@@ -1,0 +1,10 @@
+# 忽略指定文件
+*.pyc
+*.sqlite3
+
+# 忽略指定文件夹
+migrations
+__pycache__
+upload
+node_modules
+
