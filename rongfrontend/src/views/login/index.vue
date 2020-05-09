@@ -158,17 +158,20 @@ export default {
       this.$refs.loginForm.validate(valid => {
         if (valid) {
           this.loading = true
-          alert(this.loginForm)
+          alert('longin:' + this.loginForm)
           this.$store.dispatch('user/login', this.loginForm)
             .then(() => {
+              alert('then then')
               this.$router.push({ path: this.redirect || '/', query: this.otherQuery })
               this.loading = false
             })
             .catch(() => {
+              alert('catch catch')
               this.loading = false
             })
         } else {
-          console.log('error submit!!')
+          // console.log('error submit!!')
+          alert('error submit!!')
           return false
         }
       })

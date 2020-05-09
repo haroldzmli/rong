@@ -1,0 +1,19 @@
+no group data:
+vectordataserver = {
+'data':'/work/data/vector/data/data',
+'json':'/work/data/vector/data/styles',
+'style':'/work/data/vector/data/styles',
+'front':'/work/data/vector/data/fonts',
+}
+
+group data:
+vectordataserver = {
+'guizhou':
+{
+'shp':'/work/data/vector',
+'json':'/work/data/vector'
+}
+}
+
+怎样提高sqlite的效率，参照
+https://www.cnblogs.com/nnhy/p/BigData.html

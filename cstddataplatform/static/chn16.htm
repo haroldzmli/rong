@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html>
+<head>
+     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+     <title>全国16m遥感一张图</title>
+     <meta charset="utf-8" />
+     <style>
+        body { margin:0; padding:0; }
+        #map { position:absolute; top:0; bottom:0; width:100%; }
+     </style>
+     <script src='http://58.49.62.66:3000/mapbox-gl.js'></script>
+     <link href='http://58.49.62.66:3000/mapbox-gl.css' rel='stylesheet' />
+</head>
+<body>
+			<style type='text/css'>
+			    #info {
+			        display: block;
+				position:absolute;
+			        vertical-align:text-bottom;
+			        width: 830px;
+				left: 5px;
+				bottom: 5px;
+			        font-size: 12px;
+			        text-align: left;
+			        background: #fff;
+				opacity:0.7;
+			        color: #222
+			    }
+
+			    #menu {
+				background: #fff;
+				opacity:0.75;
+				position: absolute;
+				z-index: 1;
+				top: 10px;
+				left: 10px;
+				border-radius: 3px;
+				width: 120px;
+				border: 1px solid rgba(0,0,0,0.4);
+			    }
+			    #menu a {
+				font-size: 13px;
+				color: #404040;
+				display: block;
+				margin: 0;
+				padding: 0;
+				padding: 10px;
+				text-decoration: none;
+				border-bottom: 1px solid rgba(0,0,0,0.25);
+				text-align: center;
+			    }
+			    #menu a:last-child {
+				border: none;
+			    }
+			    #menu a:hover {
+				background-color: #f8f8f8;
+				color: #404040;
+			    }
+			    #menu a.active {
+				background-color: #3887be;
+				color: #ffffff;
+			    }
+			    #menu a.active:hover {
+				background: #3074a4;
+			    }
+
+		    #selectlist {
+		        display: block;
+		        position: relative;
+		        font-size: 12px;
+		        text-align: left;
+				left:125;
+				top:10;
+			        height:42px;
+			    }
+
+			    .legend {
+				    background-color: #fff;
+				    border-radius: 3px;
+				    bottom: 135px;
+				    box-shadow: 0 1px 2px rgba(0,0,0,0.10);
+				    font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+				    padding: 10px;
+				    position: absolute;
+				    right: 10px;
+				    z-index: 1;
+				}
+				.legend h4 {
+				    margin: 0 0 10px;
+				}
+				.legend div span {
+				    border-radius: 50%;
+				    display: inline-block;
+				    height: 10px;
+				    margin-right: 5px;
+				    width: 10px;
+				}
+
+
+		    #logo {
+		        display: block;
+			position:absolute;
+			right: 15px;
+			bottom: 5px;
+		    }
+
+			</style>
+
+			<div id='map'></div>
+			<pre id='logo'><a href="http://www.cstind.com" target="_blank"><img src="http://58.49.62.66:8089/mapdemo/styles/Logo.png" height="80" width="200"></a>
+			</pre>
+
+      <script>
+         var map = new mapboxgl.Map({
+             container: 'map',
+             style: "http://127.0.0.1:8000/mapstatic/china16.json",
+	     center: [116.38,39.91],
+		minZoom: 9.5,
+		maxZoom: 13.5,
+	     zoom: 12
+         });
+         map.addControl(new mapboxgl.NavigationControl());
+
+	map.on('mousemove', function (e) {
+	    document.getElementById('info').innerHTML =
+		"比例尺："+ JSON.stringify(map.getZoom()) +  "    屏幕坐标："+ JSON.stringify(e.point) + 
+		"    地图坐标：" + JSON.stringify(e.lngLat);
+	});
+
+
+				var toggleableLayerIds = [ '可见光(GF)', '夜光120m(珞珈1)', '雷达10m(GF3)' ];
+				for (var i = 0; i < toggleableLayerIds.length; i++) {
+				    var id = toggleableLayerIds[i];
+				
+				    var link = document.createElement('a');
+				    link.href = '#';
+				    link.className = 'active';
+				    link.textContent = id;
+				
+				    link.onclick = function (e) {
+				    	var clickedLayer = ''
+					var x = 116.40969;
+					var y = 39.89945;
+
+				    	if (this.textContent === '可见光(GF)')
+					{
+				        	clickedLayer = 'wchngf';
+						var visibility = map.getLayoutProperty(clickedLayer, 'visibility');
+						if (visibility === 'visible')
+						{
+						    this.className = '';
+						    map.setLayoutProperty(clickedLayer, 'visibility', 'none');
+						} else {
+						    this.className = 'active';
+						    map.setLayoutProperty(clickedLayer, 'visibility', 'visible');
+						}				        
+					}
+				    	else if (this.textContent === '夜光120m(珞珈1)')
+					{
+				        	clickedLayer = 'ygmidu';
+						var visibility = map.getLayoutProperty(clickedLayer, 'visibility');
+						if (visibility === 'visible')
+						{
+						    this.className = '';
+						    map.setLayoutProperty(clickedLayer, 'visibility', 'none');
+						} else {
+						    this.className = 'active';
+						    map.setLayoutProperty(clickedLayer, 'visibility', 'visible');
+						}				        
+					}
+				    	else if (this.textContent === '雷达10m(GF3)')
+					{
+				        	clickedLayer = 'ygliangdu';
+						var visibility = map.getLayoutProperty(clickedLayer, 'visibility');
+						if (visibility === 'visible')
+						{
+						    this.className = '';
+						    map.setLayoutProperty(clickedLayer, 'visibility', 'none');
+						} else {
+						    this.className = 'active';
+						    map.setLayoutProperty(clickedLayer, 'visibility', 'visible');
+						}				        
+					}
+				        	
+				        e.preventDefault();
+				        e.stopPropagation();
+				    };
+				
+				    var layers = document.getElementById('menu');
+				    layers.appendChild(link);
+				}
+        
+
+		      function selectlist()
+		      {	// 下拉菜单选中
+			        var sel = document.getElementById("selpnt").value;
+			        if(sel == 'gf16')
+			        {
+				        	clickedLayer = 'wchngf';
+						var visibility = map.getLayoutProperty(clickedLayer, 'visibility');
+						if (visibility === 'visible')
+						{
+						} else {
+						    this.className = 'active';
+						    map.setLayoutProperty(clickedLayer, 'visibility', 'visible');
+						    map.setLayoutProperty('wchnsar', 'visibility', 'none');
+						    map.setLayoutProperty('ygliangdu', 'visibility', 'none');
+						    map.setLayoutProperty('ygmidu', 'visibility', 'none');
+						}				        
+						map.flyTo({
+							center: [118.80,24.97],
+							zoom: 10
+								});	
+				      }
+			       else if(sel == 'gf2')
+			        {
+				        	clickedLayer = 'wchngf';
+						var visibility = map.getLayoutProperty(clickedLayer, 'visibility');
+						if (visibility === 'visible')
+						{
+						} else {
+						    this.className = 'active';
+						    map.setLayoutProperty(clickedLayer, 'visibility', 'visible');
+
+						    map.setLayoutProperty('wchnsar', 'visibility', 'none');
+						    map.setLayoutProperty('ygliangdu', 'visibility', 'none');
+						    map.setLayoutProperty('ygmidu', 'visibility', 'none');
+						}				        
+						map.flyTo({
+							center: [86.21,44.3],
+							zoom: 15
+								});	
+				      }
+			       else if(sel == 'gf08')
+			        {
+				        	clickedLayer = 'wchngf';
+						var visibility = map.getLayoutProperty(clickedLayer, 'visibility');
+						if (visibility === 'visible')
+						{
+						} else {
+						    this.className = 'active';
+						    map.setLayoutProperty(clickedLayer, 'visibility', 'visible');
+
+						    map.setLayoutProperty('wchnsar', 'visibility', 'none');
+						    map.setLayoutProperty('ygliangdu', 'visibility', 'none');
+						    map.setLayoutProperty('ygmidu', 'visibility', 'none');
+						}				        
+						map.flyTo({
+							center: [86.30,44.856],
+							zoom: 16
+								});	
+				      }
+			       else if(sel == 'sar10')
+			        {
+				        	clickedLayer = 'wchnsar';
+						var visibility = map.getLayoutProperty(clickedLayer, 'visibility');
+						if (visibility === 'visible')
+						{
+						    this.className = '';
+						    map.setLayoutProperty(clickedLayer, 'visibility', 'none');
+						} else {
+						    this.className = 'active';
+						    map.setLayoutProperty(clickedLayer, 'visibility', 'visible');
+							map.flyTo({
+								center: [120.23,36],
+								zoom: 12
+									});	
+
+						    map.setLayoutProperty('wchngf', 'visibility', 'none');
+						    map.setLayoutProperty('ygliangdu', 'visibility', 'none');
+						    map.setLayoutProperty('ygmidu', 'visibility', 'none');
+						}				        
+				      }
+			        else if(sel == 'ygl120')
+			        {
+				        	clickedLayer = 'ygliangdu';
+						var visibility = map.getLayoutProperty(clickedLayer, 'visibility');
+						if (visibility === 'visible')
+						{
+						    this.className = '';
+						    map.setLayoutProperty(clickedLayer, 'visibility', 'none');
+						} else {
+						    this.className = 'active';
+						    map.setLayoutProperty(clickedLayer, 'visibility', 'visible');
+							map.flyTo({
+								center: [116.4,39.9],
+								zoom: 11
+									});	
+
+						    map.setLayoutProperty('wchnsar', 'visibility', 'none');
+						    map.setLayoutProperty('ygmidu', 'visibility', 'none');
+						    map.setLayoutProperty('wchngf', 'visibility', 'none');
+						}				        
+				      }
+			        else if(sel == 'ygm120')
+			        {
+				        	clickedLayer = 'ygmidu';
+						var visibility = map.getLayoutProperty(clickedLayer, 'visibility');
+						if (visibility === 'visible')
+						{
+						    this.className = '';
+						    map.setLayoutProperty(clickedLayer, 'visibility', 'none');
+						} else {
+						    this.className = 'active';
+						    map.setLayoutProperty(clickedLayer, 'visibility', 'visible');
+							map.flyTo({
+								center: [116.4,39.9],
+								zoom: 11
+									});	
+
+						    map.setLayoutProperty('wchnsar', 'visibility', 'none');
+						    map.setLayoutProperty('wchngf', 'visibility', 'none');
+						    map.setLayoutProperty('ygliangdu', 'visibility', 'none');
+						}				        
+				      }
+			       else if(sel == 'wuyuan')
+			        {
+				        	clickedLayer = 'wchngf';
+						var visibility = map.getLayoutProperty(clickedLayer, 'visibility');
+						if (visibility === 'visible')
+						{
+						} else {
+						    this.className = 'active';
+						    map.setLayoutProperty(clickedLayer, 'visibility', 'visible');
+
+						    map.setLayoutProperty('wchnsar', 'visibility', 'none');
+						    map.setLayoutProperty('ygliangdu', 'visibility', 'none');
+						    map.setLayoutProperty('ygmidu', 'visibility', 'none');
+						}				        
+						map.flyTo({
+							center: [107.842,40.907],
+							zoom: 16
+								});	
+				      }
+		      }
+
+
+     </script>
+</body>
+</html>

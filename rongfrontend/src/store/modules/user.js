@@ -32,9 +32,12 @@ const actions = {
   // user login
   login({ commit }, userInfo) {
     const { username, password } = userInfo
+    alert('username:' + username)
     return new Promise((resolve, reject) => {
       login({ username: username.trim(), password: password }).then(response => {
+        alert('respeint::::::' + response)
         const { data } = response
+        alert('token newnew :' + data.token)
         commit('SET_TOKEN', data.token)
         setToken(data.token)
         resolve()
@@ -46,15 +49,17 @@ const actions = {
 
   // get user info
   getInfo({ commit, state }) {
+    alert('22222222222')
     return new Promise((resolve, reject) => {
       getInfo(state.token).then(response => {
         const { data } = response
-
+        alert(response)
         if (!data) {
           reject('Verification failed, please Login again.')
         }
 
-        const { roles, name, avatar, introduction } = data
+        const { roles, username, avatar, introduction } = data
+        alert('user:' + username)
 
         // roles must be a non-empty array
         if (!roles || roles.length <= 0) {
@@ -62,7 +67,7 @@ const actions = {
         }
 
         commit('SET_ROLES', roles)
-        commit('SET_NAME', name)
+        commit('SET_NAME', username)
         commit('SET_AVATAR', avatar)
         commit('SET_INTRODUCTION', introduction)
         resolve(data)
