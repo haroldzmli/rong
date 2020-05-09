@@ -63,14 +63,15 @@ class CstdTokenVerifyUser(VerifyJSONWebToken):
         user_id = toke_user["user_id"]
         # 通过user_id查询用户信息
         user_info = CstdUser.objects.get(pk=user_id)
-        # cstd_user_roles = CstdUserRole.objects.filter(user_info.id)
-        # cstd_user_role_list = []
-        # for cstd_user_role in cstd_user_roles:
-        #     role = CstdRole.objects.get(pk=cstd_user_role.role)
-        #     cstd_user_role_list.append(role.name)
-        #
-        # serializer = CstdUserSerializer(user_info)
-        serializer = CstdUserRoleInfoSerializer(user_info, context={'id': user_id})
+        cstd_user_roles = CstdUserRole.objects.filter(user_info.id)
+        cstd_user_role_list = []
+        for cstd_user_role in cstd_user_roles:
+            role = CstdRole.objects.get(pk=cstd_user_role.role)
+            cstd_user_role_list.append(role.name)
+
+        serializer = CstdUserSerializer(user_info)
+        print('serializer:', serializer)
+        # serializer = CstdUserRoleInfoSerializer(user_info, context={'id': user_id})
         return Response({'code': 0, 'data': serializer.data, 'msg': ''},
                         status=status.HTTP_200_OK)
 

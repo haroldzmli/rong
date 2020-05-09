@@ -1,0 +1,33 @@
+from django.db import models
+
+
+# Create your models here.
+class Map(models.Model):
+    name = models.CharField('名称', max_length=50)
+    creator = models.CharField('创建人', max_length=50)
+    layer = models.CharField('图层', max_length=50)
+    # group = models.CharField('图层组', max_length=30)
+    # path = models.CharField('数据路径', max_length=255)
+    map_data = models.IntegerField(verbose_name=u'地图数据')
+    is_deleted = models.BooleanField('已删除', default=False)
+    description = models.CharField('描述', max_length=50, default='')
+    create_time = models.DateTimeField('开始时间', auto_now_add=True)
+    modified_time = models.DateTimeField('结束时间', auto_now_add=True)
+
+    def __str__(self):
+        return self.group + self.layer
+
+    class Meta:
+        verbose_name = '地图'
+        verbose_name_plural = '地图'
+
+
+class MapData(models.Model):
+    name = models.CharField('名称', max_length=50)
+    author = models.CharField('数据创建人', max_length=50)
+    description = models.CharField('描述', max_length=50, default='')
+    is_deleted = models.BooleanField('已删除', default=False)
+    create_time = models.DateTimeField('开始时间', auto_now_add=True)
+    end_time = models.DateTimeField('结束时间', auto_now_add=True)
+    save_path = models.CharField('数据路径', max_length=255)
+    save_name = models.CharField('数据保存名称', max_length=255)
