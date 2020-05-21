@@ -67,49 +67,31 @@ def format_file_name(name):
     return name
 
 
-def upload_file(file_obj, file_type='pic'):
-    if file_obj:
-        filename = file_obj.name
-        print(filename)
-        # filename = file_obj.name.decode('utf-8', 'ignore')
-        filename_list = filename.split('.')
-        file_postfix = filename_list[-1]  # 后缀
-        # if file_postfix in ['txt', 'sql']:
+def upload_file(file_obj):
+    image_format = 'mbtiles|zip|png|jpg'
+    filename = file_obj.name
+    filename_list = filename.split('.')
+    file_postfix = filename_list[-1]  # 后缀
+    if file_postfix.lower() in image_format:
         filename_list_clean = filename_list[:-1]
         file_name = ''.join(filename_list_clean) + str(int(time.time() * 1000))
         file_name = format_file_name(file_name)
-        # else:
-        #     file_name = str(uuid.uuid1())
         sub_folder = time.strftime("%Y%m")
         upload_folder = os.path.join(settings.MEDIA_ROOT, 'upload', sub_folder)
         if not os.path.exists(upload_folder):
             os.makedirs(upload_folder)
         absolute_path = os.path.join(upload_folder, file_name) + '.%s' % file_postfix
-        if file_postfix.lower() in (
-            # "sql", "jpg", "jpeg", "bmp", "gif", "png", "xls", "xlsx", "rar", "doc", "docx", "zip", "pdf", "txt", "swf",
-            #     "wmv"):
-            "mbtiles", "img"):
-            destination = open(absolute_path, 'wb+')
-            for chunk in file_obj.chunks():
-                destination.write(chunk)
-            destination.close()
-
-            # if file_type == 'pic':  #暂不剪切图片
-            #     if file_postfix.lower() in ('jpg', 'jpeg', 'bmp', 'gif', 'png'):
-            #         im = Image.open(absolute_path)
-            #         im.thumbnail((720, 720))
-            #         im.save(absolute_path)
-
-            real_url = os.path.join('/media/', 'upload', sub_folder, file_name) + '.%s' % file_postfix
-            response_dict = {'original': filename, 'url': real_url, 'title': 'source_file_tile', 'state': 'SUCCESS',
-                             'msg': ''}
-        else:
-            response_dict = {'original': filename, 'url': '', 'title': 'source_file_tile', 'state': 'FAIL',
-                             'msg': 'invalid file format'}
+        destination = open(absolute_path, 'wb+')
+        for chunk in file_obj.chunks():
+            destination.write(chunk)
+        destination.close()
+        real_url = os.path.join('/media/', 'upload', sub_folder, file_name) + '.%s' % file_postfix
+        response_dict = {'original': filename, 'url': real_url, 'title': 'source_file_tile', 'state': 'SUCCESS',
+                         'msg': ''}
     else:
-        response_dict = {'original': '', 'url': '', 'title': 'source_file_tile', 'state': 'FAIL',
-                         'msg': 'invalid file obj'}
-    return simplejson.dumps(response_dict)
+        response_dict = {'original': filename, 'url': '', 'title': 'source_file_tile', 'state': 'FAIL',
+                         'msg': 'invalid file format'}
+    return response_dict
 
 
 class UploadDataSet(APIView):
@@ -117,7 +99,15 @@ class UploadDataSet(APIView):
     permission_classes = [IsAuthenticated]
     """
     todo 断点续传 Breakpoint resume
+    上传文件为***.mbtiles ***.zip ****文件夹
+    
+    其中zip 和 瓦片文件夹要导入到sqltie数据库中，数据库的命名为zip文件名和文件夹名字
+    
+    保存路径为 /media/upload/用户名/年月/文件名+时间
+    同时要保存数据库
     """
+
+
     def post(self, request, format=None):
         # token = request.data['token']
         # from rest_framework_jwt.utils import jwt_decode_handler
@@ -130,10 +120,8 @@ class UploadDataSet(APIView):
         fileObj = request.FILES.get('upfile', None)
         filename = fileObj.name
         print(filename)
-        response = upload_file(fileObj, 'file')
-        return Response({'code': 0, 'data': {'original': '', 'url': '', 'title': 'source_file_tile', 'state': 'FAIL',
-                         'msg': 'invalid file obj'}, 'msg': ''},
-                        status=status.HTTP_200_OK)
+        response = upload_file(fileObj)
+        return Response(response, status=status.HTTP_200_OK)
         # user = request.user
         # print('username:', user.username)
         # if user.is_admin:
@@ -154,7 +142,8 @@ def tile(request):
     z = int(request.GET.get('l'))
     x = int(request.GET.get('x'))
     y = int(request.GET.get('y'))
-
+    token = request.GET.get('access_token')
+    print('token:', token)
     dbfile = ''
     if group is not None:
         dbfile = maptileserver[group][layer]

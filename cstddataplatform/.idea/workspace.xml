@@ -1,12 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0e9786a2-0347-4988-947f-40bf45e9514c" name="Default Changelist" comment="" />
+    <list default="true" id="0e9786a2-0347-4988-947f-40bf45e9514c" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/data/demoindex.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/demoindex.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/cstddataplatform.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/cstddataplatform.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/account/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/account/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cstddataplatform/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/cstddataplatform/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cstddataplatform/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/cstddataplatform/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/china16.json" beforeDir="false" afterPath="$PROJECT_DIR$/static/china16.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/chn16.htm" beforeDir="false" afterPath="$PROJECT_DIR$/static/chn16.htm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tileserver/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/tileserver/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rongfrontend/src/views/dashboard/admin/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../rongfrontend/src/views/dashboard/admin/index.vue" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DjangoConsoleOptions" custom-start-script="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)">
+    <option name="myCustomStartScript" value="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -15,16 +31,26 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
   <component name="ProjectId" id="1Z3MrWcnDeLjEUeVD8OWs1ertfq" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/tileserver" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../rong-about/mbutil-master-master" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/utils/tiledbfile" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/utils" />
+      <recent name="$PROJECT_DIR$/static" />
       <recent name="$PROJECT_DIR$/tileserver" />
       <recent name="$PROJECT_DIR$/static/data" />
-      <recent name="$PROJECT_DIR$/static" />
       <recent name="$PROJECT_DIR$/useraccesscontrol" />
     </key>
   </component>
@@ -183,11 +209,29 @@
       <workItem from="1587966594777" duration="16489000" />
       <workItem from="1588051349689" duration="44511000" />
       <workItem from="1588988079708" duration="18687000" />
+      <workItem from="1589015251916" duration="2579000" />
+      <workItem from="1589167809072" duration="598000" />
+      <workItem from="1589174743589" duration="16808000" />
+      <workItem from="1589953631112" duration="2468000" />
+      <workItem from="1590040353033" duration="5859000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -199,7 +243,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/tileserver/views.py</url>
-          <line>214</line>
+          <line>203</line>
           <option name="timeStamp" value="2" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">

@@ -33,10 +33,10 @@ class CstdObtainJSONWebToken(ObtainJSONWebToken):
             print('userObj:'+userObj.username)
             from rest_framework_jwt.utils import jwt_payload_handler, jwt_encode_handler
             token = jwt_encode_handler(jwt_payload_handler(userObj))
-            return Response({'code': 20000, 'data': {'token': token}, 'msg': ''},
+            return Response({'code': 20000, 'data': {'rong_token': token}, 'msg': ''},
                             status=status.HTTP_200_OK)
         else:
-            return Response({'code': 0, 'data': "no User", 'msg': ''},
+            return Response({'code': 0, 'data': "no rong_token User", 'msg': ''},
                             status=status.HTTP_200_OK)
         # else:
         #     return JsonResponse({'failed': 'reason'})

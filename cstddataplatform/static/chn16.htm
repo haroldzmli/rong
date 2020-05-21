@@ -113,7 +113,7 @@
       <script>
          var map = new mapboxgl.Map({
              container: 'map',
-             style: "http://127.0.0.1:8000/mapstatic/china16.json",
+             style: "http://192.168.3.13:8000/mapstatic/china16.json",
 	     center: [116.38,39.91],
 		minZoom: 9.5,
 		maxZoom: 13.5,
@@ -123,7 +123,7 @@
 
 	map.on('mousemove', function (e) {
 	    document.getElementById('info').innerHTML =
-		"比例尺："+ JSON.stringify(map.getZoom()) +  "    屏幕坐标："+ JSON.stringify(e.point) + 
+		"比例尺："+ JSON.stringify(map.getZoom()) +  "    屏幕坐标："+ JSON.stringify(e.point) +
 		"    地图坐标：" + JSON.stringify(e.lngLat);
 	});
 
@@ -131,12 +131,12 @@
 				var toggleableLayerIds = [ '可见光(GF)', '夜光120m(珞珈1)', '雷达10m(GF3)' ];
 				for (var i = 0; i < toggleableLayerIds.length; i++) {
 				    var id = toggleableLayerIds[i];
-				
+
 				    var link = document.createElement('a');
 				    link.href = '#';
 				    link.className = 'active';
 				    link.textContent = id;
-				
+
 				    link.onclick = function (e) {
 				    	var clickedLayer = ''
 					var x = 116.40969;
@@ -153,7 +153,7 @@
 						} else {
 						    this.className = 'active';
 						    map.setLayoutProperty(clickedLayer, 'visibility', 'visible');
-						}				        
+						}
 					}
 				    	else if (this.textContent === '夜光120m(珞珈1)')
 					{
@@ -166,7 +166,7 @@
 						} else {
 						    this.className = 'active';
 						    map.setLayoutProperty(clickedLayer, 'visibility', 'visible');
-						}				        
+						}
 					}
 				    	else if (this.textContent === '雷达10m(GF3)')
 					{
@@ -179,17 +179,17 @@
 						} else {
 						    this.className = 'active';
 						    map.setLayoutProperty(clickedLayer, 'visibility', 'visible');
-						}				        
+						}
 					}
-				        	
+
 				        e.preventDefault();
 				        e.stopPropagation();
 				    };
-				
+
 				    var layers = document.getElementById('menu');
 				    layers.appendChild(link);
 				}
-        
+
 
 		      function selectlist()
 		      {	// 下拉菜单选中
@@ -206,11 +206,11 @@
 						    map.setLayoutProperty('wchnsar', 'visibility', 'none');
 						    map.setLayoutProperty('ygliangdu', 'visibility', 'none');
 						    map.setLayoutProperty('ygmidu', 'visibility', 'none');
-						}				        
+						}
 						map.flyTo({
 							center: [118.80,24.97],
 							zoom: 10
-								});	
+								});
 				      }
 			       else if(sel == 'gf2')
 			        {
@@ -225,11 +225,11 @@
 						    map.setLayoutProperty('wchnsar', 'visibility', 'none');
 						    map.setLayoutProperty('ygliangdu', 'visibility', 'none');
 						    map.setLayoutProperty('ygmidu', 'visibility', 'none');
-						}				        
+						}
 						map.flyTo({
 							center: [86.21,44.3],
 							zoom: 15
-								});	
+								});
 				      }
 			       else if(sel == 'gf08')
 			        {
@@ -244,11 +244,11 @@
 						    map.setLayoutProperty('wchnsar', 'visibility', 'none');
 						    map.setLayoutProperty('ygliangdu', 'visibility', 'none');
 						    map.setLayoutProperty('ygmidu', 'visibility', 'none');
-						}				        
+						}
 						map.flyTo({
 							center: [86.30,44.856],
 							zoom: 16
-								});	
+								});
 				      }
 			       else if(sel == 'sar10')
 			        {
@@ -264,12 +264,12 @@
 							map.flyTo({
 								center: [120.23,36],
 								zoom: 12
-									});	
+									});
 
 						    map.setLayoutProperty('wchngf', 'visibility', 'none');
 						    map.setLayoutProperty('ygliangdu', 'visibility', 'none');
 						    map.setLayoutProperty('ygmidu', 'visibility', 'none');
-						}				        
+						}
 				      }
 			        else if(sel == 'ygl120')
 			        {
@@ -285,12 +285,12 @@
 							map.flyTo({
 								center: [116.4,39.9],
 								zoom: 11
-									});	
+									});
 
 						    map.setLayoutProperty('wchnsar', 'visibility', 'none');
 						    map.setLayoutProperty('ygmidu', 'visibility', 'none');
 						    map.setLayoutProperty('wchngf', 'visibility', 'none');
-						}				        
+						}
 				      }
 			        else if(sel == 'ygm120')
 			        {
@@ -306,12 +306,12 @@
 							map.flyTo({
 								center: [116.4,39.9],
 								zoom: 11
-									});	
+									});
 
 						    map.setLayoutProperty('wchnsar', 'visibility', 'none');
 						    map.setLayoutProperty('wchngf', 'visibility', 'none');
 						    map.setLayoutProperty('ygliangdu', 'visibility', 'none');
-						}				        
+						}
 				      }
 			       else if(sel == 'wuyuan')
 			        {
@@ -326,11 +326,11 @@
 						    map.setLayoutProperty('wchnsar', 'visibility', 'none');
 						    map.setLayoutProperty('ygliangdu', 'visibility', 'none');
 						    map.setLayoutProperty('ygmidu', 'visibility', 'none');
-						}				        
+						}
 						map.flyTo({
 							center: [107.842,40.907],
 							zoom: 16
-								});	
+								});
 				      }
 		      }
 

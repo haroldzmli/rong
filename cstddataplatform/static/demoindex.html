@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html>
+<head>
+     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+     <title>遥感应用展示</title>
+     <meta charset="utf-8" />
+     <style>
+        body { margin:0; padding:0; }
+     </style>
+     <script src='http://58.49.62.66:3000/mapbox-gl.js'></script>
+     <link href='http://58.49.62.66:3000/mapbox-gl.css' rel='stylesheet' />
+</head>
+<body>
+	
+		<style>
+			ul.imglist{ margin:0 auto; width:1072px; overflow:hidden} 
+			ul.imglist li{ float:left; padding:4px 8px; width:160px} 
+			ul.imglist li img{ display:block; margin: 0 auto;width:80px; height:92px} 
+			ul.imglist li span{ display:block; width:100%; height:30px; text-align: center; line-height:30px; background:#F6F6F6} 
+
+		    #logo {
+		        display: block;
+			position:absolute;
+			right: 15px;
+			bottom: 5px;
+		    }
+		</style>
+	
+		<ul class="imglist"> 
+			<li>
+		        <a href="http://58.49.62.66:8089/mapdemo/qddemo.html" target="_blank">
+		           <img src="http://58.49.62.66:3000/demo/hm.png" />
+		           <span>山东青岛</span>
+		        </a>
+		    </li> 
+			<li>
+		        <a href="http://58.49.62.66:8089/mapdemo/qdseaj2.html" target="_blank">
+		           <img src="http://58.49.62.66:3000/demo/hm.png" />
+		           <span>青岛海洋监测</span>
+		        </a>
+		    </li> 
+			<li>
+		        <a href="http://58.49.62.66:8089/mapdemo/qdhutai.html" target="_blank">
+		           <img src="http://58.49.62.66:3000/demo/hm.png" />
+		           <span>青岛浒苔分析</span>
+		        </a>
+		    </li> 
+			<li>
+		        <a href="http://58.49.62.66:8089/mapdemo/qdsarch.html" target="_blank">
+		           <img src="http://58.49.62.66:3000/demo/hm.png" />
+		           <span>青岛雷达遥感图</span>
+		        </a>
+		    </li> 
+			<li>
+		        <a href="http://58.49.62.66:8089/mapdemo/qdsarch1.html" target="_blank">
+		           <img src="http://58.49.62.66:3000/demo/hm.png" />
+		           <span>青岛海域雷达遥感图</span>
+		        </a>
+		    </li> 
+			<li>
+		        <a href="http://58.49.62.66:8089/mapdemo/qdyg2.html" target="_blank">
+		           <img src="http://58.49.62.66:3000/demo/hm.png" />
+		           <span>青岛夜光监测分析</span>
+		        </a>
+		    </li> 
+		    <li>
+		        <a href="http://58.49.62.66:8089/mapdemo/sdsea.html" target="_blank">
+		           <img src="http://58.49.62.66:3000/demo/qdffth.png" />
+		           <span>蓬莱非法填海监测</span>
+		        </a>
+		    </li> 
+		    <li>
+		        <a href="http://58.49.62.66:8089/mapdemo/sdhsea.html" target="_blank">
+		           <img src="http://58.49.62.66:3000/demo/qdffth.png" />
+		           <span>海阳占用生态保护区</span>
+		        </a>
+		    </li> 
+		    <li>
+		        <a href="http://58.49.62.66:8089/mapdemo/hulunhu1.html" target="_blank">
+		           <img src="http://58.49.62.66:3000/demo/hulunhu.png" />
+		           <span>呼伦湖变化检测(分屏)</span>
+		        </a>
+		    </li> 
+		    <li>
+		        <a href="http://58.49.62.66:8089/mapdemo/hulunhu.html" target="_blank">
+		           <img src="http://58.49.62.66:3000/demo/hulunhu.png" />
+		           <span>呼伦湖变化检测</span>
+		        </a>
+		    </li> 
+		    <li>
+		        <a href="http://58.49.62.66:8089/mapdemo/hulunhu2.html" target="_blank">
+		           <img src="http://58.49.62.66:3000/demo/hulunhu.png" />
+		           <span>呼伦湖环境监测</span>
+		        </a>
+		    </li> 
+		    <li>
+		        <a href="http://58.49.62.66:8089/mapdemo/qiandaohu.html" target="_blank">
+		           <img src="http://58.49.62.66:3000/demo/qiandaohu.png" />
+		           <span>千岛湖环境监测</span>
+		        </a>
+		    </li> 
+		    <li>
+		        <a href="http://58.49.62.66:8089/mapdemo/huanbao.html" target="_blank">
+		           <img src="http://58.49.62.66:3000/demo/xiongan.png" />
+		           <span>京津冀水环境监测</span>
+		        </a>
+		    </li> 
+		    <li>
+		        <a href="http://58.49.62.66:8089/mapdemo/huanbao-henan.html" target="_blank">
+		           <img src="http://58.49.62.66:3000/demo/huanghe.png" />
+		           <span>黄河河南水环境监测</span>
+		        </a>
+		    </li> 
+		    <li>
+		        <a href="http://58.49.62.66:8089/mapdemo/huanbao-kaifeng.html" target="_blank">
+		           <img src="http://58.49.62.66:3000/demo/kaifeng.png" />
+		           <span>黄河开封水环境监测</span>
+		        </a>
+		    </li> 
+		    <li>
+		        <a href="http://58.49.62.66:8089/mapdemo/shouguangch.html" target="_blank">
+		           <img src="http://58.49.62.66:3000/demo/shouguang.png" />
+		           <span>寿光水灾监测</span>
+		        </a>
+		    </li> 
+		    <li>
+		        <a href="http://58.49.62.66:3000/qzindex.html" target="_blank">
+		           <img src="http://58.49.62.66:3000/demo/qz3q3x.png" />
+		           <span>泉州空间规划专题</span>
+		        </a>
+		    </li> 
+		    <li>
+		        <a href="http://58.49.62.66:8089/mapdemo/ningde.html" target="_blank">
+		           <img src="http://58.49.62.66:3000/demo/ningde.png" />
+		           <span>宁德森林火灾监测</span>
+		        </a>
+		    </li> 
+		    <li>
+		        <a href="http://58.49.62.66:8089/mapdemo/hedianzhan.html" target="_blank">
+		           <img src="http://58.49.62.66:3000/demo/hongyanhe.png" />
+		           <span>全国核电站监测</span>
+		        </a>
+		    </li> 
+		    <li>
+		        <a href="http://58.49.62.66:8089/mapdemo/hongyanhey.html" target="_blank">
+		           <img src="http://58.49.62.66:3000/demo/hongyanhe.png" />
+		           <span>红沿河核电站监测</span>
+		        </a>
+		    </li> 
+		    <li>
+		        <a href="http://58.49.62.66:8089/mapdemo/fudao3p.html" target="_blank">
+		           <img src="http://58.49.62.66:3000/demo/fudao.png" />
+		           <span>福岛核电站监测(三屏)</span>
+		        </a>
+		    </li> 
+		    <li>
+		        <a href="http://58.49.62.66:8089/mapdemo/fudao3.html" target="_blank">
+		           <img src="http://58.49.62.66:3000/demo/fudao.png" />
+		           <span>福岛核电站监测</span>
+		        </a>
+		    </li> 
+		    <li>
+		        <a href="http://58.49.62.66:8089/mapdemo/weatherdemo.html" target="_blank">
+		           <img src="http://58.49.62.66:3000/demo/qixiang.png" />
+		           <span>气象遥感图</span>
+		        </a>
+		    </li> 
+		    <li>
+		        <a href="http://58.49.62.66:8089/mapdemo/fujian1map.html" target="_blank">
+		           <img src="http://58.49.62.66:3000/demo/fujian.png" />
+		           <span>福建遥感一张图</span>
+		        </a>
+		    </li> 
+		    <li>
+		        <a href="http://58.49.62.66:8089/mapdemo/guizhou1map.html" target="_blank">
+		           <img src="http://58.49.62.66:3000/demo/guizhou.png" />
+		           <span>贵州遥感一张图</span>
+		        </a>
+		    </li> 
+		    <li>
+		        <a href="http://58.49.62.66:8089/mapdemo/feidong.html" target="_blank">
+		           <img src="http://58.49.62.66:3000/demo/feidong.png" />
+		           <span>肥东应急无人机监测</span>
+		        </a>
+		    </li> 
+		    <li>
+		        <a href="http://58.49.62.66:8089/mapdemo/nanjingroll.html" target="_blank">
+		           <img src="http://58.49.62.66:3000/demo/nanjing.png" />
+		           <span>南京多时相对比</span>
+		        </a>
+		    </li> 
+		    <li>
+		        <a href="http://58.49.62.66:8089/mapdemo/xingluo.html" target="_blank">
+		           <img src="http://58.49.62.66:3000/demo/fujian.png" />
+		           <span>新罗多时相对比</span>
+		        </a>
+		    </li> 
+		    <li>
+		        <a href="http://58.49.62.66:8089/mapdemo/yangzhou.html" target="_blank">
+		           <img src="http://58.49.62.66:3000/demo/yangzhou.png" />
+		           <span>扬州南水北调水源地</span>
+		        </a>
+		    </li> 
+		    <li>
+		        <a href="http://58.49.62.66:8089/mapdemo/yangzhou3.html" target="_blank">
+		           <img src="http://58.49.62.66:3000/demo/yangzhou.png" />
+		           <span>扬州水源地(三屏)</span>
+		        </a>
+		    </li> 
+		    <li>
+		        <a href="http://58.49.62.66:8089/mapdemo/xiangshuich.html" target="_blank">
+		           <img src="http://58.49.62.66:3000/demo/xiangshui.png" />
+		           <span>响水爆炸多时相对比</span>
+		        </a>
+		    </li> 
+		    <li>
+		        <a href="http://58.49.62.66:8089/mapdemo/qztdly1.html" target="_blank">
+		           <img src="http://58.49.62.66:3000/demo/qztdly.png" />
+		           <span>泉州土地利用解译</span>
+		        </a>
+		    </li> 
+		    <li>
+		        <a href="http://58.49.62.66:8089/mapdemo/lsvgs1.html" target="_blank">
+		           <img src="http://58.49.62.66:3000/demo/lsvgs.png" />
+		           <span>拉斯维加斯AI解译</span>
+		        </a>
+		    </li> 
+		    <li>
+		        <a href="http://58.49.62.66:8089/mapdemo/yeguang.html" target="_blank">
+		           <img src="http://58.49.62.66:3000/demo/yeguang.png" />
+		           <span>夜光遥感</span>
+		        </a>
+		    </li> 
+		    <li>
+		        <a href="http://58.49.62.66:8089/mapdemo/china1maps.html" target="_blank">
+		           <img src="http://58.49.62.66:3000/demo/yeguang.png" />
+		           <span>多源遥感一张图</span>
+		        </a>
+		    </li> 
+		    <li>
+		        <a href="http://58.49.62.66:8089/mapdemo/chn16.html" target="_blank">
+		           <img src="http://58.49.62.66:3000/demo/yeguang.png" />
+		           <span>全国16m遥感一张图(2019)</span>
+		        </a>
+		    </li> 
+		    <li>
+		        <a href="http://58.49.62.66:8089/mapdemo/fuzhouhzzx7.html" target="_blank">
+		           <img src="http://58.49.62.66:3000/demo/fuzhouhzzx.png" />
+		           <span>福州数字中国会展中心</span>
+		        </a>
+		    </li> 
+		    <li>
+		        <a href="http://58.49.62.66:8089/mapdemo/foshangif.html" target="_blank">
+		           <img src="http://58.49.62.66:3000/demo/foshan.png" />
+		           <span>佛山GIF</span>
+		        </a>
+		    </li> 
+			 <li>
+		        <a href="http://58.49.62.66:8089/mapdemo/foshanhzroll.html" target="_blank">
+		           <img src="http://58.49.62.66:3000/demo/foshangaominghuozai.png" />
+		           <span>佛山高明火灾</span>
+		        </a>
+		    </li>
+		    </li> 
+			 <li>
+		        <a href="http://58.49.62.66:8089/mapdemo/panzhihuahzroll.html" target="_blank">
+		           <img src="http://58.49.62.66:3000/demo/foshangaominghuozai.png" />
+		           <span>攀枝花火灾</span>
+		        </a>
+		    </li>
+		</ul> 
+	
+			<pre id='logo'><a href="http://www.cstind.com" target="_blank"><img src="http://58.49.62.66:8089/mapdemo/styles/Logo.png" height="80" width="200"></a>
+			</pre>
+
+</body>
+</html>
