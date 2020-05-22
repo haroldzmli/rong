@@ -1,0 +1,21 @@
+#user
+{
+            "id": 1,
+            "username": "lisi",
+            "email": "haroldzmli@qq.com",
+            "phone": "13683323019"
+}
+
+{
+    "name":"myfirstserver",
+    "author":"",
+    "description":"我的第一个数据上传"
+}
+    name = models.CharField('名称', max_length=50)
+    author = models.CharField('数据创建人', max_length=50)
+    description = models.CharField('描述', max_length=50, default='')
+    is_deleted = models.BooleanField('已删除', default=False)
+    create_time = models.DateTimeField('开始时间', auto_now_add=True)
+    end_time = models.DateTimeField('结束时间', auto_now_add=True)
+    save_path = models.CharField('数据路径', max_length=255)
+    save_name = models.CharField('数据保存名称', max_length=255)

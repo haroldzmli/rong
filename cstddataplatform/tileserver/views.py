@@ -13,17 +13,18 @@ from django.views.decorators.csrf import csrf_exempt
 from rest_framework import status
 from rest_framework.authentication import BasicAuthentication
 from rest_framework.decorators import action
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, BasePermission, SAFE_METHODS
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from rest_framework.viewsets import ViewSet
+from rest_framework.viewsets import ViewSet, ModelViewSet
 from rest_framework_jwt.authentication import JSONWebTokenAuthentication
+from rest_framework.authentication import TokenAuthentication
 
 from cstddataplatform.settings import maptileserver, vectordataserver
 from tilecloud import TileCoord, Tile, TileStore
 from tilecloud.filter.contenttype import ContentTypeAdder
-from tileserver.models import Map
-from tileserver.serializers import CstdMapSerializer
+from tileserver.models import Map, MapData
+from tileserver.serializers import CstdMapSerializer, MapDataSerializer
 
 
 class MapViewSet(APIView):
@@ -55,6 +56,124 @@ class MapViewSet(APIView):
         #     return Response({'code': 0, 'data': "no Authentication,must admin", 'msg': ''},
         #                     status=status.HTTP_200_OK)
 
+
+class IsAdmin(BasePermission):
+    """
+    Allows access only to authenticated users.
+    """
+
+    def has_permission(self, request, view):
+        print('cest')
+        return bool(request.user and request.user.is_authenticated and request.user.is_admin)
+
+
+class IsOwnerOrReadOnly(BasePermission):
+    """
+    Custom permission to only allow owners of an object to edit it.
+    """
+
+    def has_object_permission(self, request, view, obj):
+        # Read permissions are allowed to any request,
+        # so we'll always allow GET, HEAD or OPTIONS requests.
+        # if request.method in SAFE_METHODS:
+        #     return True
+
+        # Write permissions are only allowed to the owner of the snippet.
+        print(obj.owner)
+        return obj.owner == request.user
+
+
+class UserLayerViewSet(ModelViewSet):
+    """
+    A viewset that provides the standard actions
+    """
+    # queryset = MapData.objects.all()
+    # serializer_class = MapDataSerializer
+    # authentication_classes = [BasicAuthentication, JSONWebTokenAuthentication]
+    authentication_classes = [JSONWebTokenAuthentication]
+
+    def list(self, request, usrid=None):
+        print(usrid)
+        queryset = MapData.objects.all()
+        serializer = MapDataSerializer(queryset, many=True)
+        return Response({'code': 0, 'data': serializer.data, 'msg': ''},
+                        status=status.HTTP_200_OK)
+
+    def create(self, request):
+        user = request.user
+        serializer = MapDataSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    # def retrieve(self, request, pk=None):
+    #     pass
+    #
+    # def update(self, request, pk=None):
+    #     pass
+    #
+    # def partial_update(self, request, pk=None):
+    #     pass
+    #
+    # def destroy(self, request, pk=None):
+    #     pass
+
+    # @action(detail=True, methods=['post'])
+    # def set_password(self, request, pk=None):
+    #     user = self.get_object()
+    #     serializer = PasswordSerializer(data=request.data)
+    #     if serializer.is_valid():
+    #         user.set_password(serializer.data['password'])
+    #         user.save()
+    #         return Response({'status': 'password set'})
+    #     else:
+    #         return Response(serializer.errors,
+    #                         status=status.HTTP_400_BAD_REQUEST)
+    #
+    # @action(detail=False)
+    # def recent_users(self, request):
+    #     recent_users = User.objects.all().order_by('-last_login')
+    #
+    #     page = self.paginate_queryset(recent_users)
+    #     if page is not None:
+    #         serializer = self.get_serializer(page, many=True)
+    #         return self.get_paginated_response(serializer.data)
+    #
+    #     serializer = self.get_serializer(recent_users, many=True)
+    #     return Response(serializer.data)
+
+# class LayerViewSet(APIView):
+#     # authentication_classes = [BasicAuthentication, JSONWebTokenAuthentication]
+#     permission_classes = [IsOwnerOrReadOnly]
+#     #
+#     # @action(detail=True, methods=['get'], permission_classes=[IsAdmin])
+#     # def list(self, request):
+#     #     queryset = MapData.objects.all()
+#     #     serializer = CstdMapSerializer(queryset, many=True)
+#     #     return Response({'code': 0, 'data': serializer.data, 'msg': ''},
+#     #                     status=status.HTTP_200_OK)
+#
+#     def post(self, request):
+#         user = request.user
+#         serializer = MapDataSerializer(data=request.data)
+#         if serializer.is_valid():
+#             serializer.save()
+#             return Response(serializer.data, status=status.HTTP_201_CREATED)
+#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+#
+#     # def retrieve(self, request, pk=None):
+#     #     pass
+#     #
+#     # def update(self, request, pk=None):
+#     #     pass
+#     #
+#     # def partial_update(self, request, pk=None):
+#     #     pass
+#     #
+#     # def destroy(self, request, pk=None):
+#     #     pass
+#
 
 def format_file_name(name):
     '''
@@ -106,7 +225,6 @@ class UploadDataSet(APIView):
     保存路径为 /media/upload/用户名/年月/文件名+时间
     同时要保存数据库
     """
-
 
     def post(self, request, format=None):
         # token = request.data['token']

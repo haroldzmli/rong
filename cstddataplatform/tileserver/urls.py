@@ -1,13 +1,20 @@
 from django.urls import path
+from rest_framework.routers import DefaultRouter
+
 from . import views
 from rest_framework_jwt.views import obtain_jwt_token
 from django.conf.urls import url
 # from rest_framework_jwt import views
-from tileserver.views import MapViewSet, UploadDataSet
+from tileserver.views import MapViewSet, UploadDataSet, UserLayerViewSet
 
-
+router = DefaultRouter()
+# router.register('maps/layer/', UserLayerViewSet, 'layer')
 urlpatterns = [
     path('maps/', MapViewSet.as_view(), name='map'),
+    # path('maps/layer', LayerViewSet, name='layer'),
+    # path('maps/layer', LayerViewSet.as_view(), name='layer'),
+    path('maps/layer/<int:usrid>/', UserLayerViewSet.as_view({'get': 'list',
+    'post': 'create'}), name='layerdata-detail'),
     path('maps/upfile/', UploadDataSet.as_view()),
     path('tileserver', views.tile, name='tileserver'),
     path('vectorserver/<str:layer>/<str:filename>/', views.vectordata, name='vectorserver'),
@@ -17,6 +24,7 @@ urlpatterns = [
     # path('<str:type>/<str:time>/<int:x>/<int:y>/<int:z>/', views.weather, name='weather'),
 
 ]
+urlpatterns += router.urls
 
 # urlpatterns += router.urls
 

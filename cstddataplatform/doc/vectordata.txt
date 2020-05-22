@@ -17,3 +17,13 @@ vectordataserver = {
 
 怎样提高sqlite的效率，参照
 https://www.cnblogs.com/nnhy/p/BigData.html
+
+
+目前的逻辑：
+验证通过的用户都有上传数据和发布自己地图的权力
+
+
+learn:
+https://q1mi.github.io/Django-REST-framework-documentation/api-guide/authentication_zh/
+https://github.com/Styria-Digital/django-rest-framework-jwt
+https://www.django-rest-framework.org/api-guide/routers/#defaultrouter
