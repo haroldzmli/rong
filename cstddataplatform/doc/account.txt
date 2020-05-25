@@ -1,0 +1,6 @@
+用户 角色 权限是rmap的重点
+框架设计为前后端分离，所以采用  https://styria-digital.github.io/django-rest-framework-jwt/
+采用token+userpassword的方式进行认证
+
+先进行userpassword，后进行token
+

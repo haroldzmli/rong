@@ -25,9 +25,17 @@ class Map(models.Model):
 class MapData(models.Model):
     name = models.CharField('名称', max_length=50)
     author = models.CharField('数据创建人', max_length=50)
+    author_id = models.IntegerField(verbose_name=u'数据创建人')
     description = models.CharField('描述', max_length=50, default='')
     is_deleted = models.BooleanField('已删除', default=False)
     create_time = models.DateTimeField('开始时间', auto_now_add=True)
     end_time = models.DateTimeField('结束时间', auto_now_add=True)
-    save_path = models.CharField('数据路径', max_length=255)
-    save_name = models.CharField('数据保存名称', max_length=255)
+    save_path = models.CharField('数据路径', max_length=255, default='')
+    save_name = models.CharField('数据保存名称', max_length=255, default='')
+
+    def __str__(self):
+        return self.name + self.author
+
+    class Meta:
+        verbose_name = '用户地图数据'
+        verbose_name_plural = '用户地图数据'

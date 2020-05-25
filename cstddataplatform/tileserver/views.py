@@ -20,6 +20,7 @@ from rest_framework.viewsets import ViewSet, ModelViewSet
 from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 from rest_framework.authentication import TokenAuthentication
 
+from account.models import CstdUser
 from cstddataplatform.settings import maptileserver, vectordataserver
 from tilecloud import TileCoord, Tile, TileStore
 from tilecloud.filter.contenttype import ContentTypeAdder
@@ -83,6 +84,7 @@ class IsOwnerOrReadOnly(BasePermission):
         return obj.owner == request.user
 
 
+
 class UserLayerViewSet(ModelViewSet):
     """
     A viewset that provides the standard actions
@@ -90,34 +92,74 @@ class UserLayerViewSet(ModelViewSet):
     # queryset = MapData.objects.all()
     # serializer_class = MapDataSerializer
     # authentication_classes = [BasicAuthentication, JSONWebTokenAuthentication]
-    authentication_classes = [JSONWebTokenAuthentication]
+    # authentication_classes = [TokenAuthentication]
 
-    def list(self, request, usrid=None):
-        print(usrid)
-        queryset = MapData.objects.all()
+    def list(self, request, user_id=None):
+        print(user_id)
+        # queryset = MapData.objects.all()
+        queryset = MapData.objects.filter(author_id=user_id)
         serializer = MapDataSerializer(queryset, many=True)
         return Response({'code': 0, 'data': serializer.data, 'msg': ''},
                         status=status.HTTP_200_OK)
 
-    def create(self, request):
+    def create(self, request, user_id=None):
         user = request.user
-        serializer = MapDataSerializer(data=request.data)
+        print('user_id:', user_id)
+        user_info = CstdUser.objects.get(pk=user_id)
+        print(user_info)
+        mapdata = request.data
+        mapdata['author'] = user_info.username
+        mapdata['author_id'] = user_id
+        print('mapdata:',mapdata)
+        serializer = MapDataSerializer(data=mapdata)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    # def retrieve(self, request, pk=None):
-    #     pass
-    #
-    # def update(self, request, pk=None):
-    #     pass
-    #
-    # def partial_update(self, request, pk=None):
-    #     pass
-    #
-    # def destroy(self, request, pk=None):
-    #     pass
+    def update(self, request, user_id=None):
+        user = request.user
+        serializer = MapDataSerializer(data=request.data)
+        try:
+            mapdata = MapData.objects.get(pk=request.data['id'])
+        except mapdata.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        serializer = MapDataSerializer(mapdata, data=mapdata)
+        if serializer.is_valid():
+            serializer.update()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        # return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+
+        # if request.method == 'GET':
+        #     serializer = SnippetSerializer(snippet)
+        #     return Response(serializer.data)
+        #
+        # elif request.method == 'PUT':
+        #     serializer = SnippetSerializer(snippet, data=request.data)
+        #     if serializer.is_valid():
+        #         serializer.save()
+        #         return Response(serializer.data)
+        #     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+
+    def destroy(self, request, user_id=None):
+        user = request.user
+        mapdata = MapData.objects.get(pk=request.data['id'])
+        mapdata.delete()
+        try:
+            mapdata = MapData.objects.get(pk=request.data['id'])
+            # serializer = MapDataSerializer(data=request.data)
+        except mapdata.DoesNotExist:
+            return HttpResponse(status=status.HTTP_400_BAD_REQUEST)
+        mapdata.delete()
+        return Response(data={'data':1}, status=status.HTTP_201_CREATED)
+        # if serializer.is_valid():
+        #     serializer.delete()
+        #     return Response(serializer.data, status=status.HTTP_201_CREATED)
+        # return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     # @action(detail=True, methods=['post'])
     # def set_password(self, request, pk=None):

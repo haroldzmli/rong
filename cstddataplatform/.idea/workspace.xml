@@ -2,10 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0e9786a2-0347-4988-947f-40bf45e9514c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/data/data.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/account.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/account/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/account/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/account/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/account/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cstddataplatform/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/cstddataplatform/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/vectordata.txt" beforeDir="false" afterPath="$PROJECT_DIR$/doc/vectordata.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cstddataplatform/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/cstddataplatform/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tileserver/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/tileserver/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tileserver/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/tileserver/serializers.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tileserver/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/tileserver/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tileserver/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/tileserver/views.py" afterDir="false" />
@@ -34,19 +37,19 @@
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../rong-about/mbutil-master-master" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/utils/tiledbfile" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/cstddataplatform" />
       <recent name="$PROJECT_DIR$/utils" />
       <recent name="$PROJECT_DIR$/static" />
       <recent name="$PROJECT_DIR$/tileserver" />
-      <recent name="$PROJECT_DIR$/static/data" />
-      <recent name="$PROJECT_DIR$/useraccesscontrol" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/utils/tiledbfile" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -208,7 +211,7 @@
       <workItem from="1589167809072" duration="598000" />
       <workItem from="1589174743589" duration="16808000" />
       <workItem from="1589953631112" duration="2468000" />
-      <workItem from="1590040353033" duration="27631000" />
+      <workItem from="1590040353033" duration="48714000" />
     </task>
     <task id="LOCAL-00001" summary="修改文件上传">
       <created>1590046369037</created>
@@ -224,7 +227,14 @@
       <option name="project" value="LOCAL" />
       <updated>1590046467637</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="modify tileserver">
+      <created>1590138816419</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1590138816419</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -246,7 +256,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="修改文件上传" />
     <MESSAGE value="增加瓦片上传的zip png(jpg)的一些工具类" />
-    <option name="LAST_COMMIT_MESSAGE" value="增加瓦片上传的zip png(jpg)的一些工具类" />
+    <MESSAGE value="modify tileserver" />
+    <option name="LAST_COMMIT_MESSAGE" value="modify tileserver" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -258,7 +269,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/tileserver/views.py</url>
-          <line>321</line>
+          <line>363</line>
           <option name="timeStamp" value="2" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
