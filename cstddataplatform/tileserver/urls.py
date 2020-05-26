@@ -10,7 +10,7 @@ from tileserver.views import MapViewSet, UserLayerViewSet
 router = DefaultRouter()
 # router.register('maps/layer/', UserLayerViewSet, 'layer')
 urlpatterns = [
-    path('maps/layer/user/<int:user_id>', MapViewSet.as_view(), name='map'),
+    path('maps/layer/user/<int:user_id>/', MapViewSet.as_view(), name='map_search_create'),
 # path('maps/layer/user/<int:user_id>', MapViewSet.as_view(), name='map'),
     path('maps/data/user/<int:user_id>/', UserLayerViewSet.as_view({'get': 'list',
     'post': 'create'}), name='layerdata-detail_search_create'),

@@ -39,12 +39,12 @@ class MapViewSet(APIView):
     """
 
     def get(self, request, user_id=None, format='json'):
-        maps = Map.objects.filter()
+        maps = Map.objects.filter(creator_id=user_id)
         serializer = CstdMapSerializer(maps, many=True)
         return Response(serializer.data)
 
-    def post(self, request, format=None):
-        serializer = SnippetSerializer(data=request.data)
+    def post(self, request, user_id=None, format=None):
+        serializer = CstdMapSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -53,31 +53,31 @@ class MapViewSet(APIView):
 
 
 
-
-    # @action(methods=['get'], detail=False)
-    def get(self, request, format='json'):
-        # token = request.data['token']
-        # from rest_framework_jwt.utils import jwt_decode_handler
-        # toke_user = []
-        # toke_user = jwt_decode_handler(token)
-        # 获得user_id
-        # user_id = toke_user["user_id"]
-        # 通过user_id查询用户信息
-        # user_info = CstdUser.objects.get(pk=user_id)
-        queryset = Map.objects.all()
-        serializer = CstdMapSerializer(queryset, many=True)
-        return Response({'code': 0, 'data': serializer.data, 'msg': ''},
-                        status=status.HTTP_200_OK)
-        # user = request.user
-        # print('username:', user.username)
-        # if user.is_admin:
-        #     queryset = CstdUser.objects.all()
-        #     serializer = CstdUserSerializer(queryset, many=True)
-        #     return Response({'code': 0, 'data': serializer.data, 'msg': ''},
-        #                 status=status.HTTP_200_OK)
-        # else:
-        #     return Response({'code': 0, 'data': "no Authentication,must admin", 'msg': ''},
-        #                     status=status.HTTP_200_OK)
+    #
+    # # @action(methods=['get'], detail=False)
+    # def get(self, request, format='json'):
+    #     # token = request.data['token']
+    #     # from rest_framework_jwt.utils import jwt_decode_handler
+    #     # toke_user = []
+    #     # toke_user = jwt_decode_handler(token)
+    #     # 获得user_id
+    #     # user_id = toke_user["user_id"]
+    #     # 通过user_id查询用户信息
+    #     # user_info = CstdUser.objects.get(pk=user_id)
+    #     queryset = Map.objects.all()
+    #     serializer = CstdMapSerializer(queryset, many=True)
+    #     return Response({'code': 0, 'data': serializer.data, 'msg': ''},
+    #                     status=status.HTTP_200_OK)
+    #     # user = request.user
+    #     # print('username:', user.username)
+    #     # if user.is_admin:
+    #     #     queryset = CstdUser.objects.all()
+    #     #     serializer = CstdUserSerializer(queryset, many=True)
+    #     #     return Response({'code': 0, 'data': serializer.data, 'msg': ''},
+    #     #                 status=status.HTTP_200_OK)
+    #     # else:
+    #     #     return Response({'code': 0, 'data': "no Authentication,must admin", 'msg': ''},
+    #     #                     status=status.HTTP_200_OK)
 
 
 class IsAdmin(BasePermission):
