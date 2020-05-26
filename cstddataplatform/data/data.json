@@ -19,3 +19,13 @@
     end_time = models.DateTimeField('结束时间', auto_now_add=True)
     save_path = models.CharField('数据路径', max_length=255)
     save_name = models.CharField('数据保存名称', max_length=255)
+
+
+
+{"id": 7, "name": "myfirstserver", "author": "admin", "author_id": 1, "description": "putputtest"}
+
+
+    "name":"myfirstserver",
+    "author":"haroldmzli",
+    "author_id":1,
+    "description":"我的第一个数据

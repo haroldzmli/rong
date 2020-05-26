@@ -1,4 +1,4 @@
-from rest_framework_jwt.views import ObtainJSONWebToken
+# from rest_framework_jwt.views import ObtainJSONWebToken
 
 from tileserver.models import Map, MapData
 from rest_framework import serializers
@@ -8,12 +8,13 @@ class CstdMapSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Map
         # fields = ['id', 'username', 'email', 'phone']
-ObtainJSONWebToken
 
 class MapDataSerializer(serializers.ModelSerializer):
     class Meta:
         model = MapData
-        fields = ['id', 'name', 'author', 'author_id', 'description']
+        fields = '__all__'
+
+        # fields = ['id', 'name', 'author', 'author_id', 'description']
         # # fields = ['id', 'name']
         # fields = ['id', 'name', 'author', 'author_id', 'description', 'is_deleted', 'create_time', 'end_time']
         # read_only_fields = ['account_name']

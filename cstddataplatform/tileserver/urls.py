@@ -5,20 +5,21 @@ from . import views
 from rest_framework_jwt.views import obtain_jwt_token
 from django.conf.urls import url
 # from rest_framework_jwt import views
-from tileserver.views import MapViewSet, UploadDataSet, UserLayerViewSet
+from tileserver.views import MapViewSet, UserLayerViewSet
 
 router = DefaultRouter()
 # router.register('maps/layer/', UserLayerViewSet, 'layer')
 urlpatterns = [
-    path('maps/', MapViewSet.as_view(), name='map'),
-    # path('maps/layer', LayerViewSet, name='layer'),
-    # path('maps/layer', LayerViewSet.as_view(), name='layer'),
-    path('maps/layer/<int:user_id>/', UserLayerViewSet.as_view({'get': 'list',
-    'post': 'create', 'put': 'update', 'delete': 'destroy'}), name='layerdata-detail'),
-    path('maps/upfile/', UploadDataSet.as_view()),
+    path('maps/layer/user/<int:user_id>', MapViewSet.as_view(), name='map'),
+# path('maps/layer/user/<int:user_id>', MapViewSet.as_view(), name='map'),
+    path('maps/data/user/<int:user_id>/', UserLayerViewSet.as_view({'get': 'list',
+    'post': 'create'}), name='layerdata-detail_search_create'),
+    path('maps/data/user/detail/<int:pk>/', views.map_data_detail, name='layerdata-detail_get_put_delete'),
+
     path('tileserver', views.tile, name='tileserver'),
     path('vectorserver/<str:layer>/<str:filename>/', views.vectordata, name='vectorserver'),
     path('vectorserver/<str:layer>/<str:font>/<str:fontid>/', views.vectordatafont, name='vectorserverfont'),
+
 
     # path('tokentest/', views.tokentest, name='tokentest'),
     # path('<str:type>/<str:time>/<int:x>/<int:y>/<int:z>/', views.weather, name='weather'),
