@@ -27,5 +27,5 @@ urlpatterns = [
     # path('cstddataplat/api/v0.1/mapserver/', include('tileserver.urls')),
     # /cstddataplat
     path('cstddataplat/', include('tileserver.urls')),
-    # path('cstddataplat/api/v0.1/account/', include('account.urls')),
+    path('cstddataplat/api/v0.1/account/', include('account.urls')),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

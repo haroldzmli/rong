@@ -11,7 +11,7 @@ class Map(models.Model):
     # path = models.CharField('数据路径', max_length=255)
     map_data_id = models.IntegerField(verbose_name=u'地图数据id', default=0)
     is_deleted = models.BooleanField('已删除', default=False)
-    description = models.CharField('描述', max_length=50, default='')
+    description = models.CharField('描述', max_length=50, blank=True, default='')
     create_time = models.DateTimeField('开始时间', auto_now_add=True)
     modified_time = models.DateTimeField('结束时间', auto_now_add=True)
 

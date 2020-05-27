@@ -153,11 +153,26 @@ class MapUser(models.Model):
     end_time = models.DateTimeField('结束时间', auto_now_add=True)
     # maps = models.ManyToManyField(Map, related_name='mapid')
     # users = models.ManyToManyField(CstdUser, related_name='userid')
-    user = models.IntegerField(verbose_name=u'用户')
-    map = models.IntegerField(verbose_name=u'地图')
+    user_id = models.IntegerField(verbose_name=u'用户')
+    map_id = models.IntegerField(verbose_name=u'地图')
 
     class Meta:
         verbose_name = '用户地图'
         verbose_name_plural = '用户地图'
+    # def __str__(self):
+    #     return self.name
+
+
+class MapDataUser(models.Model):
+    start_time = models.DateTimeField('开始时间', auto_now_add=True)
+    end_time = models.DateTimeField('结束时间', auto_now_add=True)
+    # maps = models.ManyToManyField(Map, related_name='mapid')
+    # users = models.ManyToManyField(CstdUser, related_name='userid')
+    user_id = models.IntegerField(verbose_name=u'用户')
+    map_data_id = models.IntegerField(verbose_name=u'地图')
+
+    class Meta:
+        verbose_name = '用户地图数据'
+        verbose_name_plural = '用户地图数据'
     # def __str__(self):
     #     return self.name

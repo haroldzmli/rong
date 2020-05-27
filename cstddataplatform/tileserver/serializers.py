@@ -4,9 +4,10 @@ from tileserver.models import Map, MapData
 from rest_framework import serializers
 
 
-class CstdMapSerializer(serializers.HyperlinkedModelSerializer):
+class CstdMapSerializer(serializers.ModelSerializer):
     class Meta:
         model = Map
+        fields = '__all__'
         # fields = ['id', 'username', 'email', 'phone']
 
 class MapDataSerializer(serializers.ModelSerializer):

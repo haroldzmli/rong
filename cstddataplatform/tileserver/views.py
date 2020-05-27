@@ -44,40 +44,45 @@ class MapViewSet(APIView):
         return Response(serializer.data)
 
     def post(self, request, user_id=None, format=None):
-        serializer = CstdMapSerializer(data=request.data)
+        user = request.user
+        print('user_id:', user_id)
+        user_info = CstdUser.objects.get(pk=user_id)
+        print(user_info)
+        map_data = request.data
+        map_data['creator'] = user_info.username
+        map_data['creator_id'] = user_id
+        serializer = CstdMapSerializer(data=map_data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+@csrf_exempt
+def map_detail(request, pk):
+    """
+    Retrieve, update or delete a code map data.
+    """
+    try:
+        map_data = Map.objects.get(pk=pk)
+    except map_data.DoesNotExist:
+        return HttpResponse(status=404)
 
+    if request.method == 'GET':
+        serializer = CstdMapSerializer(map_data)
+        return JsonResponse(serializer.data)
 
-    #
-    # # @action(methods=['get'], detail=False)
-    # def get(self, request, format='json'):
-    #     # token = request.data['token']
-    #     # from rest_framework_jwt.utils import jwt_decode_handler
-    #     # toke_user = []
-    #     # toke_user = jwt_decode_handler(token)
-    #     # 获得user_id
-    #     # user_id = toke_user["user_id"]
-    #     # 通过user_id查询用户信息
-    #     # user_info = CstdUser.objects.get(pk=user_id)
-    #     queryset = Map.objects.all()
-    #     serializer = CstdMapSerializer(queryset, many=True)
-    #     return Response({'code': 0, 'data': serializer.data, 'msg': ''},
-    #                     status=status.HTTP_200_OK)
-    #     # user = request.user
-    #     # print('username:', user.username)
-    #     # if user.is_admin:
-    #     #     queryset = CstdUser.objects.all()
-    #     #     serializer = CstdUserSerializer(queryset, many=True)
-    #     #     return Response({'code': 0, 'data': serializer.data, 'msg': ''},
-    #     #                 status=status.HTTP_200_OK)
-    #     # else:
-    #     #     return Response({'code': 0, 'data': "no Authentication,must admin", 'msg': ''},
-    #     #                     status=status.HTTP_200_OK)
+    elif request.method == 'PUT':
+        data = JSONParser().parse(request)
+        serializer = CstdMapSerializer(map_data, data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse(serializer.data)
+        return JsonResponse(serializer.errors, status=400)
+
+    elif request.method == 'DELETE':
+        map_data.delete()
+        return HttpResponse(status=204)
 
 
 class IsAdmin(BasePermission):

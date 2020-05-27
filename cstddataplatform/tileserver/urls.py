@@ -11,10 +11,11 @@ router = DefaultRouter()
 # router.register('maps/layer/', UserLayerViewSet, 'layer')
 urlpatterns = [
     path('maps/layer/user/<int:user_id>/', MapViewSet.as_view(), name='map_search_create'),
-# path('maps/layer/user/<int:user_id>', MapViewSet.as_view(), name='map'),
+    path('maps/layer/user/detail/<int:pk>/', views.map_detail, name='map_detail_get_put_delete'),
+
     path('maps/data/user/<int:user_id>/', UserLayerViewSet.as_view({'get': 'list',
-    'post': 'create'}), name='layerdata-detail_search_create'),
-    path('maps/data/user/detail/<int:pk>/', views.map_data_detail, name='layerdata-detail_get_put_delete'),
+    'post': 'create'}), name='layerdata_detail_search_create'),
+    path('maps/data/user/detail/<int:pk>/', views.map_data_detail, name='layerdata_detail_get_put_delete'),
 
     path('tileserver', views.tile, name='tileserver'),
     path('vectorserver/<str:layer>/<str:filename>/', views.vectordata, name='vectorserver'),
