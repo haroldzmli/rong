@@ -19,7 +19,6 @@ from rest_framework.permissions import IsAuthenticated, BasePermission, SAFE_MET
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.viewsets import ViewSet, ModelViewSet
-from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 from rest_framework.authentication import TokenAuthentication
 
 from account.models import CstdUser
@@ -31,7 +30,7 @@ from tileserver.serializers import CstdMapSerializer, MapDataSerializer
 
 
 class MapViewSet(APIView):
-    authentication_classes = [BasicAuthentication, JSONWebTokenAuthentication]
+    # authentication_classes = [BasicAuthentication, JSONWebTokenAuthentication]
     permission_classes = [IsAuthenticated]
 
     """

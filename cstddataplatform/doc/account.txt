@@ -4,3 +4,5 @@
 
 先进行userpassword，后进行token
 
+应该支持user passord 和token进行登陆
+

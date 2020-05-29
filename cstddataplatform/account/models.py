@@ -34,6 +34,7 @@ class CstdUserManager(BaseUserManager):
         user = self.create_user(username=username, password=password, phone=self.normalize_phone(phone),
                                 email=self.normalize_email(email))
         user.is_admin = True
+        user.is_authenticated = True
         user.save(using=self._db)
         return user
 
@@ -42,11 +43,11 @@ class CstdUser(AbstractBaseUser):
     """
     地图用户
     """
-    username = models.CharField('用户名', max_length=50, unique=True)
+    username = models.CharField('username', max_length=50, unique=True)
     alias = models.CharField('姓名', max_length=50, default='')
-    email = models.EmailField('邮箱', max_length=255)
-    phone = models.CharField('电话', max_length=13, default='')
-    is_active = models.BooleanField('已激活', default=True)
+    email = models.EmailField('email', max_length=255)
+    phone = models.CharField('phone', max_length=13, default='')
+    is_active = models.BooleanField('已激活', default=False)
     is_admin = models.BooleanField('超级管理员', default=False)
     creator = models.CharField('创建人', max_length=50)
     gmt_created = models.DateTimeField('创建时间', auto_now_add=True)
@@ -59,7 +60,10 @@ class CstdUser(AbstractBaseUser):
 
     @property
     def is_staff(self):
-        return self.is_active
+        return self.is_admin
+
+    def get_full_name(self):
+        return self.username
 
     def get_short_name(self):
         return self.username
@@ -75,9 +79,20 @@ class CstdUser(AbstractBaseUser):
     def has_perms(self, perm, obj=None):
         return True
 
-    # def has_module_perms(self, app_label):
-    #     return True
+    def has_module_perms(self, app_label):
+        return True
 
+    @property
+    def is_authenticated(self):
+        return self.is_active
+
+    # @property
+    # def is_staff(self):
+    #     return self.is_admin
+
+    # @property
+    # def is_admin(self):
+    #     return self.is_admin
     # @property
     # def dept_name(self):
     #     dept_id = self.dept_id
@@ -117,10 +132,19 @@ class CstdUser(AbstractBaseUser):
         import json
         dict_result = self.get_dict()
         return json.dumps(dict_result)
+    #
+    # EMAIL_FIELD = 'email'
+    # USERNAME_FIELD = 'username'
+    # REQUIRED_FIELDS = ['email']
+    #
+    # class Meta:
+    #     verbose_name = _('user')
+    #     verbose_name_plural = _('users')
+    #     abstract = True
 
     class Meta:
-        verbose_name = '用户'
-        verbose_name_plural = '用户'
+        verbose_name = 'user'
+        verbose_name_plural = 'user'
 
 
 class CstdRole(models.Model):
@@ -169,7 +193,7 @@ class MapDataUser(models.Model):
     # maps = models.ManyToManyField(Map, related_name='mapid')
     # users = models.ManyToManyField(CstdUser, related_name='userid')
     user_id = models.IntegerField(verbose_name=u'用户')
-    map_data_id = models.IntegerField(verbose_name=u'地图')
+    map_data_id = models.IntegerField(verbose_name=u'地图数据')
 
     class Meta:
         verbose_name = '用户地图数据'

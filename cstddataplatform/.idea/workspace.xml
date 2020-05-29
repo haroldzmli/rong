@@ -2,16 +2,71 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0e9786a2-0347-4988-947f-40bf45e9514c" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/data/example.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rest_registration/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rest_registration/admin.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rest_registration/api/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rest_registration/api/serializers.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rest_registration/api/urls.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rest_registration/api/views/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rest_registration/api/views/change_password.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rest_registration/api/views/login.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rest_registration/api/views/profile.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rest_registration/api/views/register.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rest_registration/api/views/register_email.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rest_registration/api/views/reset_password.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rest_registration/apps.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rest_registration/auth_token_managers.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rest_registration/checks.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rest_registration/contrib/verification_redirects/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rest_registration/contrib/verification_redirects/admin.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rest_registration/contrib/verification_redirects/apps.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rest_registration/contrib/verification_redirects/models.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rest_registration/contrib/verification_redirects/settings.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rest_registration/contrib/verification_redirects/urls.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rest_registration/contrib/verification_redirects/views.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rest_registration/decorators.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rest_registration/exceptions.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rest_registration/locale/fr/LC_MESSAGES/django.po" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rest_registration/models.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rest_registration/notifications/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rest_registration/notifications/email.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rest_registration/notifications/enums.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rest_registration/settings.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rest_registration/settings_fields.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rest_registration/signals.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rest_registration/signers/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rest_registration/signers/register.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rest_registration/templates/rest_registration/register/body.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rest_registration/templates/rest_registration/register/body.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rest_registration/templates/rest_registration/register/subject.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rest_registration/templates/rest_registration/register_email/body.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rest_registration/templates/rest_registration/register_email/body.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rest_registration/templates/rest_registration/register_email/subject.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rest_registration/templates/rest_registration/reset_password/body.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rest_registration/templates/rest_registration/reset_password/body.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rest_registration/templates/rest_registration/reset_password/subject.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rest_registration/tests.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rest_registration/utils/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rest_registration/utils/common.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rest_registration/utils/html.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rest_registration/utils/nested_settings.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rest_registration/utils/responses.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rest_registration/utils/users.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rest_registration/utils/validation.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rest_registration/utils/verification.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rest_registration/utils/verification_notifications.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rest_registration/verification.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rest_registration/views.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/format_response.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/account/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/account/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/account/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/account/serializers.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/account/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/account/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/account/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/account/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cstddataplatform/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/cstddataplatform/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cstddataplatform/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/cstddataplatform/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/account.txt" beforeDir="false" afterPath="$PROJECT_DIR$/doc/account.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/doc/interface.txt" beforeDir="false" afterPath="$PROJECT_DIR$/doc/interface.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tileserver/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/tileserver/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tileserver/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/tileserver/serializers.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tileserver/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/tileserver/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tileserver/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/tileserver/views.py" afterDir="false" />
     </list>
@@ -42,19 +97,19 @@
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/tileserver" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/utils" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/utils" />
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/tileserver" />
+      <recent name="$PROJECT_DIR$/cstddataplatform" />
+      <recent name="$PROJECT_DIR$/static" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/utils/tiledbfile" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/tileserver" />
-      <recent name="$PROJECT_DIR$" />
-      <recent name="$PROJECT_DIR$/cstddataplatform" />
-      <recent name="$PROJECT_DIR$/utils" />
-      <recent name="$PROJECT_DIR$/static" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -217,7 +272,10 @@
       <workItem from="1589174743589" duration="16808000" />
       <workItem from="1589953631112" duration="2468000" />
       <workItem from="1590040353033" duration="49951000" />
-      <workItem from="1590450542741" duration="52445000" />
+      <workItem from="1590450542741" duration="59030000" />
+      <workItem from="1590631096971" duration="6366000" />
+      <workItem from="1590637966822" duration="1848000" />
+      <workItem from="1590643534746" duration="39213000" />
     </task>
     <task id="LOCAL-00001" summary="修改文件上传">
       <created>1590046369037</created>
@@ -261,7 +319,14 @@
       <option name="project" value="LOCAL" />
       <updated>1590483600922</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="modify account">
+      <created>1590570864602</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1590570864602</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -284,7 +349,8 @@
     <MESSAGE value="修改文件上传" />
     <MESSAGE value="增加瓦片上传的zip png(jpg)的一些工具类" />
     <MESSAGE value="modify tileserver" />
-    <option name="LAST_COMMIT_MESSAGE" value="modify tileserver" />
+    <MESSAGE value="modify account" />
+    <option name="LAST_COMMIT_MESSAGE" value="modify account" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -293,6 +359,11 @@
           <url>file://$PROJECT_DIR$/cstddataplatform/urls.py</url>
           <line>15</line>
           <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/account/views.py</url>
+          <line>98</line>
+          <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
