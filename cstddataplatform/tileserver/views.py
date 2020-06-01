@@ -142,9 +142,6 @@ class MapDataDetailViewSet(APIView):
         return HttpResponse(status=204)
 
 
-
-
-
 class MapViewSet(APIView):
     authentication_classes = [BasicAuthentication, JSONWebTokenAuthentication, SessionAuthentication]
     permission_classes = [IsAuthenticated]
