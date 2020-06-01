@@ -101,16 +101,13 @@ class MapDataDetailViewSet(APIView):
         except MapData.DoesNotExist:
             raise Http404
 
-
     def get_object_pk(self, pk):
         try:
             return MapData.objects.get(pk=pk)
         except MapData.DoesNotExist:
             raise Http404
 
-
     def get(self, request, pk=None):
-
         if request.user.is_staff:
             user_data = self.get_object_pk(pk)
             serializer = MapDataSerializer(user_data)
@@ -120,19 +117,18 @@ class MapDataDetailViewSet(APIView):
         return JsonResponse(serializer.data)
 
     def put(self, request, pk):
-
         if request.user.is_staff:
             map_data = self.get_object_pk(pk)
             serializer = MapDataSerializer(map_data, data=request.data)
         else:
             map_data = self.get_object_username(pk, request.user)
             serializer = MapDataUserSerializer(map_data, data=request.data)
-
         if serializer.is_valid():
             serializer.save()
             return JsonResponse(serializer.data)
         return JsonResponse(serializer.errors, status=400)
 
+    # delete 此处可能需要增加判断，目前这样别的登陆用户可能删除不是自己的数据
     def delete(self, request, pk):
         try:
             map_data = MapData.objects.get(pk=pk)

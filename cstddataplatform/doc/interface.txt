@@ -43,7 +43,9 @@ ip + port + /rongmapplat/api/v0.1/ +
 2、数据上传 查询 现在支持zip mbtiles格式的数据创传，其中zip数据上传后原则上要写入sqltie中
    2.1 http://127.0.0.1:8000/cstddataplat/api/v0.1/maps/data/user/ post formdata  get
 file xxxx.mbtiles
-   2.2
+   2.2  http://127.0.0.1:8000/cstddataplat/api/v0.1/maps/data/user/detail/1/ get put delete
+        查询具体数据，编辑并删除
+   2.3
 
 
 

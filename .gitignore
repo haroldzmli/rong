@@ -9,5 +9,6 @@ __pycache__
 upload
 node_modules
 venv
-
+env
+.idea
 

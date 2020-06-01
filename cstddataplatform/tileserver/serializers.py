@@ -10,15 +10,17 @@ class CstdMapSerializer(serializers.ModelSerializer):
         fields = '__all__'
         # fields = ['id', 'username', 'email', 'phone']
 
+
 class MapDataSerializer(serializers.ModelSerializer):
     class Meta:
         model = MapData
         fields = '__all__'
 
+
 class MapDataUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = MapData
-        fields = ['id', 'name', 'author', 'author_id', 'description', 'create_time', 'end_time']
+        fields = ['id', 'name', 'author', 'author_id', 'is_deleted', 'description', 'create_time', 'end_time']
 
         # fields = ['name', 'author', 'author_id']
         # # fields = ['id', 'name']
