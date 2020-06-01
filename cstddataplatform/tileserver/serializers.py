@@ -15,7 +15,12 @@ class MapDataSerializer(serializers.ModelSerializer):
         model = MapData
         fields = '__all__'
 
-        # fields = ['id', 'name', 'author', 'author_id', 'description']
+class MapDataUserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = MapData
+        fields = ['id', 'name', 'author', 'author_id', 'description', 'create_time', 'end_time']
+
+        # fields = ['name', 'author', 'author_id']
         # # fields = ['id', 'name']
         # fields = ['id', 'name', 'author', 'author_id', 'description', 'is_deleted', 'create_time', 'end_time']
         # read_only_fields = ['account_name']

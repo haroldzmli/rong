@@ -8,6 +8,10 @@ urlpatterns = [
     path('user/<int:pk>/', views.UserDetailView.as_view(), name='user_search_modify_delete'),
     path('user/', views.UsersView.as_view(), name='user_search_modify_delete'),
     url(r"^token/$", jwt_views.obtain_jwt_token, name="auth"),
+
+
+    path('mapdata/<int:pk>/', views.UsersMapDataDetailView.as_view(), name='map_data_search_modify_delete'),
+    path('mapdata/', views.UsersMapDataView.as_view(), name='map_data_create_search')
     # path('token/', views.CstdObtainJSONWebToken.as_view(), name='CstdObtainJSONWebToken'),
     # path('token/', views.TestJSONWebTokenAPIView.as_view(), name='TestJSONWebTokenAPIView'),
     # path('accounts/', include('rest_registration.api.urls')),

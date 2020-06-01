@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.base_user import BaseUserManager, AbstractBaseUser
 
+from tileserver.models import MapData
+
 
 class CstdUserManager(BaseUserManager):
 
@@ -192,8 +194,11 @@ class MapDataUser(models.Model):
     end_time = models.DateTimeField('结束时间', auto_now_add=True)
     # maps = models.ManyToManyField(Map, related_name='mapid')
     # users = models.ManyToManyField(CstdUser, related_name='userid')
-    user_id = models.IntegerField(verbose_name=u'用户')
+    user_id = models.IntegerField(verbose_name=u'数据使用用户')
     map_data_id = models.IntegerField(verbose_name=u'地图数据')
+    creator_id = models.IntegerField(verbose_name=u'数据创建用户')
+    # user = models.ForeignKey(MapUser, related_name='MapUser', on_delete=models.CASCADE)
+    # map_data = models.ForeignKey(MapData, related_name='MapUser', on_delete=models.CASCADE)
 
     class Meta:
         verbose_name = '用户地图数据'

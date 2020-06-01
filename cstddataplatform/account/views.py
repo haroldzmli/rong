@@ -5,6 +5,7 @@ from rest_framework import status, authentication, permissions
 from rest_framework.authentication import BasicAuthentication, SessionAuthentication
 from rest_framework.decorators import api_view
 from rest_framework.generics import GenericAPIView
+from rest_framework.parsers import JSONParser
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -112,6 +113,7 @@ class UsersMapDataDetailView(APIView):
 
     authentication_classes = [BasicAuthentication, JSONWebTokenAuthentication, SessionAuthentication]
     permission_classes = [IsAuthenticated]
+    # 需要增加只有creator才能有此三种权限。
 
     def get_object(self, request, pk):
         try:
@@ -133,7 +135,7 @@ class UsersMapDataDetailView(APIView):
 
     def put(self, request, pk):
         user_data = self.get_object(request, pk)
-        serializer = CstdUserSerializer(user_data, data=request.data)
+        serializer = MapDataUserSerializer(user_data, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
@@ -143,3 +145,65 @@ class UsersMapDataDetailView(APIView):
         user_data = self.get_object(request, pk)
         user_data.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+class UsersMapDataView(APIView):
+
+    authentication_classes = [BasicAuthentication, JSONWebTokenAuthentication, SessionAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request):
+        map_user_data = JSONParser().parse(request)
+        creator_name = request.user
+        try:
+            creator = CstdUser.objects.filter(username=creator_name)
+            map_user_data['creator_id'] = creator.id
+        except CstdUser.DoesNotExist:
+            user_result_object_format_list = [{"error": "no user authority"}]
+            code, msg, = 0, status.HTTP_400_BAD_REQUEST
+            data = dict(value=user_result_object_format_list)
+            return api_response(code, msg, data)
+            raise Http404
+
+        # 可以在map data里进行一次查找确认，此处省略。
+        serializer = MapDataUserSerializer(map_user_data)
+        user_result_object_format_list = []
+        code, msg, = 1, status.HTTP_201_CREATED
+        serializer = MapDataUserSerializer(data=request.data)
+        if serializer.is_valid():
+            try:
+                serializer.save()
+                user_result_object_format_list = [{"mapdatauser": "successful"}]
+                code, msg, = 1, status.HTTP_201_CREATED
+                data = dict(value=user_result_object_format_list)
+                return api_response(code, msg, data)
+            except IntegrityError as Argument:
+                user_result_object_format_list = [{"error": Argument.args[0]}]
+                code, msg, = 0, status.HTTP_201_CREATED
+                data = dict(value=user_result_object_format_list)
+                return api_response(code, msg, data)
+
+        user_result_object_format_list = [{"error": serializer.errors}]
+        code, msg, = 0, status.HTTP_400_BAD_REQUEST
+        data = dict(value=user_result_object_format_list)
+        return api_response(code, msg, data)
+
+    def get(self, request):
+        creator_name = request.user
+        try:
+            creator = CstdUser.objects.filter(username=creator_name)
+        except CstdUser.DoesNotExist:
+            user_result_object_format_list = [{"error": "no user authority"}]
+            code, msg, = 0, status.HTTP_400_BAD_REQUEST
+            data = dict(value=user_result_object_format_list)
+            return api_response(code, msg, data)
+            raise Http404
+        map_data_user = MapDataUser.objects.get(user_id=creator.id, many=True)
+        serializer = MapDataUserSerializer(map_data_user)
+        user_result_object_format_list = [serializer.data]
+        code, msg, = 1, status.HTTP_201_CREATED
+        data = dict(value=user_result_object_format_list)
+        return api_response(code, msg, data)
+
+
+

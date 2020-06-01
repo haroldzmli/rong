@@ -1,18 +1,12 @@
 import datetime
 import os
 import time
-# import requests
-import simplejson
 from django.conf import settings
-from django.contrib.auth.decorators import login_required
 
-from django.http import HttpResponse, JsonResponse
-from django.shortcuts import render
-# Create your views here.
-from django.utils.decorators import method_decorator
+from django.http import HttpResponse, JsonResponse, Http404
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework import status
-from rest_framework.authentication import BasicAuthentication
+from rest_framework.authentication import BasicAuthentication, SessionAuthentication
 from rest_framework.decorators import action
 from rest_framework.parsers import JSONParser, MultiPartParser
 from rest_framework.permissions import IsAuthenticated, BasePermission, SAFE_METHODS
@@ -20,36 +14,173 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.viewsets import ViewSet, ModelViewSet
 from rest_framework.authentication import TokenAuthentication
+from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 
 from account.models import CstdUser
 from cstddataplatform.settings import maptileserver, vectordataserver
 from tilecloud import TileCoord, Tile, TileStore
 from tilecloud.filter.contenttype import ContentTypeAdder
 from tileserver.models import Map, MapData
-from tileserver.serializers import CstdMapSerializer, MapDataSerializer
+from tileserver.serializers import CstdMapSerializer, MapDataSerializer, MapDataUserSerializer
+from utils.format_response import api_response
+
+
+class MapDataViewSet(ModelViewSet):
+    """
+    A viewset that provides the standard actions
+    """
+    # queryset = MapData.objects.all()
+    # serializer_class = MapDataSerializer
+    authentication_classes = [BasicAuthentication, JSONWebTokenAuthentication, SessionAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def list(self, request):
+        print('user:', request.user)
+        # print('auth:', request.auth)
+        creator_name = request.user
+        try:
+            creator = CstdUser.objects.filter(username=creator_name)
+            print(creator[0].username)
+        except CstdUser.DoesNotExist:
+            user_result_object_format_list = [{"error": "no user authority"}]
+            code, msg, = 0, status.HTTP_400_BAD_REQUEST
+            data = dict(value=user_result_object_format_list)
+            return api_response(code, msg, data)
+            raise Http404
+
+        queryset = MapData.objects.filter(author_id=creator[0].id)
+        serializer = MapDataUserSerializer(queryset, many=True)
+        return Response({'code': 0, 'data': serializer.data, 'msg': ''},
+                        status=status.HTTP_200_OK)
+
+    # 可以上传多个mbtiles zip数据
+    def create(self, request):
+        creator_name = request.user
+        try:
+            creator = CstdUser.objects.filter(username=creator_name)
+        except CstdUser.DoesNotExist:
+            user_result_object_format_list = [{"error": "no user authority"}]
+            code, msg, = 0, status.HTTP_400_BAD_REQUEST
+            data = dict(value=user_result_object_format_list)
+            return api_response(code, msg, data)
+            raise Http404
+
+        files = request.FILES.getlist('file', None)
+        if not files:
+            return Response({'status': 'file dont null'})
+        else:
+            returndata = []
+            mapdata = request.data
+            mapdata['author'] = creator[0].username
+            mapdata['author_id'] = creator[0].id
+            for file_obj in files:
+                response = upload_file(file_obj, str(creator[0].id))
+                mapdata['save_path'] = response['url']
+                mapdata['save_name'] = response['original']
+                # if len(mapdata['name']) == '':
+                if 'name' not in mapdata:
+                    mapdata['name'] = os.path.splitext(mapdata['save_name'])[0]  # 分割，不带后缀名
+                serializer = MapDataSerializer(data=mapdata)
+                if serializer.is_valid():
+                    serializer.save()
+                    returndata.append(serializer.data)
+            serializer = MapDataUserSerializer(returndata, many=True)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+
+class MapDataDetailViewSet(APIView):
+    """
+    Retrieve, update or delete a code map data.
+    """
+    authentication_classes = [BasicAuthentication, JSONWebTokenAuthentication, SessionAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def get_object_username(self, pk, username):
+        try:
+            return MapData.objects.get(pk=pk, author=username)
+        except MapData.DoesNotExist:
+            raise Http404
+
+
+    def get_object_pk(self, pk):
+        try:
+            return MapData.objects.get(pk=pk)
+        except MapData.DoesNotExist:
+            raise Http404
+
+
+    def get(self, request, pk=None):
+
+        if request.user.is_staff:
+            user_data = self.get_object_pk(pk)
+            serializer = MapDataSerializer(user_data)
+        else:
+            user_data = self.get_object_username(pk, request.user)
+            serializer = MapDataUserSerializer(user_data)
+        return JsonResponse(serializer.data)
+
+    def put(self, request, pk):
+
+        if request.user.is_staff:
+            map_data = self.get_object_pk(pk)
+            serializer = MapDataSerializer(map_data, data=request.data)
+        else:
+            map_data = self.get_object_username(pk, request.user)
+            serializer = MapDataUserSerializer(map_data, data=request.data)
+
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse(serializer.data)
+        return JsonResponse(serializer.errors, status=400)
+
+    def delete(self, request, pk):
+        try:
+            map_data = MapData.objects.get(pk=pk)
+        except map_data.DoesNotExist:
+            return HttpResponse(status=404)
+        map_data.delete()
+        return HttpResponse(status=204)
+
+
+
 
 
 class MapViewSet(APIView):
-    # authentication_classes = [BasicAuthentication, JSONWebTokenAuthentication]
+    authentication_classes = [BasicAuthentication, JSONWebTokenAuthentication, SessionAuthentication]
     permission_classes = [IsAuthenticated]
 
     """
-    List all snippets, or create a new snippet.
+    列出用户创建的地图
     """
 
-    def get(self, request, user_id=None, format='json'):
-        maps = Map.objects.filter(creator_id=user_id)
+    def get(self, request, format='json'):
+        creator_name = request.user
+        try:
+            creator = CstdUser.objects.filter(username=creator_name)
+        except CstdUser.DoesNotExist:
+            user_result_object_format_list = [{"error": "no user authority"}]
+            code, msg, = 0, status.HTTP_400_BAD_REQUEST
+            data = dict(value=user_result_object_format_list)
+            return api_response(code, msg, data)
+            raise Http404
+
+        maps = Map.objects.filter(creator_id=creator.id)
         serializer = CstdMapSerializer(maps, many=True)
         return Response(serializer.data)
 
-    def post(self, request, user_id=None, format=None):
-        user = request.user
-        print('user_id:', user_id)
-        user_info = CstdUser.objects.get(pk=user_id)
-        print(user_info)
+    def post(self, request):
+        creator_name = request.user
+        try:
+            creator = CstdUser.objects.filter(username=creator_name)
+        except CstdUser.DoesNotExist:
+            user_result_object_format_list = [{"error": "no user authority"}]
+            code, msg, = 0, status.HTTP_400_BAD_REQUEST
+            data = dict(value=user_result_object_format_list)
+            return api_response(code, msg, data)
+            raise Http404
         map_data = request.data
-        map_data['creator'] = user_info.username
-        map_data['creator_id'] = user_id
+        map_data['creator'] = creator.username
+        map_data['creator_id'] = creator.id
         serializer = CstdMapSerializer(data=map_data)
         if serializer.is_valid():
             serializer.save()
@@ -109,75 +240,6 @@ class IsOwnerOrReadOnly(BasePermission):
         print(obj.owner)
         return obj.owner == request.user
 
-
-@csrf_exempt
-def map_data_detail(request, pk):
-    """
-    Retrieve, update or delete a code map data.
-    """
-    try:
-        map_data = MapData.objects.get(pk=pk)
-    except map_data.DoesNotExist:
-        return HttpResponse(status=404)
-
-    if request.method == 'GET':
-        serializer = MapDataSerializer(map_data)
-        return JsonResponse(serializer.data)
-
-    elif request.method == 'PUT':
-        data = JSONParser().parse(request)
-        serializer = MapDataSerializer(map_data, data=data)
-        if serializer.is_valid():
-            serializer.save()
-            return JsonResponse(serializer.data)
-        return JsonResponse(serializer.errors, status=400)
-
-    elif request.method == 'DELETE':
-        map_data.delete()
-        return HttpResponse(status=204)
-
-
-class UserLayerViewSet(ModelViewSet):
-    """
-    A viewset that provides the standard actions
-    """
-    # queryset = MapData.objects.all()
-    # serializer_class = MapDataSerializer
-    # authentication_classes = [BasicAuthentication, JSONWebTokenAuthentication]
-    # authentication_classes = [TokenAuthentication]
-
-    def list(self, request, user_id=None):
-        print(user_id)
-        # queryset = MapData.objects.all()
-        queryset = MapData.objects.filter(author_id=user_id)
-        serializer = MapDataSerializer(queryset, many=True)
-        return Response({'code': 0, 'data': serializer.data, 'msg': ''},
-                        status=status.HTTP_200_OK)
-
-    # 可以上传多个mbtiles zip数据
-    def create(self, request, user_id=None):
-        user = request.user
-        print('user_id:', user_id)
-        user_info = CstdUser.objects.get(pk=user_id)
-        print(user_info)
-        files = request.FILES.getlist('file', None)
-        if not files:
-            return Response({'status': 'file dont null'})
-        else:
-            returndata = []
-            mapdata = request.data
-            mapdata['author'] = user_info.username
-            mapdata['author_id'] = user_id
-            for file_obj in files:
-                response = upload_file(file_obj, str(user_id))
-                mapdata['save_path'] = response['url']
-                mapdata['save_name'] = response['original']
-                serializer = MapDataSerializer(data=mapdata)
-                if serializer.is_valid():
-                    serializer.save()
-                    returndata.append(mapdata)
-                serializer = MapDataSerializer(returndata, many=True)
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
 def format_file_name(name):
