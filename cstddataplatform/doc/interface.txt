@@ -45,7 +45,8 @@ ip + port + /rongmapplat/api/v0.1/ +
 file xxxx.mbtiles
    2.2  http://127.0.0.1:8000/cstddataplat/api/v0.1/maps/data/user/detail/1/ get put delete
         查询具体数据，编辑并删除
-   2.3
+   2.3 http://127.0.0.1:8000/cstddataplat/api/v0.1/maps/map/user/ post get
+        地图数据 增加 查找
 
 
 

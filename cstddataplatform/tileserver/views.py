@@ -157,7 +157,7 @@ class MapViewSet(APIView):
             return api_response(code, msg, data)
             raise Http404
 
-        maps = Map.objects.filter(creator_id=creator.id)
+        maps = Map.objects.filter(creator_id=creator[0].id)
         serializer = CstdMapSerializer(maps, many=True)
         return Response(serializer.data)
 
@@ -172,8 +172,8 @@ class MapViewSet(APIView):
             return api_response(code, msg, data)
             raise Http404
         map_data = request.data
-        map_data['creator'] = creator.username
-        map_data['creator_id'] = creator.id
+        map_data['creator'] = creator[0].username
+        map_data['creator_id'] = creator[0].id
         serializer = CstdMapSerializer(data=map_data)
         if serializer.is_valid():
             serializer.save()
@@ -181,31 +181,81 @@ class MapViewSet(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-@csrf_exempt
-def map_detail(request, pk):
+class MapDetailViewSet(APIView):
     """
     Retrieve, update or delete a code map data.
     """
-    try:
-        map_data = Map.objects.get(pk=pk)
-    except map_data.DoesNotExist:
-        return HttpResponse(status=404)
+    authentication_classes = [BasicAuthentication, JSONWebTokenAuthentication, SessionAuthentication]
+    permission_classes = [IsAuthenticated]
 
-    if request.method == 'GET':
-        serializer = CstdMapSerializer(map_data)
+    def get_object_username(self, pk, username):
+        try:
+            return Map.objects.get(pk=pk, author=username)
+        except MapData.DoesNotExist:
+            raise Http404
+
+    def get_object_pk(self, pk):
+        try:
+            return Map.objects.get(pk=pk)
+        except MapData.DoesNotExist:
+            raise Http404
+
+    def get(self, request, pk=None):
+        if request.user.is_staff:
+            user_data = self.get_object_pk(pk)
+            serializer = CstdMapSerializer(user_data)
+        else:
+            user_data = self.get_object_username(pk, request.user)
+            serializer = CstdMapSerializer(user_data)
         return JsonResponse(serializer.data)
 
-    elif request.method == 'PUT':
-        data = JSONParser().parse(request)
-        serializer = CstdMapSerializer(map_data, data=data)
+    def put(self, request, pk):
+        if request.user.is_staff:
+            map_data = self.get_object_pk(pk)
+            serializer = CstdMapSerializer(map_data, data=request.data)
+        else:
+            map_data = self.get_object_username(pk, request.user)
+            serializer = CstdMapSerializer(map_data, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return JsonResponse(serializer.data)
         return JsonResponse(serializer.errors, status=400)
 
-    elif request.method == 'DELETE':
-        map_data.delete()
+    # delete 此处可能需要增加判断，目前这样别的登陆用户可能删除不是自己的数据
+    def delete(self, request, pk):
+        try:
+            user_map = Map.objects.get(pk=pk)
+        except user_map.DoesNotExist:
+            return HttpResponse(status=404)
+        user_map.delete()
         return HttpResponse(status=204)
+
+#
+# @csrf_exempt
+# def map_detail(request, pk):
+#     """
+#     Retrieve, update or delete a code map data.
+#     """
+#     try:
+#         map_data = Map.objects.get(pk=pk)
+#     except map_data.DoesNotExist:
+#         return HttpResponse(status=404)
+#
+#     if request.method == 'GET':
+#         serializer = CstdMapSerializer(map_data)
+#         return JsonResponse(serializer.data)
+#
+#     elif request.method == 'PUT':
+#         data = JSONParser().parse(request)
+#         serializer = CstdMapSerializer(map_data, data=data)
+#         if serializer.is_valid():
+#             serializer.save()
+#             return JsonResponse(serializer.data)
+#         return JsonResponse(serializer.errors, status=400)
+#
+#     elif request.method == 'DELETE':
+#         map_data.delete()
+#         return HttpResponse(status=204)
 
 
 class IsAdmin(BasePermission):
@@ -272,45 +322,90 @@ def upload_file(file_obj, user_id):
     return response_dict
 
 
-def tile(request):
-    # token = request.GET.get('token')
-    # print(token)
-    group = request.GET.get('group')
-    layer = request.GET.get('layer')
-    z = int(request.GET.get('l'))
-    x = int(request.GET.get('x'))
-    y = int(request.GET.get('y'))
-    token = request.GET.get('access_token')
-    print('token:', token)
-    dbfile = ''
-    if group is not None:
-        dbfile = maptileserver[group][layer]
-    else:
-        dbfile = maptileserver[layer]
+class TestViewSet(APIView):
+    def get(self, request, layer=None, filename=None, tileid=None):
+        print(layer, " ", filename,  str(tileid))
 
-    content_type_adder = ContentTypeAdder()
-    tilestore = TileStore.load(dbfile)
-    if tilestore is None:
-        HttpResponse(404)
-    else:
-        tilecoord = TileCoord(z, x, y)
-        tile = Tile(tilecoord)
-        tile = tilestore.get_one(tile)
-        if tile is None:
+
+class TileViewSet(APIView):
+    authentication_classes = [BasicAuthentication, JSONWebTokenAuthentication, SessionAuthentication]
+    permission_classes = [IsAuthenticated]
+    def get(self, request):
+        group = request.GET.get('group')
+        layer = request.GET.get('layer')
+        z = int(request.GET.get('l'))
+        x = int(request.GET.get('x'))
+        y = int(request.GET.get('y'))
+        token = request.GET.get('access_token')
+        dbfile = ''
+        if group is not None:
+            dbfile = maptileserver[group][layer]
+        else:
+            dbfile = maptileserver[layer]
+
+        content_type_adder = ContentTypeAdder()
+        tilestore = TileStore.load(dbfile)
+        if tilestore is None:
             HttpResponse(404)
-        if tile.data is None:
-            HttpResponse(204)
+        else:
+            tilecoord = TileCoord(z, x, y)
+            tile = Tile(tilecoord)
+            tile = tilestore.get_one(tile)
+            if tile is None:
+                HttpResponse(404)
+            if tile.data is None:
+                HttpResponse(204)
 
-        tile = content_type_adder(tile)
+            tile = content_type_adder(tile)
 
-        # if tile.content_type is not None:
-        #     response = HttpResponse(tile.data, content_type=tile.content_type)
-        #     response['Access-Control-Allow-Origin'] = "*"
-        # if tile.content_encoding is not None:
-        #     bottle.response.set_header('Content-Encoding', tile.content_encoding)
-        response = HttpResponse(tile.data, content_type=tile.content_type)
-        response['Access-Control-Allow-Origin'] = "*"
-        return response
+            # if tile.content_type is not None:
+            #     response = HttpResponse(tile.data, content_type=tile.content_type)
+            #     response['Access-Control-Allow-Origin'] = "*"
+            # if tile.content_encoding is not None:
+            #     bottle.response.set_header('Content-Encoding', tile.content_encoding)
+            response = HttpResponse(tile.data, content_type=tile.content_type)
+            response['Access-Control-Allow-Origin'] = "*"
+            return response
+
+# def tile(request):
+#     # token = request.GET.get('token')
+#     # print(token)
+#     group = request.GET.get('group')
+#     layer = request.GET.get('layer')
+#     z = int(request.GET.get('l'))
+#     x = int(request.GET.get('x'))
+#     y = int(request.GET.get('y'))
+#     token = request.GET.get('access_token')
+#     print('token:', token)
+#     dbfile = ''
+#     if group is not None:
+#         dbfile = maptileserver[group][layer]
+#     else:
+#         dbfile = maptileserver[layer]
+#
+#     content_type_adder = ContentTypeAdder()
+#     tilestore = TileStore.load(dbfile)
+#     if tilestore is None:
+#         HttpResponse(404)
+#     else:
+#         tilecoord = TileCoord(z, x, y)
+#         tile = Tile(tilecoord)
+#         tile = tilestore.get_one(tile)
+#         if tile is None:
+#             HttpResponse(404)
+#         if tile.data is None:
+#             HttpResponse(204)
+#
+#         tile = content_type_adder(tile)
+#
+#         # if tile.content_type is not None:
+#         #     response = HttpResponse(tile.data, content_type=tile.content_type)
+#         #     response['Access-Control-Allow-Origin'] = "*"
+#         # if tile.content_encoding is not None:
+#         #     bottle.response.set_header('Content-Encoding', tile.content_encoding)
+#         response = HttpResponse(tile.data, content_type=tile.content_type)
+#         response['Access-Control-Allow-Origin'] = "*"
+#         return response
 
 
 def vectordata(request, layer, filename):
