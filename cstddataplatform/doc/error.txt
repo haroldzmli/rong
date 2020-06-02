@@ -1,0 +1,30 @@
+111111
+111111
+111111
+[02/Jun/2020 02:48:09] "POST /cstddataplat/api/v0.1/maps/data/user/ HTTP/1.1" 201 181
+user: admin
+admin
+Traceback (most recent call last):
+  File "/usr/lib/python3.6/wsgiref/handlers.py", line 138, in run
+    self.finish_response()
+  File "/usr/lib/python3.6/wsgiref/handlers.py", line 183, in finish_response
+    self.close()
+  File "/work/cstd/rong/cstddataplatform/venv/lib/python3.6/site-packages/django/core/servers/basehttp.py", line 113, in close
+    self.get_stdin()._read_limited()
+  File "/work/cstd/rong/cstddataplatform/venv/lib/python3.6/site-packages/django/core/handlers/wsgi.py", line 28, in _read_limited
+    result = self.stream.read(size)
+MemoryError
+[02/Jun/2020 02:48:22] code 400, message Bad request syntax ('----------------------------865158520032055688229235')
+[02/Jun/2020 02:48:22] "----------------------------865158520032055688229235" 400 -
+Traceback (most recent call last):
+  File "/usr/lib/python3.6/wsgiref/handlers.py", line 138, in run
+    self.finish_response()
+  File "/usr/lib/python3.6/wsgiref/handlers.py", line 183, in finish_response
+    self.close()
+  File "/work/cstd/rong/cstddataplatform/venv/lib/python3.6/site-packages/django/core/servers/basehttp.py", line 113, in close
+    self.get_stdin()._read_limited()
+  File "/work/cstd/rong/cstddataplatform/venv/lib/python3.6/site-packages/django/core/handlers/wsgi.py", line 28, in _read_limited
+    result = self.stream.read(size)
+MemoryError
+[02/Jun/2020 02:48:49] code 400, message Bad request syntax ('----------------------------358964146179371280126941')
+[02/Jun/2020 02:48:49] "----------------------------358964146179371280126941" 400 -

@@ -13,11 +13,9 @@ urlpatterns = [
     path('map/user/', MapViewSet.as_view(), name='map_search_create'),
     path('map/user/detail/<int:pk>/', tileserverviews.MapDetailViewSet.as_view(), name='map_detail_get_put_delete'),
 
-
-
     path('map/user/<str:layer>/<str:filename>/<int:tileid>/', tileserverviews.TestViewSet.as_view(), name='TestViewSet'),
 
-    path('tileserver', tileserverviews.tileserverviews.tile, name='tileserver'),
+    path('tileserver/<int:userid>/<str:mapname>/', tileserverviews.TileViewSet.as_view(), name='tileserver'),
 
 
     path('vectorserver/<str:layer>/<str:filename>/', tileserverviews.vectordata, name='vectorserver'),

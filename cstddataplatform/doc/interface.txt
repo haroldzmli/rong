@@ -47,6 +47,10 @@ file xxxx.mbtiles
         查询具体数据，编辑并删除
    2.3 http://127.0.0.1:8000/cstddataplat/api/v0.1/maps/map/user/ post get
         地图数据 增加 查找
+   2.4 http://127.0.0.1:8000/cstddataplat/api/v0.1/maps/map/user/detail/1/
+       地图数据详细的 查找 修改和删除
+   2.5 http://127.0.0.1:8000/cstddataplat/api/v0.1/maps/tileserver/1/myfirstmap/?l=11&x=1439&y=795&access_token=**** 还支持The authorization header方法。
+      地图瓦片服务
 
 
 

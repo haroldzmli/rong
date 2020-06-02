@@ -1,9 +1,9 @@
 {"version":8,"name":"Mapbox Streets",
 "metadata":{"mapbox:autocomposite":true,"mapbox:type":"default","mapbox:origin":"streets-v10"},"sources":{
-"composite":{"url":"http://127.0.0.1:8000/cstddataplat/vectorserver/json/streets.online.json","type":"vector"},
-"chngf":{"type": "raster","tiles": ["http://127.0.0.1:8000/cstddataplat/tileserver?layer=china16&l={z}&x={x}&y={y}"],"tileSize": 256}
+"composite":{"url":"http://192.168.3.13:8000/cstddataplat/api/v0.1/maps/vectorserver/json/streets.online.json","type":"vector"},
+"chngf":{"type": "raster","tiles": ["http://192.168.3.13:8000/cstddataplat/api/v0.1/maps/tileserver/1/myfirstmap/?l={z}&x={x}&y={y}&access_token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTkxMDc4MDcxLCJleHAiOjE1OTM2NzAwNzEsInVzZXJfaWQiOjF9.OpgtU-y44HRaMD3LnwL4HOEUA22IjUB9p3MYuBUbtZ8"],"tileSize": 256}
 },
-"sprite":"http://127.0.0.1:8000/cstddataplat/vectorserver/style/sprite@2x","glyphs":"http://127.0.0.1:8000/cstddataplat/vectorserver/front/{fontstack}/{range}.pbf","visibility":"public",
+"sprite":"http://192.168.3.13:8000/cstddataplat/api/v0.1/maps/vectorserver/style/sprite@2x","glyphs":"http://192.168.3.13:8000/cstddataplat/api/v0.1/maps/vectorserver/front/{fontstack}/{range}.pbf","visibility":"public",
 "layers":[
 {"id": "wchngf","type": "raster","source": "chngf"},
 

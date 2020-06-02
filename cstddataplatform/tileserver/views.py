@@ -23,6 +23,7 @@ from tilecloud.filter.contenttype import ContentTypeAdder
 from tileserver.models import Map, MapData
 from tileserver.serializers import CstdMapSerializer, MapDataSerializer, MapDataUserSerializer
 from utils.format_response import api_response
+from rest_framework_jwt.utils import check_payload, check_user
 
 
 class MapDataViewSet(ModelViewSet):
@@ -54,6 +55,7 @@ class MapDataViewSet(ModelViewSet):
                         status=status.HTTP_200_OK)
 
     # 可以上传多个mbtiles zip数据
+    #todo 超大型文件的分片传输 目前测试10G数据有报错
     def create(self, request):
         creator_name = request.user
         try:
@@ -74,6 +76,7 @@ class MapDataViewSet(ModelViewSet):
             mapdata['author'] = creator[0].username
             mapdata['author_id'] = creator[0].id
             for file_obj in files:
+                print(file_obj)
                 response = upload_file(file_obj, str(creator[0].id))
                 mapdata['save_path'] = response['url']
                 mapdata['save_name'] = response['original']
@@ -312,6 +315,7 @@ def upload_file(file_obj, user_id):
         absolute_path = os.path.join(upload_folder, file_name) + '.%s' % file_postfix
         destination = open(absolute_path, 'wb+')
         for chunk in file_obj.chunks():
+            print('111111')
             destination.write(chunk)
         destination.close()
         # real_url = os.path.join('/media/', 'upload', sub_folder, file_name) + '.%s' % file_postfix
@@ -329,83 +333,111 @@ class TestViewSet(APIView):
 
 class TileViewSet(APIView):
     authentication_classes = [BasicAuthentication, JSONWebTokenAuthentication, SessionAuthentication]
-    permission_classes = [IsAuthenticated]
-    def get(self, request):
-        group = request.GET.get('group')
-        layer = request.GET.get('layer')
+    # permission_classes = [IsAuthenticated]
+    def get(self, request, userid=None, mapname=None):
         z = int(request.GET.get('l'))
         x = int(request.GET.get('x'))
         y = int(request.GET.get('y'))
         token = request.GET.get('access_token')
-        dbfile = ''
-        if group is not None:
-            dbfile = maptileserver[group][layer]
+        if token:
+            user = check_user(check_payload(token))
+            if user.id == userid:
+                maps = Map.objects.filter(name=mapname, creator_id=userid)
+                mapdatastr = maps[0].map_data
+                mapdataids = [int(v) for v in mapdatastr.split(',')]
+                for mapdataid in mapdataids:
+                    # , author=request.user
+                    mapdata = MapData.objects.filter(id=mapdataid, author_id=userid)
+                    dbfile = mapdata[0].save_path
+                    content_type_adder = ContentTypeAdder()
+                    tilestore = TileStore.load(dbfile)
+                    if tilestore is None:
+                        HttpResponse(404)
+                    else:
+                        tilecoord = TileCoord(z, x, y)
+                        tile = Tile(tilecoord)
+                        tile = tilestore.get_one(tile)
+                        if tile is None:
+                            HttpResponse(404)
+                        if tile.data is None:
+                            HttpResponse(204)
+
+                        tile = content_type_adder(tile)
+
+                        # if tile.content_type is not None:
+                        #     response = HttpResponse(tile.data, content_type=tile.content_type)
+                        #     response['Access-Control-Allow-Origin'] = "*"
+                        # if tile.content_encoding is not None:
+                        #     bottle.response.set_header('Content-Encoding', tile.content_encoding)
+                        response = HttpResponse(tile.data, content_type=tile.content_type)
+                        response['Access-Control-Allow-Origin'] = "*"
+                        return response
+        elif request.user.id == userid:
+            maps = Map.objects.filter(name=mapname, creator_id=userid)
+            mapdatastr = maps[0].map_data
+            mapdataids = [int(v) for v in mapdatastr.split(',')]
+            for mapdataid in mapdataids:
+                # , author=request.user
+                mapdata = MapData.objects.filter(id=mapdataid, author_id=userid)
+                dbfile = mapdata[0].save_path
+                content_type_adder = ContentTypeAdder()
+                tilestore = TileStore.load(dbfile)
+                if tilestore is None:
+                    HttpResponse(404)
+                else:
+                    tilecoord = TileCoord(z, x, y)
+                    tile = Tile(tilecoord)
+                    tile = tilestore.get_one(tile)
+                    if tile is None:
+                        HttpResponse(404)
+                    if tile.data is None:
+                        HttpResponse(204)
+
+                    tile = content_type_adder(tile)
+
+                    # if tile.content_type is not None:
+                    #     response = HttpResponse(tile.data, content_type=tile.content_type)
+                    #     response['Access-Control-Allow-Origin'] = "*"
+                    # if tile.content_encoding is not None:
+                    #     bottle.response.set_header('Content-Encoding', tile.content_encoding)
+                    response = HttpResponse(tile.data, content_type=tile.content_type)
+                    response['Access-Control-Allow-Origin'] = "*"
+                    return response
+        elif request.auth:
+            user = check_user(check_payload(request.auth))
+            if user.id == userid:
+                maps = Map.objects.filter(name=mapname, creator_id=userid)
+                mapdatastr = maps[0].map_data
+                mapdataids = [int(v) for v in mapdatastr.split(',')]
+                for mapdataid in mapdataids:
+                    # , author=request.user
+                    mapdata = MapData.objects.filter(id=mapdataid, author_id=userid)
+                    dbfile = mapdata[0].save_path
+                    content_type_adder = ContentTypeAdder()
+                    tilestore = TileStore.load(dbfile)
+                    if tilestore is None:
+                        HttpResponse(404)
+                    else:
+                        tilecoord = TileCoord(z, x, y)
+                        tile = Tile(tilecoord)
+                        tile = tilestore.get_one(tile)
+                        if tile is None:
+                            HttpResponse(404)
+                        if tile.data is None:
+                            HttpResponse(204)
+
+                        tile = content_type_adder(tile)
+
+                        # if tile.content_type is not None:
+                        #     response = HttpResponse(tile.data, content_type=tile.content_type)
+                        #     response['Access-Control-Allow-Origin'] = "*"
+                        # if tile.content_encoding is not None:
+                        #     bottle.response.set_header('Content-Encoding', tile.content_encoding)
+                        response = HttpResponse(tile.data, content_type=tile.content_type)
+                        response['Access-Control-Allow-Origin'] = "*"
+                        return response
         else:
-            dbfile = maptileserver[layer]
-
-        content_type_adder = ContentTypeAdder()
-        tilestore = TileStore.load(dbfile)
-        if tilestore is None:
-            HttpResponse(404)
-        else:
-            tilecoord = TileCoord(z, x, y)
-            tile = Tile(tilecoord)
-            tile = tilestore.get_one(tile)
-            if tile is None:
-                HttpResponse(404)
-            if tile.data is None:
-                HttpResponse(204)
-
-            tile = content_type_adder(tile)
-
-            # if tile.content_type is not None:
-            #     response = HttpResponse(tile.data, content_type=tile.content_type)
-            #     response['Access-Control-Allow-Origin'] = "*"
-            # if tile.content_encoding is not None:
-            #     bottle.response.set_header('Content-Encoding', tile.content_encoding)
-            response = HttpResponse(tile.data, content_type=tile.content_type)
-            response['Access-Control-Allow-Origin'] = "*"
-            return response
-
-# def tile(request):
-#     # token = request.GET.get('token')
-#     # print(token)
-#     group = request.GET.get('group')
-#     layer = request.GET.get('layer')
-#     z = int(request.GET.get('l'))
-#     x = int(request.GET.get('x'))
-#     y = int(request.GET.get('y'))
-#     token = request.GET.get('access_token')
-#     print('token:', token)
-#     dbfile = ''
-#     if group is not None:
-#         dbfile = maptileserver[group][layer]
-#     else:
-#         dbfile = maptileserver[layer]
-#
-#     content_type_adder = ContentTypeAdder()
-#     tilestore = TileStore.load(dbfile)
-#     if tilestore is None:
-#         HttpResponse(404)
-#     else:
-#         tilecoord = TileCoord(z, x, y)
-#         tile = Tile(tilecoord)
-#         tile = tilestore.get_one(tile)
-#         if tile is None:
-#             HttpResponse(404)
-#         if tile.data is None:
-#             HttpResponse(204)
-#
-#         tile = content_type_adder(tile)
-#
-#         # if tile.content_type is not None:
-#         #     response = HttpResponse(tile.data, content_type=tile.content_type)
-#         #     response['Access-Control-Allow-Origin'] = "*"
-#         # if tile.content_encoding is not None:
-#         #     bottle.response.set_header('Content-Encoding', tile.content_encoding)
-#         response = HttpResponse(tile.data, content_type=tile.content_type)
-#         response['Access-Control-Allow-Origin'] = "*"
-#         return response
+            return JsonResponse({'error': 'no authority'}, status=400)
 
 
 def vectordata(request, layer, filename):
