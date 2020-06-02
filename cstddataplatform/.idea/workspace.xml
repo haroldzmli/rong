@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0e9786a2-0347-4988-947f-40bf45e9514c" name="Default Changelist" comment="">
+    <list default="true" id="0e9786a2-0347-4988-947f-40bf45e9514c" name="Default Changelist" comment="modify account,edit interface.txt">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tileserver/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/tileserver/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -78,6 +77,28 @@
       <option name="CUSTOM_SETTINGS" value="false" />
       <option name="USE_OPTIONS" value="false" />
       <option name="OPTIONS" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="lizhimimg" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="cstddataplatform" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tilecloud/tests" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/tilecloud/tests/lizhimimg.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
     <configuration name="tests (1)" type="PythonConfigurationType" factoryName="Python" temporary="true">
@@ -176,9 +197,11 @@
       <item itemvalue="Python.tests" />
       <item itemvalue="Python.tests (1)" />
       <item itemvalue="Python.ziptest" />
+      <item itemvalue="Python.lizhimimg" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.lizhimimg" />
         <item itemvalue="Python.tests (1)" />
         <item itemvalue="Python.ziptest" />
         <item itemvalue="Django tests.Test: cstddataplatform" />
@@ -210,7 +233,8 @@
       <workItem from="1590450542741" duration="59030000" />
       <workItem from="1590631096971" duration="6366000" />
       <workItem from="1590637966822" duration="1848000" />
-      <workItem from="1590643534746" duration="63868000" />
+      <workItem from="1590643534746" duration="72621000" />
+      <workItem from="1591065297542" duration="10013000" />
     </task>
     <task id="LOCAL-00001" summary="修改文件上传">
       <created>1590046369037</created>
@@ -275,7 +299,21 @@
       <option name="project" value="LOCAL" />
       <updated>1591002357159</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="modify account,edit interface.txt">
+      <created>1591002546468</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1591002546468</updated>
+    </task>
+    <task id="LOCAL-00011" summary="modify account,edit interface.txt">
+      <created>1591081760679</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1591081760679</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -327,6 +365,7 @@
     <SUITE FILE_PATH="coverage/cstddataplatform$Test__cstddataplatform.coverage" NAME="Test: cstddataplatform Coverage Results" MODIFIED="1584431433972" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/cstddataplatform$tests.coverage" NAME="tests Coverage Results" MODIFIED="1584429554954" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/useraccesscontrol" />
     <SUITE FILE_PATH="coverage/cstddataplatform$ziptest.coverage" NAME="ziptest Coverage Results" MODIFIED="1584519389678" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tilecloud/tests" />
+    <SUITE FILE_PATH="coverage/cstddataplatform$lizhimimg.coverage" NAME="lizhimimg Coverage Results" MODIFIED="1591063447288" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tilecloud/tests" />
     <SUITE FILE_PATH="coverage/cstddataplatform$tests__1_.coverage" NAME="tests (1) Coverage Results" MODIFIED="1587971374461" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/account" />
   </component>
 </project>

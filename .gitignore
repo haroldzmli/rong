@@ -2,6 +2,8 @@
 *.pyc
 *.sqlite3
 *.mbtiles
+db.sqlite*
+*.tmp
 
 # 忽略指定文件夹
 migrations
