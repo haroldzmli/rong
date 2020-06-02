@@ -235,7 +235,7 @@
       <workItem from="1590631096971" duration="6366000" />
       <workItem from="1590637966822" duration="1848000" />
       <workItem from="1590643534746" duration="72621000" />
-      <workItem from="1591065297542" duration="10555000" />
+      <workItem from="1591065297542" duration="10825000" />
     </task>
     <task id="LOCAL-00001" summary="修改文件上传">
       <created>1590046369037</created>
@@ -321,7 +321,14 @@
       <option name="project" value="LOCAL" />
       <updated>1591083126362</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="pip freeze &gt; requirements.txt &#10;生成requirements.txt 使用 pip install -r .">
+      <created>1591083547022</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1591083547022</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -346,7 +353,8 @@
     <MESSAGE value="modify tileserver" />
     <MESSAGE value="modify account" />
     <MESSAGE value="modify account,edit interface.txt" />
-    <option name="LAST_COMMIT_MESSAGE" value="modify account,edit interface.txt" />
+    <MESSAGE value="pip freeze &gt; requirements.txt &#10;生成requirements.txt 使用 pip install -r ." />
+    <option name="LAST_COMMIT_MESSAGE" value="pip freeze &gt; requirements.txt &#10;生成requirements.txt 使用 pip install -r ." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
