@@ -56,6 +56,8 @@ class MapDataViewSet(ModelViewSet):
 
     # 可以上传多个mbtiles zip数据
     #todo 超大型文件的分片传输 目前测试10G数据有报错
+    # https://blog.csdn.net/susuzhe123/article/details/90718931
+    # https://www.cnblogs.com/linjiqin/p/3731751.html
     def create(self, request):
         creator_name = request.user
         try:
