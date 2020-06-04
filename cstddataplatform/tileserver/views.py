@@ -289,7 +289,6 @@ class IsOwnerOrReadOnly(BasePermission):
         return obj.owner == request.user
 
 
-
 def format_file_name(name):
     '''
     去掉名称中的url关键字
@@ -302,7 +301,9 @@ def format_file_name(name):
 
 
 def upload_file(file_obj, user_id):
-    image_format = 'mbtiles|zip|png|jpg'
+    image_format = 'mbtiles|zip'
+    # 目前只支持sqlite zip(天地图）格式
+    # image_format = 'mbtiles|zip|png|jpg'
     filename = file_obj.name
     filename_list = filename.split('.')
     file_postfix = filename_list[-1]  # 后缀

@@ -42,7 +42,16 @@ class ZipTileStore(TileStore):
             tile.data = self.zipfile.read(tile.zipinfo)
         else:
             filename = self.layout.filename(tile.tilecoord, tile.metadata)
-            tile.data = self.zipfile.read(filename)
+            jpgfile = ''.join((filename, '.jpg'))
+            pngfile = ''.join((filename, '.png'))
+
+            try:
+                tile.data = self.zipfile.read(jpgfile)
+            except KeyError:
+                try:
+                    tile.data = self.zipfile.read(pngfile)
+                except KeyError:
+                    print('no file :', filename)
         return tile
 
     def list(self):
