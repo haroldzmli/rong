@@ -4,7 +4,7 @@ export function login(data) {
   return request({
     // alert('ddata,', data)
     // url: '/vue-element-admin/user/login',
-    url: '/cstddataplat/api/v0.1/account/obtain_token/',
+    url: '/cstddataplat/api/v0.1/account/token/',
     method: 'post',
     data
   })
@@ -13,7 +13,7 @@ export function login(data) {
 export function getInfo(token) {
   return request({
     // url: '/vue-element-admin/user/info',
-    url: '/cstddataplat/api/v0.1/account/token2user/',
+    url: '/cstddataplat/api/v0.1/account/user/',
     method: 'get',
     params: { token }
   })

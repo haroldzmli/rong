@@ -7,7 +7,9 @@ urlpatterns = [
     path('register/', views.UserRegisterView.as_view(), name='user_register'),
     path('user/<int:pk>/', views.UserDetailView.as_view(), name='user_search_modify_delete'),
     path('user/', views.UsersView.as_view(), name='user_search_modify_delete'),
-    url(r"^token/$", jwt_views.obtain_jwt_token, name="auth"),
+    # url(r"^token/$", jwt_views.obtain_jwt_token, name="auth"),
+    url(r"^token/$", views.UserTokenView.as_view(), name="auth"),
+    url('logout/', views.UserLogoutView.as_view(), name="logout"),
 
 
     path('mapdata/<int:pk>/', views.UsersMapDataDetailView.as_view(), name='map_data_search_modify_delete'),

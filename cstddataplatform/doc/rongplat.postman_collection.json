@@ -1,0 +1,972 @@
+{
+	"info": {
+		"_postman_id": "48a71fab-3959-424b-88a7-39da7a62b427",
+		"name": "rongplat",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "tileserver",
+			"item": [
+				{
+					"name": "用户mapdata上传和查询",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "zmli+760831",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "upfile",
+									"type": "file",
+									"src": "/work/data/mbtiles/road-trip-wilderness.mbtiles"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/cstddataplat/maps/upfile/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"cstddataplat",
+								"maps",
+								"upfile",
+								""
+							],
+							"query": [
+								{
+									"key": "upfile",
+									"value": "foshan_gf2_20191207_L14-17.mbtiles",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://127.0.0.1:8000/cstddataplat/api/v0.1/tileserver/maps/",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "admin11",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "zmli+760831",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/cstddataplat/api/v0.1/tileserver/maps/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"cstddataplat",
+								"api",
+								"v0.1",
+								"tileserver",
+								"maps",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://127.0.0.1:8000/mapdemo/index",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/mapdemo/index",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"mapdemo",
+								"index"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://192.168.3.13:8000/mapstatic/china16.json",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://192.168.3.13:8000/mapstatic/china16.json",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"3",
+								"13"
+							],
+							"port": "8000",
+							"path": [
+								"mapstatic",
+								"china16.json"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://127.0.0.1:8000/cstddataplat/maps/upfile/",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "zmli+760831",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\"name\":\"mymap\",\n\"layer\":0,\n\"map_data_id\":1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/cstddataplat/maps/layer/user/1/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"cstddataplat",
+								"maps",
+								"layer",
+								"user",
+								"1",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://192.168.3.13:8000/cstddataplat/maps/data/user/1/",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "zmli+760831",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": [
+										"/work/data/mbtiles/road-trip-wilderness.mbtiles",
+										"/work/data/mbtiles/foshan_gf2_20191207_L14-17.mbtiles"
+									]
+								},
+								{
+									"key": "name",
+									"value": "333333",
+									"type": "text"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://192.168.3.13:8000/cstddataplat/maps/data/user/1/",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"3",
+								"13"
+							],
+							"port": "8000",
+							"path": [
+								"cstddataplat",
+								"maps",
+								"data",
+								"user",
+								"1",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://192.168.3.13:8000/cstddataplat/maps/layer/1/",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "zmli+760831",
+									"type": "string"
+								}
+							]
+						},
+						"method": "OPTIONS",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 7,\n    \"name\": \"tdeeee\",\n    \"author\": \"admin\",\n    \"author_id\": 1,\n    \"description\": \"我的第一个数据上传\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://192.168.3.13:8000/cstddataplat/maps/layer/1/",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"3",
+								"13"
+							],
+							"port": "8000",
+							"path": [
+								"cstddataplat",
+								"maps",
+								"layer",
+								"1",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://192.168.3.13:8000/cstddataplat/maps/layer/1/",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "zmli+760831",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 6,\n    \"name\": \"tdeeee\",\n    \"author\": \"admin\",\n    \"author_id\": 1,\n    \"description\": \"我的第一个数据上传\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://192.168.3.13:8000/cstddataplat/maps/layer/1/",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"3",
+								"13"
+							],
+							"port": "8000",
+							"path": [
+								"cstddataplat",
+								"maps",
+								"layer",
+								"1",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://192.168.3.13:8000/cstddataplat/maps/data/7/",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"id\": 7, \"name\": \"myfirstserver\", \"author\": \"admin\", \"author_id\": 1, \"description\": \"putputtest\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://192.168.3.13:8000/cstddataplat/maps/data/7/",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"3",
+								"13"
+							],
+							"port": "8000",
+							"path": [
+								"cstddataplat",
+								"maps",
+								"data",
+								"7",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://127.0.0.1:8000/cstddataplat/maps/UploadView/",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "zmli760831",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "haroldzmli",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "aaaa",
+									"type": "text"
+								},
+								{
+									"key": "file",
+									"type": "file",
+									"src": []
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/cstddataplat/maps/UploadView/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"cstddataplat",
+								"maps",
+								"UploadView",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "account",
+			"item": [
+				{
+					"name": "注册新用户",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"password\": \"zmli+760831\",\n    \"username\": \"wangwu\",\n    \"email\": \"wangwu@qq.com\",\n    \"phone\": \"13114505748\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://192.168.3.13:8000/cstddataplat/api/v0.1/account/register/",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"3",
+								"13"
+							],
+							"port": "8000",
+							"path": [
+								"cstddataplat",
+								"api",
+								"v0.1",
+								"account",
+								"register",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://192.168.3.13:8000/cstddataplat/api/v0.1/account/user/",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "lisi1",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "zmli+760831",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 1,\n    \"password\": \"zmli+760831\",\n    \"creator\": \"2222\",\n    \"username\": \"555\",\n    \"email\": \"555@qq.com\",\n    \"phone\": \"13010505748\",\n    \"gmt_created\": \"2020-05-26T08:49:34.907729\",\n    \"gmt_modified\": \"2020-05-27T08:51:40.726207\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://192.168.3.13:8000/cstddataplat/api/v0.1/account/user/",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"3",
+								"13"
+							],
+							"port": "8000",
+							"path": [
+								"cstddataplat",
+								"api",
+								"v0.1",
+								"account",
+								"user",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://192.168.3.13:8000/cstddataplat/api/v0.1/account/user/6/",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "zmli+760831",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "  {\n                \"id\": 6,\n                \"password\": \"pbkdf2_sha256$180000$YwcMfpsQ3uTs$EbuoA7K0LfSysFfIiVKrUR5rIExbIWKj+tbUnPTZ2p8=\",\n                \"last_login\": null,\n                \"username\": \"lisi1\",\n                \"alias\": \"qqqq\",\n                \"email\": \"lisi@qq.com\",\n                \"phone\": \"13110505748\",\n                \"is_active\": true,\n                \"is_admin\": false,\n                \"creator\": \"qqqqq\",\n                \"gmt_created\": \"2020-05-29T03:15:05.303893\",\n                \"gmt_modified\": \"2020-05-29T03:15:05.303916\",\n                \"is_deleted\": false\n            }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://192.168.3.13:8000/cstddataplat/api/v0.1/account/user/6/",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"3",
+								"13"
+							],
+							"port": "8000",
+							"path": [
+								"cstddataplat",
+								"api",
+								"v0.1",
+								"account",
+								"user",
+								"6",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://192.168.3.13:8000/cstddataplat/api/v0.1/account/user/",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "zmli+760831",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://192.168.3.13:8000/cstddataplat/api/v0.1/account/user/",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"3",
+								"13"
+							],
+							"port": "8000",
+							"path": [
+								"cstddataplat",
+								"api",
+								"v0.1",
+								"account",
+								"user",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://192.168.3.13:8000/cstddataplat/api/v0.1/account/user/",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "zmli+760831",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://192.168.3.13:8000/cstddataplat/api/v0.1/account/token/",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"3",
+								"13"
+							],
+							"port": "8000",
+							"path": [
+								"cstddataplat",
+								"api",
+								"v0.1",
+								"account",
+								"token",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "获取token",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\"username\":\"admin\",\n\"password\":\"zmli+760831\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/cstddataplat/api/v0.1/account/token/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"cstddataplat",
+								"api",
+								"v0.1",
+								"account",
+								"token",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "tileservernew",
+			"item": [
+				{
+					"name": "用户mapdata上传和查询",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "zmli+760831",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/work/data/mbtiles/chn16y2019.mbtiles"
+								},
+								{
+									"key": "name",
+									"value": "test1",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/cstddataplat/api/v0.1/maps/data/user/detail/10/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"cstddataplat",
+								"api",
+								"v0.1",
+								"maps",
+								"data",
+								"user",
+								"detail",
+								"10",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "mapdata 详细查询 修改和删除",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "zmli+760831",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 1,\n    \"name\": \"qqqqqqq\",\n    \"author\": \"admin\",\n    \"author_id\": 1,\n    \"description\": \"\",\n    \"is_deleted\": false,\n    \"create_time\": \"2020-06-01T07:13:23.061722\",\n    \"end_time\": \"2020-06-01T07:13:23.061760\",\n    \"save_path\": \"/work/cstd/rong/cstddataplatform/media/upload/202006/1/road-trip-wilderness1590995603058.mbtiles\",\n    \"save_name\": \"road-trip-wilderness.mbtiles\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/cstddataplat/api/v0.1/maps/data/user/detail/1/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"cstddataplat",
+								"api",
+								"v0.1",
+								"maps",
+								"data",
+								"user",
+								"detail",
+								"1",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "map 创建和查找",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "zmli+760831",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\"name\":\"myfirstmap\",\n\"map_data\":\"10\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/cstddataplat/api/v0.1/maps/map/user/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"cstddataplat",
+								"api",
+								"v0.1",
+								"maps",
+								"map",
+								"user",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "map 详细查询 修改和删除",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "zmli+760831",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/cstddataplat/api/v0.1/maps/map/user/detail/1/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"cstddataplat",
+								"api",
+								"v0.1",
+								"maps",
+								"map",
+								"user",
+								"detail",
+								"1",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}

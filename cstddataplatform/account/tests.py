@@ -53,12 +53,21 @@ import re
 #     re.search(phone_pat, phonenum)
 # except ValueError:
 #     pass
-from django.contrib.auth.base_user import BaseUserManager, AbstractBaseUser
-email = '111@qq.com'
-aaa = BaseUserManager.normalize_email(email)
-print(aaa)
+# from django.contrib.auth.base_user import BaseUserManager, AbstractBaseUser
+# email = '111@qq.com'
+# aaa = BaseUserManager.normalize_email(email)
+# print(aaa)
 #     print(phonenum)
 # else:
 #     print(ValueError)
 
 # print(phonenum)
+
+test = {'a':11111, 'b':'aaaa'}
+
+
+d = {'a': '1'}
+test.update(c=2)  #也可以 d.update({‘b’: 2})
+print(test)
+
+# print(test.update(c=10))

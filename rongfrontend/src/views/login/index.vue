@@ -46,7 +46,7 @@
       </el-tooltip>
 
       <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click.native.prevent="handleLogin">Login</el-button>
-
+     <!-- <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" >registor</el-button>-->
       <div style="position:relative">
         <div class="tips">
           <span>Username : admin</span>
@@ -117,7 +117,7 @@ export default {
       handler: function(route) {
         alert(route.path)
         const query = route.query
-        alert(JSON.stringify(query))
+        // alert('index.js watch:' + JSON.stringify(query))
         if (query) {
           this.redirect = query.redirect
           this.otherQuery = this.getOtherQuery(query)
@@ -158,20 +158,20 @@ export default {
       this.$refs.loginForm.validate(valid => {
         if (valid) {
           this.loading = true
-          alert('longin:' + this.loginForm)
+          // alert('index.js  longin:' + JSON.stringify(this.loginForm))
           this.$store.dispatch('user/login', this.loginForm)
             .then(() => {
-              alert('then then')
+              // alert('index.js  longin   then then')
               this.$router.push({ path: this.redirect || '/', query: this.otherQuery })
               this.loading = false
             })
             .catch(() => {
-              alert('catch catch')
+              // alert('index.js  longin   catch catch')
               this.loading = false
             })
         } else {
           // console.log('error submit!!')
-          alert('error submit!!')
+          // alert('error submit!!')
           return false
         }
       })

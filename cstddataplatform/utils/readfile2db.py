@@ -77,6 +77,10 @@ def writetable(dbfile, userid, username, filepath, filename=''):
         'insert into tileserver_map (name, creator, creator_id, description, is_deleted, create_time, modified_time, map_data ) values (?, ?, ?, ?,?, ?, ?, ?)',
         (name, 'admin', 1, name, 0, now_time, now_time, str(data[0] -1)))
 
+    # cur.execute(
+    #     'insert into tileserver_map (name, creator, creator_id, description, is_deleted, create_time, modified_time, map_data ) values (?, ?, ?, ?,?, ?, ?, ?)',
+    #     (name, 'admin', 1, name, 0, now_time, now_time, str(data[0])))
+
     con.commit()
     cur.close()
     con.close()

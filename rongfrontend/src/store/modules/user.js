@@ -32,12 +32,12 @@ const actions = {
   // user login
   login({ commit }, userInfo) {
     const { username, password } = userInfo
-    alert('username:' + username)
+    // alert('haroldzmli store modules user.js  username:' + username)
     return new Promise((resolve, reject) => {
       login({ username: username.trim(), password: password }).then(response => {
-        alert('respeint::::::' + response)
+        // alert('haroldmzli store modules user.js respeint::::::' + JSON.stringify(response))
         const { data } = response
-        alert('token newnew :' + data.token)
+        // alert('haroldzmli store modules user.js token newnew :' + JSON.stringify(data))
         commit('SET_TOKEN', data.token)
         setToken(data.token)
         resolve()
@@ -49,17 +49,16 @@ const actions = {
 
   // get user info
   getInfo({ commit, state }) {
-    alert('22222222222')
+    // alert('haroldzmli store modules user.js 22222222222')
     return new Promise((resolve, reject) => {
       getInfo(state.token).then(response => {
         const { data } = response
-        alert(response)
         if (!data) {
           reject('Verification failed, please Login again.')
         }
 
         const { roles, username, avatar, introduction } = data
-        alert('user:' + username)
+        // alert('haroldzmli store modules user.js user:' + username)
 
         // roles must be a non-empty array
         if (!roles || roles.length <= 0) {

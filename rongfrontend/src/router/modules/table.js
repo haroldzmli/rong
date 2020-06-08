@@ -6,12 +6,18 @@ const tableRouter = {
   path: '/table',
   component: Layout,
   redirect: '/table/complex-table',
-  name: 'Table',
+  name: 'table',
   meta: {
-    title: 'Table',
+    title: '用户数表操作',
     icon: 'table'
   },
   children: [
+    {
+      path: 'complex-table',
+      component: () => import('@/views/table/complex-table'),
+      name: 'ComplexTable',
+      meta: { title: '用户信息' }
+    },
     {
       path: 'dynamic-table',
       component: () => import('@/views/table/dynamic-table/index'),

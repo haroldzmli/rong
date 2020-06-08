@@ -10,6 +10,8 @@ from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework_jwt.authentication import JSONWebTokenAuthentication
+from rest_framework_jwt.serializers import JSONWebTokenSerializer
+from rest_framework_jwt.utils import check_user, check_payload
 
 from account.models import CstdUser, MapDataUser
 from account.serializers import CstdUserSerializer, CstdUserRegistorSerializer, MapDataUserSerializer
@@ -97,16 +99,64 @@ class UserRegisterView(APIView):
         return api_response(code, msg, data)
 
 
+class UserTokenView(GenericAPIView):
+
+    permission_classes = ()
+    authentication_classes = ()
+
+    serializer_class = JSONWebTokenSerializer
+
+    def post(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+
+        serializer.is_valid(raise_exception=True)
+
+        user = serializer.validated_data.get('user') or request.user
+        token = serializer.validated_data.get('token')
+        issued_at = serializer.validated_data.get('issued_at')
+        response_data = JSONWebTokenAuthentication. \
+            jwt_create_response_payload(token, user, request, issued_at)
+        # response_data.update(code=20000)
+        response = Response({'data': response_data, 'code':20000})
+
+        # if api_settings.JWT_AUTH_COOKIE:
+        #     set_cookie_with_token(response, api_settings.JWT_AUTH_COOKIE, token)
+
+        return response
+
+
+class UserLogoutView(GenericAPIView):
+    def post(self, request, *args, **kwargs):
+
+        response = Response({'code': 20000})
+
+        # if api_settings.JWT_AUTH_COOKIE:
+        #     set_cookie_with_token(response, api_settings.JWT_AUTH_COOKIE, token)
+
+        return response
+
+
 class UsersView(APIView):
-    authentication_classes = [BasicAuthentication, JSONWebTokenAuthentication]
-    permission_classes = [IsAdminUser]
+    # authentication_classes = [BasicAuthentication, JSONWebTokenAuthentication]
+    # # permission_classes = [IsAdminUser]
+    authentication_classes = [BasicAuthentication, JSONWebTokenAuthentication, SessionAuthentication]
+    permission_classes = [IsAuthenticated]
 
     def get(self, request):
-        # print('token:', request.user)
-        # print('auth:', request.auth)
-        user_data = CstdUser.objects.all()
-        serializer = CstdUserSerializer(user_data, many=True)
-        return Response(serializer.data)
+        token = request.GET.get('token')
+        print('token:', token)
+        print('token:', request.user)
+        print('auth:', request.auth)
+        user = check_user(check_payload(token))
+
+        user_data = CstdUser.objects.filter(pk=user.id)
+        serializer = CstdUserSerializer(user_data[0])
+        serializer.data.update(roles=['admin'])
+        data = serializer.data
+        data.update({'roles': ['admin']})
+        data = dict(data=data)
+        data.update({'code': 20000})
+        return Response(data)
 
 
 class UsersMapDataDetailView(APIView):

@@ -1,7 +1,6 @@
 import Cookies from 'js-cookie'
 
-const TokenKey = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImFkbWluIiwiZXhwIjoxNTkxNTgxNDI1LC' +
-  'JlbWFpbCI6ImFkbWluQHFxLmNvbSJ9.5rfBfgi4kaPUYEF0__6x1-WG8Z0_0_rFaB0vOvRG9t0'
+const TokenKey = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTkxMzQ0ODI4LCJleHAiOjE1OTM5MzY4MjgsInVzZXJfaWQiOjF9.zxIUq88SZqu_c_bekaNLU94vjuqgw2ctz9w2cGhrgUI'
 
 export function getToken() {
   return Cookies.get(TokenKey)
