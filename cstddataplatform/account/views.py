@@ -5,6 +5,7 @@ from rest_framework import status, authentication, permissions
 from rest_framework.authentication import BasicAuthentication, SessionAuthentication
 from rest_framework.decorators import api_view
 from rest_framework.generics import GenericAPIView
+from rest_framework.pagination import PageNumberPagination
 from rest_framework.parsers import JSONParser
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.response import Response
@@ -147,16 +148,60 @@ class UsersView(APIView):
         print('token:', token)
         print('token:', request.user)
         print('auth:', request.auth)
-        user = check_user(check_payload(token))
+        if token:
+            user = check_user(check_payload(token))
+            user_data = CstdUser.objects.filter(pk=user.id)
+        else:
+            # if re
+            user_data = CstdUser.objects.filter(pk=request.user.id)
+        #
+        # pg = PageNumberPagination()
+        # # 获取分页的数据
+        # page_roles = pg.paginate_queryset(queryset=user_data, request=request, view=self)
+        # # 对数据进行序列化
+        # ser = CstdUserSerializer(instance=page_roles, many=True)
+        # return pg.get_paginated_response(ser.data, {'code': 20000})
 
-        user_data = CstdUser.objects.filter(pk=user.id)
+
+
+
+
+
         serializer = CstdUserSerializer(user_data[0])
         serializer.data.update(roles=['admin'])
         data = serializer.data
         data.update({'roles': ['admin']})
         data = dict(data=data)
         data.update({'code': 20000})
+
         return Response(data)
+
+
+class TestView(APIView):
+    # authentication_classes = [BasicAuthentication, JSONWebTokenAuthentication]
+    # # permission_classes = [IsAdminUser]
+    authentication_classes = [BasicAuthentication, JSONWebTokenAuthentication, SessionAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        token = request.GET.get('token')
+        print('token:', token)
+        print('token:', request.user)
+        print('auth:', request.auth)
+        if token:
+            user = check_user(check_payload(token))
+            user_data = CstdUser.objects.filter(pk=user.id)
+        else:
+            # if re
+            user_data = CstdUser.objects.filter(pk=request.user.id)
+
+        serializer = CstdUserSerializer(user_data, many=True)
+        data = serializer.data
+        # data = dict(data=data)
+        # data.update({'code': 20000})  items total
+
+        response = Response({'data': { 'items': data, 'total': user_data.count()}, 'code': 20000})
+        return response
 
 
 class UsersMapDataDetailView(APIView):

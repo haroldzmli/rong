@@ -1,4 +1,7 @@
 from django.db import models
+import django.utils.timezone as timezone
+from django.db.backends.sqlite3.base import DatabaseFeatures # 关键设置
+DatabaseFeatures.supports_microsecond_precision = False # 关键设置
 
 
 # Create your models here.

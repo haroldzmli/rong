@@ -2,7 +2,7 @@ import request from '@/utils/request'
 
 export function fetchList(query) {
   return request({
-    url: '/vue-element-admin/article/list',
+    url: '/cstddataplat/api/v0.1/account/test/',
     method: 'get',
     params: query
   })
