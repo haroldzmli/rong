@@ -10,6 +10,7 @@ urlpatterns = [
     path('data/user/', MapDataViewSet.as_view({'get': 'list','post': 'create'}),
          name='layerdata_detail_search_create'),
     path('data/user/detail/<int:pk>/', tileserverviews.MapDataDetailViewSet.as_view(), name='mapdata_detail_get_put_delete'),
+
     path('map/user/', MapViewSet.as_view(), name='map_search_create'),
     path('map/user/detail/<int:pk>/', tileserverviews.MapDetailViewSet.as_view(), name='map_detail_get_put_delete'),
 

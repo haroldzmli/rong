@@ -8,9 +8,10 @@
 import Dropzone from 'dropzone'
 import 'dropzone/dist/dropzone.css'
 // import { getToken } from 'api/qiniu';
-
+import { getToken } from '@/utils/auth'
 Dropzone.autoDiscover = false
-
+//https://stackoverflow.com/questions/43908977/how-to-include-the-header-access-token-to-the-dropzone-config
+// https://www.dropzonejs.com/
 export default {
   props: {
     id: {
@@ -27,11 +28,11 @@ export default {
     },
     defaultMsg: {
       type: String,
-      default: '上传图片'
+      default: '上传瓦片包'
     },
     acceptedFiles: {
       type: String,
-      default: ''
+      default: '.zip,.mbtiles'
     },
     thumbnailHeight: {
       type: Number,
@@ -47,7 +48,7 @@ export default {
     },
     maxFilesize: {
       type: Number,
-      default: 2
+      default: 1024*10
     },
     maxFiles: {
       type: Number,
@@ -100,6 +101,9 @@ export default {
       addRemoveLinks: this.showRemoveLink,
       acceptedFiles: this.acceptedFiles,
       autoProcessQueue: this.autoProcessQueue,
+      parallelUploads: 100,
+      timeout: 100*60*1000,  /*milliseconds*/
+      headers: { 'Authorization': 'Bearer ' + getToken() },
       dictDefaultMessage: '<i style="margin-top: 3em;display: inline-block" class="material-icons">' + this.defaultMsg + '</i><br>Drop files here to upload',
       dictMaxFilesExceeded: '只能一个图',
       previewTemplate: '<div class="dz-preview dz-file-preview">  <div class="dz-image" style="width:' + this.thumbnailWidth + 'px;height:' + this.thumbnailHeight + 'px" ><img style="width:' + this.thumbnailWidth + 'px;height:' + this.thumbnailHeight + 'px" data-dz-thumbnail /></div>  <div class="dz-details"><div class="dz-size"><span data-dz-size></span></div> <div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress></span></div>  <div class="dz-error-message"><span data-dz-errormessage></span></div>  <div class="dz-success-mark"> <i class="material-icons">done</i> </div>  <div class="dz-error-mark"><i class="material-icons">error</i></div></div>',
@@ -112,6 +116,8 @@ export default {
             const mockFile = { name: 'name' + i, size: 12345, url: v }
             this.options.addedfile.call(this, mockFile)
             this.options.thumbnail.call(this, mockFile, v)
+            // this.options.headers['Authorization'] = 'Bearer ${getToken()}'
+            // this.options.requestHeaders['Authorization'] = 'Bearer ${getToken()}'
             mockFile.previewElement.classList.add('dz-success')
             mockFile.previewElement.classList.add('dz-complete')
             vm.initOnce = false
@@ -119,7 +125,9 @@ export default {
           })
         } else {
           const mockFile = { name: 'name', size: 12345, url: val }
+          // this.options.headers['Authorization'] = 'Bearer ${getToken()}'
           this.options.addedfile.call(this, mockFile)
+          // this.options.requestHeaders['Authorization'] = 'Bearer ${getToken()}'
           this.options.thumbnail.call(this, mockFile, val)
           mockFile.previewElement.classList.add('dz-success')
           mockFile.previewElement.classList.add('dz-complete')
@@ -138,7 +146,7 @@ export default {
         done()
       },
       sending: (file, xhr, formData) => {
-        // formData.append('token', file.token);
+        // formData.append('token', getToken())
         // formData.append('key', file.key);
         vm.initOnce = false
       }

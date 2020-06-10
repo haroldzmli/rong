@@ -13,10 +13,28 @@ const tableRouter = {
   },
   children: [
     {
-      path: 'complex-table',
-      component: () => import('@/views/table/complex-table'),
-      name: 'ComplexTable',
+      path: 'user-info',
+      component: () => import('@/views/table/user-info'),
+      name: 'UserInfo',
       meta: { title: '用户信息' }
+    },
+    {
+      path: 'dropzone',
+      component: () => import('@/views/components-demo/dropzone'),
+      name: 'DropzoneDemo',
+      meta: { title: '上传数据' }
+    },
+    {
+      path: 'user-map-data',
+      component: () => import('@/views/table/user-map-data'),
+      name: 'UserMapData',
+      meta: { title: '用户数据' }
+    },
+    {
+      path: 'user-map',
+      component: () => import('@/views/table/user-map'),
+      name: 'UserMap',
+      meta: { title: '用户地图' }
     },
     {
       path: 'dynamic-table',

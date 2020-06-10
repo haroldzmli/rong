@@ -2,13 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0e9786a2-0347-4988-947f-40bf45e9514c" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../rongfrontend/src/api/user-map-data.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../rongfrontend/src/views/table/user-info.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../rongfrontend/src/views/table/user-map-data.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../rongfrontend/src/views/table/user-map.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/account/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/account/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/account/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/account/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/account/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/account/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tileserver/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/tileserver/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../rongfrontend/src/api/article.js" beforeDir="false" afterPath="$PROJECT_DIR$/../rongfrontend/src/api/article.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../rongfrontend/src/views/table/complex-table.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../rongfrontend/src/views/table/complex-table.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tileserver/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/tileserver/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tileserver/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/tileserver/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rongfrontend/src/components/Dropzone/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../rongfrontend/src/components/Dropzone/index.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rongfrontend/src/router/modules/table.js" beforeDir="false" afterPath="$PROJECT_DIR$/../rongfrontend/src/router/modules/table.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rongfrontend/src/views/components-demo/dropzone.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../rongfrontend/src/views/components-demo/dropzone.vue" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -296,7 +299,7 @@
       <workItem from="1590643534746" duration="72621000" />
       <workItem from="1591065297542" duration="55821000" />
       <workItem from="1591682198860" duration="66000" />
-      <workItem from="1591682961275" duration="2123000" />
+      <workItem from="1591682961275" duration="12433000" />
     </task>
     <task id="LOCAL-00001" summary="修改文件上传">
       <created>1590046369037</created>

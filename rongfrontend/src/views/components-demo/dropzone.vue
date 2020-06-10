@@ -1,11 +1,11 @@
 <template>
   <div class="components-container">
-    <aside>
-      Based on <a class="link-type" href="https://github.com/rowanwins/vue-dropzone"> dropzone </a>.
-      Because my business has special needs, and has to upload images to qiniu, so instead of a third party, I chose encapsulate it by myself. It is very simple, you can see the detail code in @/components/Dropzone.
-    </aside>
+<!--    <aside>-->
+<!--      Based on <a class="link-type" href="https://github.com/rowanwins/vue-dropzone"> dropzone </a>.-->
+<!--      Because my business has special needs, and has to upload images to qiniu, so instead of a third party, I chose encapsulate it by myself. It is very simple, you can see the detail code in @/components/Dropzone.-->
+<!--    </aside>-->
     <div class="editor-container">
-      <dropzone id="myVueDropzone" url="https://httpbin.org/post" @dropzone-removedFile="dropzoneR" @dropzone-success="dropzoneS" />
+      <dropzone id="myVueDropzone" url="http://127.0.0.1:8000/cstddataplat/api/v0.1/maps/data/user/" @dropzone-removedFile="dropzoneR" @dropzone-success="dropzoneS" />
     </div>
   </div>
 </template>

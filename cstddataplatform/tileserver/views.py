@@ -33,41 +33,52 @@ class MapDataViewSet(ModelViewSet):
     # queryset = MapData.objects.all()
     # serializer_class = MapDataSerializer
     authentication_classes = [BasicAuthentication, JSONWebTokenAuthentication, SessionAuthentication]
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
 
     def list(self, request):
-        print('user:', request.user)
-        # print('auth:', request.auth)
-        creator_name = request.user
-        try:
-            creator = CstdUser.objects.filter(username=creator_name)
-            print(creator[0].username)
-        except CstdUser.DoesNotExist:
-            user_result_object_format_list = [{"error": "no user authority"}]
-            code, msg, = 0, status.HTTP_400_BAD_REQUEST
-            data = dict(value=user_result_object_format_list)
-            return api_response(code, msg, data)
-            raise Http404
+        token = request.GET.get('token')
+        if token:
+            user = check_user(check_payload(token))
+            creator = CstdUser.objects.filter(pk=user.id)
+        else:
+            # if re
+            creator = CstdUser.objects.filter(pk=request.user.id)
+
+
 
         queryset = MapData.objects.filter(author_id=creator[0].id)
         serializer = MapDataUserSerializer(queryset, many=True)
-        return Response({'code': 0, 'data': serializer.data, 'msg': ''},
-                        status=status.HTTP_200_OK)
+
+        response = Response({'data': {'items': serializer.data, 'total': queryset.count()}, 'code': 20000})
+        return response
+        #
+        # return Response({'code': 0, 'data': serializer.data, 'msg': ''},
+        #                 status=status.HTTP_200_OK)
 
     # 可以上传多个mbtiles zip数据
     #todo 超大型文件的分片传输 目前测试10G数据有报错
     # https://blog.csdn.net/susuzhe123/article/details/90718931
     # https://www.cnblogs.com/linjiqin/p/3731751.html
     def create(self, request):
-        creator_name = request.user
-        try:
-            creator = CstdUser.objects.filter(username=creator_name)
-        except CstdUser.DoesNotExist:
-            user_result_object_format_list = [{"error": "no user authority"}]
-            code, msg, = 0, status.HTTP_400_BAD_REQUEST
-            data = dict(value=user_result_object_format_list)
-            return api_response(code, msg, data)
-            raise Http404
+        token = request.GET.get('token')
+        if token:
+            user = check_user(check_payload(token))
+            creator = CstdUser.objects.filter(pk=user.id)
+        else:
+            # if re
+            creator = CstdUser.objects.filter(pk=request.user.id)
+
+        # print('token:', request.user)
+        # print('auth:', request.auth)
+        # creator_name = request.user
+        # try:
+        #     creator = CstdUser.objects.filter(username=creator_name)
+        # except CstdUser.DoesNotExist:
+        #     user_result_object_format_list = [{"error": "no user authority"}]
+        #     code, msg, = 0, status.HTTP_400_BAD_REQUEST
+        #     data = dict(value=user_result_object_format_list)
+        #     return api_response(code, msg, data)
+        #     raise Http404
 
         files = request.FILES.getlist('file', None)
         if not files:
@@ -318,7 +329,7 @@ def upload_file(file_obj, user_id):
         absolute_path = os.path.join(upload_folder, file_name) + '.%s' % file_postfix
         destination = open(absolute_path, 'wb+')
         for chunk in file_obj.chunks():
-            print('111111')
+            # print('111111')
             destination.write(chunk)
         destination.close()
         # real_url = os.path.join('/media/', 'upload', sub_folder, file_name) + '.%s' % file_postfix
