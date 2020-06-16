@@ -2,16 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0e9786a2-0347-4988-947f-40bf45e9514c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../rongfrontend/src/api/user-map-data.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../rongfrontend/src/views/table/user-info.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../rongfrontend/src/views/table/user-map-data.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../rongfrontend/src/views/table/user-map.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../rongfrontend/src/views/components-demo/swiper.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../rongfrontend/src/views/components-demo/vuemapbox.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tileserver/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/tileserver/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cstddataplatform/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/cstddataplatform/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/china16.json" beforeDir="false" afterPath="$PROJECT_DIR$/static/china16.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/chn16.htm" beforeDir="false" afterPath="$PROJECT_DIR$/static/chn16.htm" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tileserver/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/tileserver/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rongfrontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../rongfrontend/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../rongfrontend/src/components/Dropzone/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../rongfrontend/src/components/Dropzone/index.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../rongfrontend/src/router/modules/table.js" beforeDir="false" afterPath="$PROJECT_DIR$/../rongfrontend/src/router/modules/table.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../rongfrontend/src/views/components-demo/dropzone.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../rongfrontend/src/views/components-demo/dropzone.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rongfrontend/src/router/modules/components.js" beforeDir="false" afterPath="$PROJECT_DIR$/../rongfrontend/src/router/modules/components.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rongfrontend/vue.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/../rongfrontend/vue.config.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -79,19 +80,19 @@
     <property name="DatabaseDriversLRU" value="sqlite" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/utils" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/static" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/utils/tiledbfile" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/static" />
       <recent name="$PROJECT_DIR$/utils" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/tileserver" />
       <recent name="$PROJECT_DIR$/cstddataplatform" />
-      <recent name="$PROJECT_DIR$/static" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/utils/tiledbfile" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -299,7 +300,9 @@
       <workItem from="1590643534746" duration="72621000" />
       <workItem from="1591065297542" duration="55821000" />
       <workItem from="1591682198860" duration="66000" />
-      <workItem from="1591682961275" duration="12433000" />
+      <workItem from="1591682961275" duration="15579000" />
+      <workItem from="1591840324871" duration="1327000" />
+      <workItem from="1591858474079" duration="14626000" />
     </task>
     <task id="LOCAL-00001" summary="修改文件上传">
       <created>1590046369037</created>

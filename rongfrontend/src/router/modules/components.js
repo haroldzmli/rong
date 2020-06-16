@@ -95,6 +95,18 @@ const componentsRouter = {
       component: () => import('@/views/components-demo/drag-kanban'),
       name: 'DragKanbanDemo',
       meta: { title: 'Drag Kanban' }
+    },
+    {
+      path: 'swiper',
+      component: () => import('@/views/components-demo/swiper'),
+      name: 'swiperDemo',
+      meta: { title: 'swiper' }
+    },
+    {
+      path: 'vuemapbox',
+      component: () => import('@/views/components-demo/vuemapbox'),
+      name: 'vuemapbox',
+      meta: { title: 'vuemapbox' }
     }
   ]
 }

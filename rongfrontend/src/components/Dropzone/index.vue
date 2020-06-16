@@ -10,7 +10,7 @@ import 'dropzone/dist/dropzone.css'
 // import { getToken } from 'api/qiniu';
 import { getToken } from '@/utils/auth'
 Dropzone.autoDiscover = false
-//https://stackoverflow.com/questions/43908977/how-to-include-the-header-access-token-to-the-dropzone-config
+// https://stackoverflow.com/questions/43908977/how-to-include-the-header-access-token-to-the-dropzone-config
 // https://www.dropzonejs.com/
 export default {
   props: {
@@ -48,7 +48,7 @@ export default {
     },
     maxFilesize: {
       type: Number,
-      default: 1024*10
+      default: 1024 * 10
     },
     maxFiles: {
       type: Number,
@@ -102,7 +102,8 @@ export default {
       acceptedFiles: this.acceptedFiles,
       autoProcessQueue: this.autoProcessQueue,
       parallelUploads: 100,
-      timeout: 100*60*1000,  /*milliseconds*/
+      // milliseconds
+      timeout: 100 * 60 * 1000,
       headers: { 'Authorization': 'Bearer ' + getToken() },
       dictDefaultMessage: '<i style="margin-top: 3em;display: inline-block" class="material-icons">' + this.defaultMsg + '</i><br>Drop files here to upload',
       dictMaxFilesExceeded: '只能一个图',

@@ -1,7 +1,7 @@
 {"version":8,"name":"Mapbox Streets",
 "metadata":{"mapbox:autocomposite":true,"mapbox:type":"default","mapbox:origin":"streets-v10"},"sources":{
 "composite":{"url":"http://192.168.3.13:8000/cstddataplat/api/v0.1/maps/vectorserver/json/streets.online.json","type":"vector"},
-"chngf":{"type": "raster","tiles": ["http://192.168.3.13:8000/cstddataplat/api/v0.1/maps/tileserver/1/myfirstmap/?l={z}&x={x}&y={y}&access_token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTkxMDc4MDcxLCJleHAiOjE1OTM2NzAwNzEsInVzZXJfaWQiOjF9.OpgtU-y44HRaMD3LnwL4HOEUA22IjUB9p3MYuBUbtZ8"],"tileSize": 256}
+"chngf":{"type": "raster","tiles": ["http://192.168.3.13:8000/cstddataplat/api/v0.1/maps/tileserver/1/myfirstmap/?l={z}&x={x}&y={y}&access_token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTkxOTI0NTQwLCJleHAiOjE1OTQ1MTY1NDAsInVzZXJfaWQiOjF9.mdAAW2awREIUQkWCxGOnZ4PZtLbrRSGkvP4gfYi8jAU"],"tileSize": 256}
 },
 "sprite":"http://192.168.3.13:8000/cstddataplat/api/v0.1/maps/vectorserver/style/sprite@2x","glyphs":"http://192.168.3.13:8000/cstddataplat/api/v0.1/maps/vectorserver/front/{fontstack}/{range}.pbf","visibility":"public",
 "layers":[

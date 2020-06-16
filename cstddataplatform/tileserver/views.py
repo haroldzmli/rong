@@ -36,6 +36,7 @@ class MapDataViewSet(ModelViewSet):
     # permission_classes = [IsAuthenticated]
 
     def list(self, request):
+        print('regquesr:', request.GET)
         token = request.GET.get('token')
         if token:
             user = check_user(check_payload(token))
@@ -374,7 +375,7 @@ class TileViewSet(APIView):
                         if tile is None:
                             HttpResponse(404)
                         if tile.data is None:
-                            HttpResponse(204)
+                            HttpResponse(404)
 
                         tile = content_type_adder(tile)
 
@@ -405,7 +406,7 @@ class TileViewSet(APIView):
                     if tile is None:
                         HttpResponse(404)
                     if tile.data is None:
-                        HttpResponse(204)
+                        HttpResponse(404)
 
                     tile = content_type_adder(tile)
 
@@ -438,7 +439,7 @@ class TileViewSet(APIView):
                         if tile is None:
                             HttpResponse(404)
                         if tile.data is None:
-                            HttpResponse(204)
+                            HttpResponse(404)
 
                         tile = content_type_adder(tile)
 

@@ -36,6 +36,16 @@ module.exports = {
       warnings: false,
       errors: true
     },
+    proxy: {
+      '/mapstatic/china16.json': {
+        target: 'http://127.0.0.1:8000/mapstatic/china16.json',
+        changeOrigin: true,
+        ws: true,
+        pathRewrite: {
+          '^/api': ''
+        }
+      }
+    }
     // before: require('./mock/mock-server.js')
   },
   configureWebpack: {
