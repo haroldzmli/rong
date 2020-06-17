@@ -1,3 +1,4 @@
+<!-- mapboxue 跳出大坑，就是 django的 static file server 不受 跨域限制-->
 <template>
   <MglMap
     container="map-test"
