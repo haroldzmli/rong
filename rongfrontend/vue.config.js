@@ -1,5 +1,6 @@
 'use strict'
 const path = require('path')
+const webpack = require('webpack')
 const defaultSettings = require('./src/settings.js')
 
 function resolve(dir) {
@@ -36,18 +37,21 @@ module.exports = {
       warnings: false,
       errors: true
     },
-    proxy: {
-      '/mapstatic/china16.json': {
-        target: 'http://127.0.0.1:8000/mapstatic/china16.json',
-        changeOrigin: true,
-        ws: true,
-        pathRewrite: {
-          '^/api': ''
-        }
-      }
-    }
+    // proxy: {
+    //   '/mapstatic/china16.json': {
+    //     target: 'http://127.0.0.1:8000/mapstatic/china16.json',
+    //     changeOrigin: true,
+    //     ws: true,
+    //     pathRewrite: {
+    //       '^/api': ''
+    //     }
+    //   }
+    // }
     // before: require('./mock/mock-server.js')
   },
+
+
+
   configureWebpack: {
     // provide the app's title in webpack's name field, so that
     // it can be accessed in index.html to inject the correct title.
@@ -56,7 +60,12 @@ module.exports = {
       alias: {
         '@': resolve('src')
       }
-    }
+    },
+    plugins: [
+      new webpack.ProvidePlugin({
+        mapboxgl: 'mapbox-gl',
+      }),
+    ]
   },
   chainWebpack(config) {
     config.plugins.delete('preload') // TODO: need test

@@ -224,6 +224,7 @@ CORS_ALLOW_METHODS = (
     'POST',
     'PUT',
     'VIEW',
+    'FETCH'
 )
 
 CORS_ALLOW_HEADERS = (
