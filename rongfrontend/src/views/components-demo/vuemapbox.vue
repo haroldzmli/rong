@@ -76,7 +76,7 @@ export default {
         layout: {
           'icon-image': '{icon}-15',
           'text-field': '{title}',
-          'text-font': ['Open Sans Semibold', 'Arial Unicode MS Bold'],
+          'text-font': ['YaHeiRegular'],
           'text-offset': [0, 0.6],
           'text-anchor': 'top'
         }
@@ -104,6 +104,6 @@ export default {
 <style>
 #map {
   width: 100%;
-  height: 500px;
+  height: 800px;
 }
 </style>

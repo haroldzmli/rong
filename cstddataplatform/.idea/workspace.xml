@@ -2,14 +2,28 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0e9786a2-0347-4988-947f-40bf45e9514c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../rongfrontend/src/views/components-demo/mapboxvue.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../rongfrontend/src/assets/images/background.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../rongfrontend/src/assets/images/common/swiper-logo.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../rongfrontend/src/assets/images/common/vue-logo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../rongfrontend/src/assets/images/example/1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../rongfrontend/src/assets/images/example/10.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../rongfrontend/src/assets/images/example/2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../rongfrontend/src/assets/images/example/3.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../rongfrontend/src/assets/images/example/4.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../rongfrontend/src/assets/images/example/5.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../rongfrontend/src/assets/images/example/6.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../rongfrontend/src/assets/images/example/7.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../rongfrontend/src/assets/images/example/8.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../rongfrontend/src/assets/images/example/9.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../rongfrontend/src/assets/images/mammon/aliyun-banner-1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../rongfrontend/src/assets/images/mammon/aliyun-banner-2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../rongfrontend/src/assets/images/mammon/aliyun-banner-3.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../rongfrontend/src/assets/images/mammon/aliyun-banner-4.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../rongfrontend/src/views/components-demo/37-zoom.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cstddataplatform/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/cstddataplatform/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/chn16.htm" beforeDir="false" afterPath="$PROJECT_DIR$/static/chn16.htm" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../rongfrontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../rongfrontend/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../rongfrontend/src/router/modules/components.js" beforeDir="false" afterPath="$PROJECT_DIR$/../rongfrontend/src/router/modules/components.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rongfrontend/src/views/components-demo/swiper.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../rongfrontend/src/views/components-demo/swiper.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../rongfrontend/src/views/components-demo/vuemapbox.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../rongfrontend/src/views/components-demo/vuemapbox.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../rongfrontend/vue.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/../rongfrontend/vue.config.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -299,7 +313,7 @@
       <workItem from="1591682198860" duration="66000" />
       <workItem from="1591682961275" duration="15579000" />
       <workItem from="1591840324871" duration="1327000" />
-      <workItem from="1591858474079" duration="20503000" />
+      <workItem from="1591858474079" duration="21730000" />
     </task>
     <task id="LOCAL-00001" summary="修改文件上传">
       <created>1590046369037</created>
