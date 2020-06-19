@@ -3,9 +3,6 @@
     <Mapbox
       access-token="pk.eyJ1IjoibGlqaWFuZ2ppYW5namlhbmciLCJhIjoiY2s2b2czbmltMG14cDNkbXpldjhkd3c3ZiJ9.zBaMzJo2X2UVPyFTtd5hEQ"
       :map-options="{
-        // style: 'mapbox://styles/mapbox/streets-v11',
-        //  center: [-96, 37.8],
-        // zoom: 3,
         style: 'http://192.168.3.13:8000/cstddataplat/api/v0.1/maps/vectorserver/json/china16.json/',
         center: center,
         minZoom: 9.5,
@@ -16,12 +13,18 @@
         show: true,
         position: 'top-left',
       }"
+      :fullscreen-control="{
+        show: true,
+        position: 'top-left',
+      }"
       @map-load="loaded"
+      @map-mousemove="mousemove"
       @map-zoomend="zoomend"
       @map-click:points="clicked"
       @geolocate-error="geolocateError"
       @geolocate-geolocate="geolocate"
     />
+    <div style="position:absolute; z-index:2; left:10px; top:10px">{{ printData }}</div>
   </div>
 </template>
 
@@ -35,7 +38,8 @@ export default {
       accessToken: 'some_token',
       mapStyle: 'http://192.168.3.13:8000/cstddataplat/api/v0.1/maps/vectorserver/json/china16.json/',
       center: [116.38, 39.91],
-      zoom: 12
+      zoom: 12,
+      printData: null
     }
   },
   methods: {
@@ -89,6 +93,10 @@ export default {
       const title = e.features[0].properties.title
       console.log(title)
     },
+    mousemove(map, e) {
+      this.printData = '比例尺：' + JSON.stringify(map.getZoom()) + '    屏幕坐标：' + JSON.stringify(e.point) + '    地图坐标：' + JSON.stringify(e.lngLat)
+      console.log(this.printData)
+    },
     geolocateError(control, positionError) {
       console.log(positionError)
     },
@@ -104,6 +112,6 @@ export default {
 <style>
 #map {
   width: 100%;
-  height: 800px;
+  height: 700px;
 }
 </style>
