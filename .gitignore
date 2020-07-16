@@ -15,4 +15,5 @@ venv
 env
 **/.idea
 static
+yarn.lock
 
