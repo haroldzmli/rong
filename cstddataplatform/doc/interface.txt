@@ -31,24 +31,385 @@ ip + port + /rongmapplat/api/v0.1/ +
     "email": "lisi@qq.com",
     "phone": "13110505748"
     }
+
+    {
+    "code": 1,
+    "data": {
+        "value": [
+            {
+                "register": "successful"
+            }
+        ]
+    },
+    "msg": 201
+    }
+
     1.2 用户 改查删  用户只能使用自己的权限，但是admin就都可以
     http://192.168.3.13:8000/cstddataplat/api/v0.1/account/user/6/ get put delete
+{
+    "code": 1,
+    "data": {
+        "value": [
+            {
+                "id": 1,
+                "password": "pbkdf2_sha256$180000$ZdYot1BkzdBz$4Dn6IJQCE0h8QKwU6cT8Xy4JsJMWQTAzx2sA3ai3IvY=",
+                "last_login": null,
+                "username": "admin",
+                "alias": "",
+                "email": "admin@qq.com",
+                "phone": "13683323019",
+                "is_active": true,
+                "is_admin": true,
+                "creator": "",
+                "gmt_created": "2020-06-01T05:41:25.078080",
+                "gmt_modified": "2020-06-01T05:41:25.078101",
+                "is_deleted": false
+            }
+        ]
+    },
+    "msg": 201
+}
+
+  {
+                "id": 6,
+                "password": "pbkdf2_sha256$180000$YwcMfpsQ3uTs$EbuoA7K0LfSysFfIiVKrUR5rIExbIWKj+tbUnPTZ2p8=",
+                "last_login": null,
+                "username": "lisi1",
+                "alias": "qqqq",
+                "email": "lisi@qq.com",
+                "phone": "13110505748",
+                "is_active": true,
+                "is_admin": false,
+                "creator": "qqqqq",
+                "gmt_created": "2020-05-29T03:15:05.303893",
+                "gmt_modified": "2020-05-29T03:15:05.303916",
+                "is_deleted": false
+            }
     1.3 获取token
     http://192.168.3.13:8000/cstddataplat/api/v0.1/account/token/ post
+{
+"username":"admin",
+"password":"zmli+760831"
+}
+
+{
+    "data": {
+        "pk": 1594860578,
+        "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTk0ODYwNTc4LCJleHAiOjE1OTc0NTI1NzgsInVzZXJfaWQiOjF9.GitXsj1zvkP757albI5bknk2yhkhhgCUUXLn8RdgGYM"
+    },
+    "code": 20000
+}
+
     1.4 获取user列表 目前只有admin才有权限
     http://192.168.3.13:8000/cstddataplat/api/v0.1/account/user/
+{
+    "data": {
+        "id": 1,
+        "password": "pbkdf2_sha256$180000$ZdYot1BkzdBz$4Dn6IJQCE0h8QKwU6cT8Xy4JsJMWQTAzx2sA3ai3IvY=",
+        "last_login": null,
+        "username": "admin",
+        "alias": "",
+        "email": "admin@qq.com",
+        "phone": "13683323019",
+        "is_active": true,
+        "is_admin": true,
+        "creator": "",
+        "gmt_created": "2020-06-01T05:41:25.078080",
+        "gmt_modified": "2020-06-01T05:41:25.078101",
+        "is_deleted": false,
+        "roles": [
+            "admin"
+        ]
+    },
+    "code": 20000
+}
 
 
 正式流程：
 2、数据上传 查询 现在支持zip mbtiles格式的数据创传，其中zip数据上传后原则上要写入sqltie中
    2.1 http://127.0.0.1:8000/cstddataplat/api/v0.1/maps/data/user/ post formdata  get
+   http://127.0.0.1:8000/cstddataplat/api/v0.1/maps/data/user/?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTk0ODYzOTkwLCJleHAiOjE1OTc0NTU5OTAsInVzZXJfaWQiOjF9.JlkllSgyPxR26mYQdeFNWvFlK7fHcaa-eo964Z0FuFE
+
 file xxxx.mbtiles
+{
+    "data": {
+        "items": [
+            {
+                "id": 1,
+                "name": "qqqqqqq2222",
+                "author": "admin",
+                "author_id": 1,
+                "is_deleted": false,
+                "description": "",
+                "create_time": "2020-06-01T07:13:23.061722",
+                "end_time": "2020-06-01T07:13:23.061760"
+            },
+            {
+                "id": 2,
+                "name": "test1",
+                "author": "admin",
+                "author_id": 1,
+                "is_deleted": false,
+                "description": "",
+                "create_time": "2020-06-01T07:34:50.263654",
+                "end_time": "2020-06-01T07:34:50.263677"
+            },
+            {
+                "id": 3,
+                "name": "",
+                "author": "admin",
+                "author_id": 1,
+                "is_deleted": false,
+                "description": "",
+                "create_time": "2020-06-01T07:37:51.395804",
+                "end_time": "2020-06-01T07:37:51.395875"
+            },
+            {
+                "id": 4,
+                "name": "road-trip-wilderness",
+                "author": "admin",
+                "author_id": 1,
+                "is_deleted": false,
+                "description": "",
+                "create_time": "2020-06-01T07:38:52.263799",
+                "end_time": "2020-06-01T07:38:52.263848"
+            },
+            {
+                "id": 5,
+                "name": "road-trip-wilderness",
+                "author": "admin",
+                "author_id": 1,
+                "is_deleted": false,
+                "description": "",
+                "create_time": "2020-06-01T07:39:08.183997",
+                "end_time": "2020-06-01T07:39:08.184024"
+            },
+            {
+                "id": 6,
+                "name": "road-trip-wilderness",
+                "author": "admin",
+                "author_id": 1,
+                "is_deleted": false,
+                "description": "",
+                "create_time": "2020-06-01T07:50:57.835865",
+                "end_time": "2020-06-01T07:50:57.835893"
+            },
+            {
+                "id": 7,
+                "name": "road-trip-wilderness",
+                "author": "admin",
+                "author_id": 1,
+                "is_deleted": false,
+                "description": "",
+                "create_time": "2020-06-01T07:53:45.065385",
+                "end_time": "2020-06-01T07:53:45.065411"
+            },
+            {
+                "id": 9,
+                "name": "chn16y2019",
+                "author": "admin",
+                "author_id": 1,
+                "is_deleted": false,
+                "description": "",
+                "create_time": "2020-06-02T02:12:21.827254",
+                "end_time": "2020-06-02T02:12:21.827278"
+            },
+            {
+                "id": 10,
+                "name": "chn16y2019",
+                "author": "admin",
+                "author_id": 1,
+                "is_deleted": false,
+                "description": "",
+                "create_time": "2020-06-02T02:48:07.509894",
+                "end_time": "2020-06-02T02:48:07.509934"
+            },
+            {
+                "id": 11,
+                "name": "foshan_gf2_20191207_L14-17",
+                "author": "admin",
+                "author_id": 1,
+                "is_deleted": false,
+                "description": "",
+                "create_time": "2020-06-10T03:01:12.087779",
+                "end_time": "2020-06-10T03:01:12.087808"
+            },
+            {
+                "id": 12,
+                "name": "foshan_gf2_20191207_L14-17",
+                "author": "admin",
+                "author_id": 1,
+                "is_deleted": false,
+                "description": "",
+                "create_time": "2020-06-10T03:45:35.493732",
+                "end_time": "2020-06-10T03:45:35.493794"
+            },
+            {
+                "id": 13,
+                "name": "foshan_gf2_20191207_L14-17",
+                "author": "admin",
+                "author_id": 1,
+                "is_deleted": false,
+                "description": "",
+                "create_time": "2020-06-10T05:34:26.146251",
+                "end_time": "2020-06-10T05:34:26.146294"
+            },
+            {
+                "id": 14,
+                "name": "road-trip-wilderness",
+                "author": "admin",
+                "author_id": 1,
+                "is_deleted": false,
+                "description": "",
+                "create_time": "2020-06-10T05:39:23.700923",
+                "end_time": "2020-06-10T05:39:23.700944"
+            },
+            {
+                "id": 15,
+                "name": "foshan_gf2_20191207_L14-17",
+                "author": "admin",
+                "author_id": 1,
+                "is_deleted": false,
+                "description": "",
+                "create_time": "2020-06-10T05:41:41.412992",
+                "end_time": "2020-06-10T05:41:41.413028"
+            },
+            {
+                "id": 16,
+                "name": "road-trip-wilderness",
+                "author": "admin",
+                "author_id": 1,
+                "is_deleted": false,
+                "description": "",
+                "create_time": "2020-06-10T05:48:14.559505",
+                "end_time": "2020-06-10T05:48:14.559540"
+            },
+            {
+                "id": 17,
+                "name": "foshan_gf2_20191207_L14-17",
+                "author": "admin",
+                "author_id": 1,
+                "is_deleted": false,
+                "description": "",
+                "create_time": "2020-06-10T05:48:42.307649",
+                "end_time": "2020-06-10T05:48:42.307700"
+            },
+            {
+                "id": 18,
+                "name": "road-trip-wilderness",
+                "author": "admin",
+                "author_id": 1,
+                "is_deleted": false,
+                "description": "",
+                "create_time": "2020-06-10T05:48:42.620846",
+                "end_time": "2020-06-10T05:48:42.620868"
+            },
+            {
+                "id": 19,
+                "name": "foshan_gf2_20191207_L14-17",
+                "author": "admin",
+                "author_id": 1,
+                "is_deleted": false,
+                "description": "",
+                "create_time": "2020-06-10T05:49:40.375442",
+                "end_time": "2020-06-10T05:49:40.375470"
+            },
+            {
+                "id": 20,
+                "name": "road-trip-wilderness",
+                "author": "admin",
+                "author_id": 1,
+                "is_deleted": false,
+                "description": "",
+                "create_time": "2020-06-10T05:49:40.563164",
+                "end_time": "2020-06-10T05:49:40.563187"
+            },
+            {
+                "id": 21,
+                "name": "chn16y2019",
+                "author": "admin",
+                "author_id": 1,
+                "is_deleted": false,
+                "description": "",
+                "create_time": "2020-06-10T06:05:57.963640",
+                "end_time": "2020-06-10T06:05:57.963677"
+            },
+            {
+                "id": 22,
+                "name": "foshan_gf2_20191207_L14-17",
+                "author": "admin",
+                "author_id": 1,
+                "is_deleted": false,
+                "description": "",
+                "create_time": "2020-06-10T06:08:13.489069",
+                "end_time": "2020-06-10T06:08:13.489089"
+            },
+            {
+                "id": 23,
+                "name": "road-trip-wilderness",
+                "author": "admin",
+                "author_id": 1,
+                "is_deleted": false,
+                "description": "",
+                "create_time": "2020-06-10T06:08:13.766095",
+                "end_time": "2020-06-10T06:08:13.766129"
+            },
+            {
+                "id": 24,
+                "name": "chn16y2019",
+                "author": "admin",
+                "author_id": 1,
+                "is_deleted": false,
+                "description": "",
+                "create_time": "2020-06-10T06:14:47.122724",
+                "end_time": "2020-06-10T06:14:47.122756"
+            }
+        ],
+        "total": 23
+    },
+    "code": 20000
+}
    2.2  http://127.0.0.1:8000/cstddataplat/api/v0.1/maps/data/user/detail/1/ get put delete
         查询具体数据，编辑并删除
+        {
+    "id": 1,
+    "name": "qqqqqqq2222",
+    "author": "admin",
+    "author_id": 1,
+    "description": "",
+    "is_deleted": false,
+    "create_time": "2020-06-01T07:13:23.061722",
+    "end_time": "2020-06-01T07:13:23.061760",
+    "save_path": "/work/cstd/rong/cstddataplatform/media/upload/202006/1/road-trip-wilderness1590995603058.mbtiles",
+    "save_name": "road-trip-wilderness.mbtiles"
+}
    2.3 http://127.0.0.1:8000/cstddataplat/api/v0.1/maps/map/user/ post get
         地图数据 增加 查找
+        {
+    "id": 3,
+    "name": "myfirstmap",
+    "creator": "admin",
+    "creator_id": 1,
+    "map_data": "10",
+    "is_deleted": false,
+    "description": "",
+    "create_time": "2020-07-16T01:51:18.266906",
+    "modified_time": "2020-07-16T01:51:18.266929"
+}
    2.4 http://127.0.0.1:8000/cstddataplat/api/v0.1/maps/map/user/detail/1/
        地图数据详细的 查找 修改和删除
+       {
+    "id": 10,
+    "name": "chn16y2019",
+    "author": "admin",
+    "author_id": 1,
+    "description": "",
+    "is_deleted": false,
+    "create_time": "2020-06-02T02:48:07.509894",
+    "end_time": "2020-06-02T02:48:07.509934",
+    "save_path": "/work/cstd/rong/cstddataplatform/media/upload/202006/1/chn16y20191591065855765.mbtiles",
+    "save_name": "chn16y2019.mbtiles"
+}
    2.5 http://127.0.0.1:8000/cstddataplat/api/v0.1/maps/tileserver/1/myfirstmap/?l=11&x=1439&y=795&access_token=**** 还支持The authorization header方法。
       地图瓦片服务
 
