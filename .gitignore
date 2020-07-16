@@ -13,6 +13,6 @@ upload
 node_modules
 venv
 env
-.idea
+**/.idea
 static
 

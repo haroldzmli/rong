@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0e9786a2-0347-4988-947f-40bf45e9514c" name="Default Changelist" comment="">
+    <list default="true" id="0e9786a2-0347-4988-947f-40bf45e9514c" name="Default Changelist" comment="增加瓦片、zip瓦片到mbtiles，并倒入map mapdata两个数据库">
+      <change beforePath="$PROJECT_DIR$/../.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../rongfrontend/src/views/components-demo/vuemapbox.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../rongfrontend/src/views/components-demo/vuemapbox.vue" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -293,7 +293,8 @@
       <workItem from="1591682198860" duration="66000" />
       <workItem from="1591682961275" duration="15579000" />
       <workItem from="1591840324871" duration="1327000" />
-      <workItem from="1591858474079" duration="23646000" />
+      <workItem from="1591858474079" duration="24661000" />
+      <workItem from="1594606348350" duration="5784000" />
     </task>
     <task id="LOCAL-00001" summary="修改文件上传">
       <created>1590046369037</created>
@@ -421,7 +422,14 @@
       <option name="project" value="LOCAL" />
       <updated>1591235234118</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="详细增加输入、输出数据示例。">
+      <created>1594864518307</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1594864518307</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -451,7 +459,8 @@
     <MESSAGE value="去掉虚拟环境的pkg-resources==0.0.0" />
     <MESSAGE value="去掉static文件夹上传功能。" />
     <MESSAGE value="增加瓦片、zip瓦片到mbtiles，并倒入map mapdata两个数据库" />
-    <option name="LAST_COMMIT_MESSAGE" value="增加瓦片、zip瓦片到mbtiles，并倒入map mapdata两个数据库" />
+    <MESSAGE value="详细增加输入、输出数据示例。" />
+    <option name="LAST_COMMIT_MESSAGE" value="详细增加输入、输出数据示例。" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
