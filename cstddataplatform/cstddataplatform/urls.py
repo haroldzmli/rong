@@ -25,7 +25,7 @@ from django.conf import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('cstddataplat/api/v0.1/maps/', include('tileserver.urls')),
-    # /cstddataplat
+    path('cstddataplat/api/v0.1/data/', include('dataserver.urls')),
     # path('cstddataplat/', include('tileserver.urls')),
     path('cstddataplat/api/v0.1/account/', include('account.urls')),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

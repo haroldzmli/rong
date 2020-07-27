@@ -1,4 +1,6 @@
 # from rest_framework_jwt.views import ObtainJSONWebToken
+from django.db.models import BinaryField
+
 from dataserver.models import UserLabelData
 from rest_framework import serializers
 
@@ -6,7 +8,11 @@ from rest_framework import serializers
 class UserLabelDataSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserLabelData
-        fields = ['id', 'name', 'author', 'author_id', 'is_deleted', 'description', 'create_time', 'end_time']
+        # fields = ['id', 'name', 'creator', 'creator_id', 'is_deleted', 'description', 'create_time', 'modified_time',
+        #           'label_data_pbf', 'label_data_geojson']
+        fields = ['id', 'name', 'creator', 'creator_id', 'is_deleted', 'description', 'create_time', 'modified_time',
+                  'label_data_geojson']
+    # label_data_pbf = BinaryField()
 
         # fields = ['name', 'author', 'author_id']
         # # fields = ['id', 'name']
@@ -19,7 +25,6 @@ class UserLabelDataSerializer(serializers.ModelSerializer):
     #     print('hehhe:', mapdata)
     #     return mapdata
     # def save(self, validated_data):
-    #     mapData = MapData(validated_data)
-    #     mapData.save()
-    #     return mapData
-
+    #     userLabelData = UserLabelData(validated_data)
+    #     userLabelData.save()
+    #     return userLabelData

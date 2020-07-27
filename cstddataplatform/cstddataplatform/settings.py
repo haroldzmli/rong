@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'account.apps.AccountConfig',
     'tileserver.apps.TileserverConfig',
+    'dataserver.apps.DataserverConfig',
 ]
 
 MIDDLEWARE = [

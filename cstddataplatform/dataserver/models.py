@@ -15,10 +15,12 @@ class UserLabelData(models.Model):
     description = models.CharField('描述', max_length=50, blank=True, default='')
     create_time = models.DateTimeField('开始时间', auto_now_add=True)
     modified_time = models.DateTimeField('修改时间', auto_now_add=True)
-    label_data = models.BinaryField('用户标注数据,geojson的pbf版本', blank=False)
+    # 参考资料https://github.com/mapbox/geobuf
+    # label_data_pbf = models.BinaryField('用户标注数据,geojson的pbf版本', blank=False)
+    label_data_geojson = models.TextField('用户标注数据，geojson的txt版本', blank=False)
 
     def __str__(self):
-        return self.name + self.creator
+        return self.name + " " + self.creator
 
     class Meta:
         verbose_name = '用户标注地图层'

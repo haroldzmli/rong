@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" style="position:absolute; z-index:2; left:10px; top:10px; right:100px">
     <Mapbox
       access-token="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTk1MjkyMzk5LCJleHAiOjE1OTc4ODQzOTksInVzZXJfaWQiOjF9.IulCkLFv4GtBf6BXfRozgyMHbA0GEEUhx5br-5qDtVo"
       :map-options="{
@@ -17,6 +17,7 @@
         show: true,
         position: 'top-left',
       }"
+      @map-init="initialized"
       @map-load="loaded"
       @map-mousemove="mousemove"
       @map-zoomend="zoomend"
@@ -24,12 +25,14 @@
       @geolocate-error="geolocateError"
       @geolocate-geolocate="geolocate"
     />
-    <div style="position:absolute; z-index:2; left:10px; top:10px">{{ printData }}</div>
+    <div style="position:absolute; z-index:2; left:10px; top:10px; right:100px">{{ printData }}</div>
   </div>
 </template>
 
 <script>
 import Mapbox from 'mapbox-gl-vue'
+import MapboxDraw from 'mapbox-gl-draw'
+// import MapboxDraw from 'mapbox-gl-draw'
 
 export default {
   components: { Mapbox },
@@ -43,6 +46,20 @@ export default {
     }
   },
   methods: {
+    initialized(map) {
+      const draw = new MapboxDraw(
+        { displayControlsDefault: true }
+      )
+      //   { displayControlsDefault: false,
+      //     controls: {
+      //       polygon: true,
+      //       trash: true
+      //     }
+      //   }
+
+      map.addControl(draw, 'top-left')
+    },
+
     loaded(map) {
       map.addLayer({
         id: 'points',
@@ -95,7 +112,7 @@ export default {
     },
     mousemove(map, e) {
       this.printData = '比例尺：' + JSON.stringify(map.getZoom()) + '    屏幕坐标：' + JSON.stringify(e.point) + '    地图坐标：' + JSON.stringify(e.lngLat)
-      console.log(this.printData)
+    //  console.log(this.printData)
     },
     geolocateError(control, positionError) {
       console.log(positionError)
@@ -110,8 +127,5 @@ export default {
 </script>
 
 <style>
-#map {
-  width: 100%;
-  height: 700px;
-}
+	#map { position: absolute; top: 30px; bottom: 30px; left: 200px; width: 100%; }
 </style>

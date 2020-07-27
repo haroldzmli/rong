@@ -414,6 +414,58 @@ file xxxx.mbtiles
       地图瓦片服务
 
 
+3 data server
+  3.1 http://127.0.0.1:8000/cstddataplat/api/v0.1/data/label/user/?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTk0ODYzOTkwLCJleHAiOjE1OTc0NTU5OTAsInVzZXJfaWQiOjF9.JlkllSgyPxR26mYQdeFNWvFlK7fHcaa-eo964Z0FuFE
+
+  post get
+  post
+  {
+    "name": "myfirstmap", // 应该填写，最好写
+    "creator": "admin",   //后期，使用token，就无所谓了
+    "creator_id": 1,//后期，使用token，就无所谓了
+    "is_deleted": false, //不需要
+    "description": "", //不需要
+    "create_time": "2020-07-16T01:51:18.266906",//不需要，会自动写
+    "modified_time": "2020-07-16T01:51:18.266929",//不需要，会自动写
+	"label_data_geojson": //必须写
+{ "type": "FeatureCollection",
+  "features": [
+    { "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [102.0, 0.5]},
+      "properties": {"prop0": "value0"}
+      },
+    { "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [102.0, 0.0], [103.0, 1.0], [104.0, 0.0], [105.0, 1.0]
+          ]
+        },
+      "properties": {
+        "prop0": "value0",
+        "prop1": 0.0
+        }
+      },
+    { "type": "Feature",
+       "geometry": {
+         "type": "Polygon",
+         "coordinates": [
+           [ [100.0, 0.0], [101.0, 0.0], [101.0, 1.0],
+             [100.0, 1.0], [100.0, 0.0] ]
+           ]
+       },
+       "properties": {
+         "prop0": "value0",
+         "prop1": {"this": "that"}
+         }
+       }
+     ]
+   }
+}
+
+3.2 标注数据的查、改和删
+http://127.0.0.1:8000/cstddataplat/api/v0.1/data/label/user/detail/2/?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTk0ODYzOTkwLCJleHAiOjE1OTc0NTU5OTAsInVzZXJfaWQiOjF9.JlkllSgyPxR26mYQdeFNWvFlK7fHcaa-eo964Z0FuFE
+方法：put get和delete
 
 
 
