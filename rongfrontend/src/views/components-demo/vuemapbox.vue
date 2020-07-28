@@ -1,10 +1,11 @@
 <template>
-  <div id="app" style="position:absolute; z-index:2; left:10px; top:10px; right:100px">
+  <div id="app">
     <Mapbox
-      access-token="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTk1MjkyMzk5LCJleHAiOjE1OTc4ODQzOTksInVzZXJfaWQiOjF9.IulCkLFv4GtBf6BXfRozgyMHbA0GEEUhx5br-5qDtVo"
+      access-token="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTk1MjkyMzk5LCJl
+      eHAiOjE1OTc4ODQzOTksInVzZXJfaWQiOjF9.IulCkLFv4GtBf6BXfRozgyMHbA0GEEUhx5br-5qDtVo"
       :map-options="{
         style: 'http://192.168.3.13:8000/cstddataplat/api/v0.1/maps/vectorserver/json/china16.json/',
-        center: center,
+        center: [116.38, 39.91],
         minZoom: 9.5,
         maxZoom: 13.5,
         zoom: 12
@@ -13,11 +14,16 @@
         show: true,
         position: 'top-left',
       }"
+      :scale-control="{
+        show: true,
+        position: 'top-left',
+      }"
       :fullscreen-control="{
         show: true,
         position: 'top-left',
       }"
-      @map-init="initialized"
+
+      @map-init="mapInitialized"
       @map-load="loaded"
       @map-mousemove="mousemove"
       @map-zoomend="zoomend"
@@ -25,39 +31,49 @@
       @geolocate-error="geolocateError"
       @geolocate-geolocate="geolocate"
     />
-    <div style="position:absolute; z-index:2; left:10px; top:10px; right:100px">{{ printData }}</div>
+    <!--      <p :class="$style.red">-->
+    <!--    This should be red-->
+    <!--  </p>-->
+    <el-button type="primary" icon="el-icon-upload" class="updateDataset" @click="imagecropperShow=true">
+      保存数据
+    </el-button>
   </div>
+<!--<div class="calculation-box">-->
+<!--<p>Draw a polygon using the draw tools.</p>-->
+<!--<div id="calculated-area"></div>-->
+<!--</div>-->
 </template>
 
 <script>
 import Mapbox from 'mapbox-gl-vue'
-import MapboxDraw from 'mapbox-gl-draw'
-// import MapboxDraw from 'mapbox-gl-draw'
+/* eslint-disable */
+import MapboxDraw from "mapbox-gl-draw";
+import map from 'mapbox-gl'
+import 'mapbox-gl-draw/dist/mapbox-gl-draw.css'
+import 'mapbox-gl/dist/mapbox-gl.css'
 
 export default {
   components: { Mapbox },
-  data() {
-    return {
-      accessToken: 'some_token',
-      mapStyle: 'http://192.168.3.13:8000/cstddataplat/api/v0.1/maps/vectorserver/json/china16.json/',
-      center: [116.38, 39.91],
-      zoom: 12,
-      printData: null
-    }
-  },
   methods: {
-    initialized(map) {
-      const draw = new MapboxDraw(
-        { displayControlsDefault: true }
+    mapInitialized(map) {
+      const Draw = new MapboxDraw(
+          {
+              displayControlsDefault: false,
+              controls: {
+                  polygon: true,
+                  trash: true
+              }}
       )
-      //   { displayControlsDefault: false,
-      //     controls: {
-      //       polygon: true,
-      //       trash: true
-      //     }
-      //   }
-
-      map.addControl(draw, 'top-left')
+      map.addControl(Draw)
+var markerHeight = 50, markerRadius = 10, linearOffset = 25;
+var popupOffsets = {
+'top-left': [100, 100],
+'top-right': [100, 100],
+};
+        var popup = new mapboxgl.Popup({ offset: popupOffsets , className: 'my-class',closeOnClick: false })
+// .setLngLat([116.38, 39.91])
+.setHTML('<h1>Hello World!</h1>')
+.addTo(map);
     },
 
     loaded(map) {
@@ -112,7 +128,7 @@ export default {
     },
     mousemove(map, e) {
       this.printData = '比例尺：' + JSON.stringify(map.getZoom()) + '    屏幕坐标：' + JSON.stringify(e.point) + '    地图坐标：' + JSON.stringify(e.lngLat)
-    //  console.log(this.printData)
+      //console.log(this.printData)
     },
     geolocateError(control, positionError) {
       console.log(positionError)
@@ -122,10 +138,49 @@ export default {
         `User position: ${position.coords.latitude}, ${position.coords.longitude}`
       )
     }
+
+
   }
 }
 </script>
+<!--<style module>-->
+<!--.red {-->
+<!--  color: red;-->
+<!--}-->
+<!--.bold {-->
+<!--  font-weight: bold;-->
+<!--}-->
+<!--</style>-->
+<style scoped>
+#map {
+  width: 100%;
+  height: 700px;
+}
+.updateDataset {
+            position: absolute;
+            top:140px;
+            left:10px;
+            z-index:100;
+            background-color:white;
+            color:black;
+            padding:6px;
+            border-radius:4px;
 
-<style>
-	#map { position: absolute; top: 30px; bottom: 30px; left: 200px; width: 100%; }
+}
+  .calculation-box {
+height: 75px;
+width: 150px;
+position: absolute;
+bottom: 40px;
+left: 10px;
+background-color: rgba(255, 255, 255, 0.9);
+padding: 15px;
+text-align: center;
+}
+
+p {
+font-family: 'Open Sans';
+margin: 0;
+font-size: 13px;
+}
 </style>

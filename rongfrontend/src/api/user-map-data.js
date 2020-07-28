@@ -23,3 +23,19 @@ export function logout() {
     method: 'post'
   })
 }
+
+// labelgeojsondata
+// export function postlabelgeojson(data) {
+//   return request({
+//     url: '/cstddataplat/api/v0.1/account/logout/',
+//     method: 'post',
+//     data
+//   })
+// }
+//
+// export function getlabelgeojson() {
+//   return request({
+//     url: '/cstddataplat/api/v0.1/account/logout/',
+//     method: 'get'
+//   })
+// }

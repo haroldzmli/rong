@@ -365,7 +365,8 @@ class TileViewSet(APIView):
                     mapdata = MapData.objects.filter(id=mapdataid, author_id=userid)
                     dbfile = mapdata[0].save_path
                     content_type_adder = ContentTypeAdder()
-                    tilestore = TileStore.load(dbfile)
+                    # tilestore = TileStore.load(dbfile)
+                    tilestore = TileStore.load('/work/cstd/rong/cstddataplatform/media/upload/202006/1/chn16y20191591065855765.mbtiles')
                     if tilestore is None:
                         HttpResponse(404)
                     else:

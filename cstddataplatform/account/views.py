@@ -113,6 +113,7 @@ class UserTokenView(GenericAPIView):
         serializer.is_valid(raise_exception=True)
 
         user = serializer.validated_data.get('user') or request.user
+        print('user:', user)
         token = serializer.validated_data.get('token')
         issued_at = serializer.validated_data.get('issued_at')
         response_data = JSONWebTokenAuthentication. \

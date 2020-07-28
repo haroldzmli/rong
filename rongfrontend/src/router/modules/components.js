@@ -108,12 +108,12 @@ const componentsRouter = {
       name: 'vuemapbox',
       meta: { title: 'vuemapbox' }
     },
-    {
-      path: 'mapboxvue',
-      component: () => import('@/views/components-demo/mapboxvue'),
-      name: 'mapboxvue',
-      meta: { title: 'mapboxvue' }
-    },
+    // {
+    //   path: 'mapboxvue',
+    //   component: () => import('@/views/components-demo/mapboxvue'),
+    //   name: 'mapboxvue',
+    //   meta: { title: 'mapboxvue' }
+    // },
     {
       path: '37-zoom',
       component: () => import('@/views/components-demo/37-zoom'),
